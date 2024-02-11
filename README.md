@@ -2,7 +2,7 @@
 
 ## Capstone project for Web 450 at Bellevue University
 
-## Contributors: Laurel Condon, James Harper, Danielle Taplin
+### Contributors: Laurel Condon, James Harper, Danielle Taplin
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
 
