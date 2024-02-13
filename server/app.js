@@ -1,8 +1,9 @@
-/**
- * Title: app.js
- * Author: Professor Krasso
- * Date: 8/5/2023
- */
+/*
+* Project Name: config.js
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
+
 'use strict'
 
 // Require statements
@@ -18,6 +19,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../dist/bcrs')))
 app.use('/', express.static(path.join(__dirname, '../dist/bcrs')))
+
+const PORT = process.env.PORT || 3000;
+
+const CONN =
+  "mongodb+srv://admin:<password>@bcrsdb.qdqxmhl.mongodb.net/?retryWrites=true&w=majority";
 
 // error handler for 404 errors
 app.use(function(req, res, next) {
