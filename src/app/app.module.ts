@@ -20,7 +20,7 @@ import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { ServicesComponent } from './services/services.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './security/register/register.component';
 import { ServiceGraphComponent } from './service-graph/service-graph.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';

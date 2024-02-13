@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+/* import bootstrap icons */
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+
+/* Custom Gradient for nav bar and footer */
+.gradient-custom {
+  /* Old Browsers */
+ background: -webkit-linear-gradient(to right, #2B4A32, #1a6534);
+
+ /* Newer Browsers */
+ background: linear-gradient(to right, #2B4A32, #1a6534);
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 40px; /* Update margin-top once other pages have been built */
+}
+
+/* Custom Font Colors */
+
+.text-gray {
+  color: #98a4a0;
+}
+
+.text-dk-green {
+  color: #2b4a32
+}
+
+.text-lt-green {
+  color: #1a6534
+}

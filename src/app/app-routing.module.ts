@@ -8,6 +8,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { HomeComponent } from './home/home.component';
+import { ServicesComponent } from './services/services.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { FaqComponent } from './faq/faq.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -24,6 +29,26 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         title: 'BCRS: Home'
+      },
+      {
+        path: 'services',
+        component: ServicesComponent,
+        title: 'BCRS: Services'
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+        title: 'BCRS: About'
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        title: 'BCRS: Contact'
+      },
+      {
+        path: 'faq',
+        component: FaqComponent,
+        title: 'BCRS: FAQ'
       }
     ]
   },
@@ -31,6 +56,12 @@ const routes: Routes = [
     // path for the security module (e.g. login, register, forgot password, etc.)
     path: 'security',
     loadChildren: () => import('./security/security.module').then(m => m.SecurityModule)
+  },
+
+  // path to 404 page not found
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
