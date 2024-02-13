@@ -1,8 +1,8 @@
-/**
- * Title: app.component.ts
- * Author: Professor Krasso
- * Date: 8/5/23
- */
+/*
+* Project Name: app.component.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
 
 // imports statements
 import { Component } from '@angular/core';

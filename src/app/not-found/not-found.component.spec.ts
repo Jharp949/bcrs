@@ -1,3 +1,9 @@
+/*
+* Project Name: not-found.component.spec.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';

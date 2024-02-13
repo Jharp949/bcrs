@@ -1,9 +1,8 @@
-/**
- * Title: security.module.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+/*
+* Project Name: security.module.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
 */
-
 // imports statements
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

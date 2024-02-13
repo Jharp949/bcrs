@@ -1,8 +1,9 @@
-/**
- * Title: app.module.ts
- * Author: Professor Krasso
- * Date: 8/5/23
- */
+/*
+* Project Name: app.module.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
+
 
 // imports statements
 import { NgModule } from '@angular/core';
