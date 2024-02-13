@@ -20,11 +20,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../dist/bcrs')))
 app.use('/', express.static(path.join(__dirname, '../dist/bcrs')))
 
-const PORT = process.env.PORT || 3000;
-
-const CONN =
-  "mongodb+srv://admin:<password>@bcrsdb.qdqxmhl.mongodb.net/?retryWrites=true&w=majority";
-
 // error handler for 404 errors
 app.use(function(req, res, next) {
   next(createServer(404)) // forward to error handler

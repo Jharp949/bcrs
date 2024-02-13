@@ -8,6 +8,8 @@
 // imports statements
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +27,7 @@ import { ServiceGraphComponent } from './service-graph/service-graph.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,7 @@ import { SecurityQuestionsComponent } from './security-questions/security-questi
     NotFoundComponent,
     FaqComponent,
     ServicesComponent,
-    RegisterComponent,
+    RegisterComponent, // Add the RegisterComponent here
     ServiceGraphComponent,
     UserListComponent,
     UserDetailsComponent,
@@ -46,7 +49,11 @@ import { SecurityQuestionsComponent } from './security-questions/security-questi
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
