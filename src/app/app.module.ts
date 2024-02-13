@@ -14,6 +14,16 @@ import { HomeComponent } from './home/home.component';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { NavComponent } from './layouts/nav/nav.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { FaqComponent } from './faq/faq.component';
+import { ServicesComponent } from './services/services.component';
+import { RegisterComponent } from './register/register.component';
+import { ServiceGraphComponent } from './service-graph/service-graph.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +31,17 @@ import { FooterComponent } from './layouts/footer/footer.component';
     HomeComponent,
     BaseLayoutComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    AboutComponent,
+    ContactComponent,
+    NotFoundComponent,
+    FaqComponent,
+    ServicesComponent,
+    RegisterComponent,
+    ServiceGraphComponent,
+    UserListComponent,
+    UserDetailsComponent,
+    SecurityQuestionsComponent
   ],
   imports: [
     BrowserModule,
