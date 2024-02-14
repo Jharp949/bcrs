@@ -42,7 +42,7 @@ const userSchema = {
 }
 
 /**
-* findEmployeeById
+* findUserById
 * @swagger
 * /api/users/{empId}:
 *   get:

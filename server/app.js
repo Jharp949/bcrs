@@ -19,9 +19,9 @@ const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Nodebucket',
+      title: 'BCRS',
       version: '1.0.0',
-      description: 'Test Employee API'
+      description: 'Test APIs for Bobs Computer Repair Shop'
     },
   },
   apis: ['./server/routes/*.js'], // folder containing all APIs
