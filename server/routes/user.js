@@ -138,6 +138,21 @@ router.delete('/:empId', (req, res, next) => {
         }
 
         mongo(async db => {
+            const user = await db.collection('users').findOne({ empId }); // findOne returns a single document
+
+            if (!user) {
+                const err = new Error('Unable to find user with empId ' + empId);
+                err.status = 404;
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
+            if (user.isDisabled === true) {
+                res.send('User is already disabled'); // send message back to the client if user is already disabled
+                return; // exit out of the if statement
+            }
+
             const result = await db.collection('users').updateOne({ empId }, { $set: { isDisabled: true } }); // updateOne updates a single document
 
             if (result.matchedCount === 0) {
