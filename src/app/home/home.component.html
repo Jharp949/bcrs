@@ -17,7 +17,7 @@
   <div class="cs-container">
       <div class="cs-content">
           <span class="cs-topper">
-            <!--implementing use of chevrons on webpage-->
+            <!--implementing use of chevrons on webpage -SVG = scalable vector graphics-->
               <svg class="cs-chevron" width="49" height="15" viewBox="0 0 49 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g opacity="0.7">
                   <path d="M0.621948 7.49889L6.40262 15L10.343 15L4.56231 7.49889L10.343 -4.2492e-07L6.40262 -2.52681e-07L0.621948 7.49889Z" fill="var(--chevronColor)"/>
@@ -48,6 +48,7 @@
       </div>
       <ul class="cs-card-group">
           <li class="cs-item">
+            <!--bandwidth conservation lazy loading, decoding async potential performance booster as loaded images are decoded on load, before the completed event is dispatched -->
               <img class="cs-icon" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/check-circle.svg" alt="icon" width="48" height="48">
               <h3 class="cs-h3">100% Success Rate</h3>
               <p class="cs-item-text">
@@ -72,7 +73,7 @@
       </ul>
   </div>
 
-  <!-- Background Image, there's a background image in the CSS for the parallax effect you'll need to change as well if you swap out our images -->
+  <!-- Background Image, there's a background image in the CSS for the parallax effect you'll need to change as well if you swap out these images -->
   <picture class="cs-background">
       <source media="(max-width: 600px)" srcset="../../assets/computer-repair-home.jpg">
       <source media="(min-width: 601px)" srcset="../../assets/computer-repair-home.jpg">
