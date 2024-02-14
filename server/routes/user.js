@@ -42,6 +42,34 @@ const userSchema = {
 }
 
 /**
+* findAllUsers
+* @swagger
+* /api/users:
+*   get:
+*     tags:
+*       - Users
+*     description: Finds all users
+*     summary: findAllUsers
+*     responses:
+*       '200':
+*         description: List of all users
+*       '500':
+*         description: Internal server error
+*/
+router.get('/', (req, res, next) => {
+    try {
+        mongo(async db => {
+            const users = await db.collection('users').find().toArray();
+            res.send(users);
+        });
+    } catch (err) {
+        console.error('Error: ', err);
+        next(err);
+    }
+});
+
+
+/**
 * findUserById
 * @swagger
 * /api/users/{empId}:
