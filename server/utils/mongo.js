@@ -4,37 +4,48 @@
 * Date: 2/12/2024
 */
 
-"use strict";
+//Use strict mode
+"use strict;"
 
-const { MongoClient } = require("mongodb");
-const config = require("./config");
+//Require mongoClient
+const { MongoClient } = require("mongodb")
+const config = require("./config")
 
-const MONGO_URL = config.dbUrl; //mongodb link;
+//Store a db connection URL as a variable
+const MONGO_URL = config.dbUrl;
 
+//Connect to the database and output a message saying so to the console
 const mongo = async(operations, next) => {
-    try {
-        console.log("Connecting to MongoDB...");
+  try {
+    console.log("Connecting to db...")
 
-        const client = await MongoClient.connect(MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+    //Connect to MongoDB
+    const client = await MongoClient.connect(MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-        const db = client.db(config.dbName);
-        console.log("Connected to MongoDB!");
+    //Set database as bcrs
+    const db = client.db(config.dbname);
+    console.log("Connected to db.")
 
-        await operations(db);
-        console.log("Operation completed successfully!");
+    //Await the connection to the database, and output a message stating its connected once successful
+    await operations(db);
+    console.log("Operation was successful")
 
-        client.close();
-        console.log("Disconnected from MongoDB!");
-    } catch (err) {
-        const error = new Error("Error connecting to db: " + err);
-        error.status = 500;
+    //Close client
+    client.close()
 
-        console.log("Error connecting to db: " + err);
-        next(error);
-    }
-};
+  } catch (err) {
+    //Upon failure to connect, set error status to 500 and create an error variable
+    const error = new Error("Error connecting to db: ", err);
+    error.status = 500;
 
-module.exports = { mongo };
+    //Output an error message to the console, and provide the error variable to next
+    console.log("Error connecting to db: ", err);
+    next(error);
+  }
+}
+
+//Export the mongo module
+module.exports = { mongo }
