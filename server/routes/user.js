@@ -14,32 +14,7 @@ const Ajv = require('ajv');
 
 const ajv = new Ajv();
 
-const userSchema = {
-  type: 'object',
-  properties: {
-    empId: { type: 'number'},
-    email: { type: 'string'} ,
-    password: { type: 'string'},
-    firstName: { type: 'string'},
-    lastName: { type: 'string'},
-    phoneNumber: { type: 'number'},
-    address: { type: 'string'},
-    selectedSecurityQuestions: { type: 'array' },
-    role: {type: 'string'},
-    isDisabled: { type: 'boolean' }
-  },
-  required: [
-    'empId',
-    'email',
-    'password',
-    'firstName',
-    'lastName',
-    'phoneNumber',
-    'address',
-    'role'
-  ],
-  additionalProperties: false
-}
+const User = require('../models/user-model');
 
 /**
 * findAllUsers
@@ -67,7 +42,6 @@ router.get('/', (req, res, next) => {
         next(err);
     }
 });
-
 
 /**
 * findUserById
@@ -123,6 +97,63 @@ router.get('/:empId', (req, res, next) => {
 } catch (err) {
     console.error('Error: ', err);
     next(err);
+    }
+});
+  
+/**
+* deleteUserById
+* @swagger
+* /api/users/{empId}:
+*   delete:
+*     tags:
+*       - Users
+*     description: Deletes User by the ID number
+*     summary: deleteUserById
+*     parameters:
+*       - name: empId
+*         in: path
+*         required: true
+*         description: User ID document
+*         schema:
+*           type: number
+*     responses:
+*       '200':
+*         description: User disabled successfully
+*       '400':
+*         description: User ID must be a number
+*       '404':
+*         description: User ID not found
+*/
+router.delete('/:empId', (req, res, next) => {
+    try {
+        let { empId } = req.params;
+        empId = parseInt(empId, 10);
+
+        if (isNaN(empId)) {
+            const err = new Error('User ID must be a number');
+            err.status = 400;
+            console.log('err', err);
+            next(err);
+            return; // exit out of the if statement
+        }
+
+        mongo(async db => {
+            const result = await db.collection('users').updateOne({ empId }, { $set: { isDisabled: true } }); // updateOne updates a single document
+
+            if (result.matchedCount === 0) {
+                const err = new Error('Unable to find user with empId ' + empId);
+                err.status = 404;
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
+            res.send('User disabled successfully'); // send success message back to the client
+        });
+
+    } catch (err) {
+        console.error('Error: ', err);
+        next(err);
     }
 });
 
