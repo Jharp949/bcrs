@@ -17,6 +17,7 @@
       padding: var(--sectionPadding);
       /* 200px - 300px - leaving extra space for the navigation */
       padding-top: clamp(12.5rem, 31.95vw, 18.75rem);
+      /*clamp() provides control of an element by limiting it to a range of min and max values; clamp(min value, preferred value, max value) */
       position: relative;
       z-index: 1;
     }
@@ -65,6 +66,7 @@
       width: 3rem;
       height: auto;
     }
+    /*title and text styling*/
     #hero-1619 .cs-title {
       /* 39px - 61px */
       font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
