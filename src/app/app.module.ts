@@ -29,6 +29,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
