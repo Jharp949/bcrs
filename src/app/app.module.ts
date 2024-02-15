@@ -42,6 +42,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SecurityQuestionListComponent } from './security-question-list/security-question-list.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ServiceGraphComponent,
     UserListComponent,
     UserDetailsComponent,
-    SecurityQuestionsComponent
+    SecurityQuestionsComponent,
+    SecurityQuestionListComponent
   ],
   imports: [
     BrowserModule,
