@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 // user model
 const userSchema = new Schema({
   empId: {type: Number, unique: true},
-  userName: {type: String, unique: true, dropDups: true },
+  email: {type: String, unique: true, dropDups: true },
   password: {type: String, required: true },
   firstName: {type: String, required: true },
   lastName: {type: String, required: true },
