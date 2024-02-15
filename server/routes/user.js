@@ -134,7 +134,7 @@ router.get('/:empId', (req, res, next) => {
 *               address:
 *                 type: string
 *                 required: true
-*               securityQuestions:
+*               selectedSecurityQuestions:
 *                 type: array
 *                 items:
 *                   type: string
