@@ -101,7 +101,7 @@ router.get('/:empId', (req, res, next) => {
 * /api/users:
 *   post:
 *     tags:
-*       - createUsers
+*       - Users
 *     description: Adds a new user to the MongoDB collection users
 *     summary: createUser
 *     requestBody:
@@ -113,26 +113,38 @@ router.get('/:empId', (req, res, next) => {
 *             properties:
 *               empId:
 *                 type: number
+*                 required: true
 *               email:
 *                 type: string
+*                 required: true
 *               password:
 *                 type: string
+*                 required: true
 *               firstName:
 *                 type: string
+*                 required: true
 *               lastName:
 *                 type: string
+*                 required: true
 *               phoneNumber:
 *                 type: string
+*                 required: true
 *               address:
 *                 type: string
+*                 required: true
 *               securityQuestions:
 *                 type: array
 *                 items:
 *                   type: string
+*                 required: true
+*                 maxItems: 3
 *               role:
 *                 type: string
+*                 required: true
 *               isDisabled:
 *                 type: boolean
+*                 default: false
+*                 required: true
 *     responses:
 *       '200':
 *         description: User added successfully
@@ -153,6 +165,16 @@ router.post('/', (req, res, next) => {
         }
 
         mongo(async db => {
+            const existingUser = await db.collection('users').findOne({ empId: user.empId });
+
+            if (existingUser) {
+                const err = new Error('User with the same empId already exists');
+                err.status = 409;
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
             const result = await db.collection('users').insertOne(user); // insertOne adds a single document
 
             if (result.insertedCount === 0) {
