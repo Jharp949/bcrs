@@ -95,8 +95,6 @@ router.get('/:empId', (req, res, next) => {
     }
 });
 
-let nextEmpId = 1001; // Initialize the nextEmpId variable
-
 /**
 * createUser
 * @swagger
@@ -151,6 +149,9 @@ let nextEmpId = 1001; // Initialize the nextEmpId variable
 *       '400':
 *         description: Invalid request body
 */
+
+let nextEmpId = 1001; // Initialize the nextEmpId variable
+
 router.post('/', (req, res, next) => {
     try {
         const user = req.body;
@@ -262,7 +263,7 @@ router.post('/', (req, res, next) => {
 *               address:
 *                 type: string
 *                 required: true
-*               SelectedSecurityQuestions:
+*               selectedSecurityQuestions:
 *                 type: array
 *                 items:
 *                   type: string
