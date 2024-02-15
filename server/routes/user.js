@@ -95,6 +95,8 @@ router.get('/:empId', (req, res, next) => {
     }
 });
 
+let nextEmpId = 1001; // Initialize the nextEmpId variable
+
 /**
 * createUser
 * @swagger
@@ -111,10 +113,6 @@ router.get('/:empId', (req, res, next) => {
 *           schema:
 *             type: object
 *             properties:
-*               empId:
-*                 type: number
-*                 required: true
-*                 dropDups: true
 *               email:
 *                 type: string
 *                 required: true
@@ -167,7 +165,7 @@ router.post('/', (req, res, next) => {
         }
 
         // Check if any required fields are left blank
-        const requiredFields = ['empId', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'selectedSecurityQuestions', 'role'];
+        const requiredFields = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'selectedSecurityQuestions', 'role'];
         const missingFields = requiredFields.filter(field => !user[field]);
 
         if (missingFields.length > 0) {
@@ -179,16 +177,6 @@ router.post('/', (req, res, next) => {
         }
 
         mongo(async db => {
-            const existingUser = await db.collection('users').findOne({ empId: user.empId });
-
-            if (existingUser) {
-                const err = new Error('User with the same empId already exists');
-                err.status = 409;
-                console.log('err', err);
-                next(err);
-                return; // exit out of the if statement
-            }
-
             const existingEmailUser = await db.collection('users').findOne({ email: user.email });
 
             if (existingEmailUser) {
@@ -198,6 +186,17 @@ router.post('/', (req, res, next) => {
                 next(err);
                 return; // exit out of the if statement
             }
+
+            // Find the maximum empId in the collection
+            const maxEmpIdUser = await db.collection('users').findOne({}, { sort: { empId: -1 } });
+
+            if (maxEmpIdUser) {
+                nextEmpId = maxEmpIdUser.empId + 1;
+            }
+
+            // Assign the next empId and increment it for the next user
+            user.empId = nextEmpId;
+            nextEmpId++;
 
             const result = await db.collection('users').insertOne(user); // insertOne adds a single document
 
