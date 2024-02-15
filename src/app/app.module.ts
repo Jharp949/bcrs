@@ -29,6 +29,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { MatCardModule } from '@angular/material/card';
+
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

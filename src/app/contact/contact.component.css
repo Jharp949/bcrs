@@ -3,3 +3,39 @@
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */
+
+h1 {
+	margin-left: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	text-shadow: 1px 8px 8px rgba(6, 5, 1, 0.6);
+}
+
+p {
+	font-family: "Montserrat", sans-serif;
+	line-height: 50px;
+	text-align: center;
+	color: #816D3B;
+	font-size: 25px;
+	margin-top: 0px;
+	text-shadow: 1px 8px 8px rgba(6, 5, 1, 0.6);
+}
+
+i {
+	color: black;
+	font-size: 50px;
+	text-shadow: 1px 8px 14px rgba(255, 255, 255, 0.6);
+}
+
+.contact {
+	width: 30%;
+	margin: 10px auto;
+	background-color: #2B4A32;
+	text-align: center;
+	text-shadow: 3px 8px 8px rgba(6, 5, 1, 0.6);
+}
+.map {
+    border: 4px solid #2B4A32;
+}

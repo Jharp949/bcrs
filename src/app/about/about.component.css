@@ -3,3 +3,26 @@
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */
+
+h1 {
+	margin-left: 20px;
+	font-family: 'Montserrat', sans-serif;
+	text-shadow: 1px 8px 8px rgba(6, 5, 1, 0.6);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+p {
+	font-family: 'Montserrat', sans-serif;
+	line-height: 40px;
+	text-align: justify;
+	color: #faf2e4;
+	font-size: 25px;
+    text-align: center;
+	
+}
+.about {
+	width: 95%;
+	margin: 10px auto;
+	background-color: #2B4A32;
+}
