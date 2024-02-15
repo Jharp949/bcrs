@@ -14,6 +14,26 @@ const Ajv = require('ajv');
 
 const ajv = new Ajv();
 
+
+const userSchema = {
+  type: 'object',
+  properties: {
+      empId: { type: 'string' },
+      email: { type: 'string' },
+      password: { type: 'string' },
+      firstName: { type: 'string' },
+      lastName: { type: 'string' },
+      phoneNumber: { type: 'integer' },
+      address: { type: 'string' },
+      isDisabled: { type: 'boolean', default: false },
+      role: { type: 'string' },
+      selectedSecurityQuestions: { type: 'array' }
+  },
+  required: ['empId', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'isDisabled', 'role', 'selectedSecurityQuestions']
+};
+
+const validateUser = ajv.compile(userSchema);
+
 const User = require('../models/user-model');
 
 /**
@@ -82,7 +102,7 @@ router.get('/:empId', (req, res, next) => {
 
     mongo(async db => {
         const user = await db.collection('users').findOne({empId}); // findOne returns a single document
-    
+
         if (!user) {
             const err = new Error('Unable to find user with empId ' + empId);
             err.status = 404;
@@ -93,7 +113,7 @@ router.get('/:empId', (req, res, next) => {
 
         res.send(user); // send the employee back to the client
     });
-    
+
 } catch (err) {
     console.error('Error: ', err);
     next(err);
@@ -248,6 +268,5 @@ router.delete('/:empId', (req, res, next) => {
         next(err);
     }
 });
-
 
 module.exports = router;
