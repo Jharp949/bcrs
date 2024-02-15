@@ -13,6 +13,8 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
+import { authGuard } from './shared/authguard.guard';
+import { UserListComponent } from './user-list/user-list.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -49,6 +51,11 @@ const routes: Routes = [
         path: 'faq',
         component: FaqComponent,
         title: 'BCRS: FAQ'
+      },
+      {
+        path: 'user-list', //title for task page
+        component: UserListComponent,
+        canActivate: [authGuard]
       }
     ]
   },

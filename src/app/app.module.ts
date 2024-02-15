@@ -28,7 +28,6 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
 import { MatCardModule } from '@angular/material/card';
 
 
