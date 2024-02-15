@@ -171,7 +171,92 @@ router.post('/', (req, res, next) => {
         next(err);
     }
 });
-  
+
+/**
+* updateUser
+* @swagger
+* /api/users/{empId}:
+*   put:
+*     tags:
+*       - updateUsers
+*     description: Updates an existing user in the MongoDB collection users
+*     summary: updateUser
+*     parameters:
+*       - name: empId
+*         in: path
+*         required: true
+*         schema:
+*           type: number
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               password:
+*                 type: string
+*               firstName:
+*                 type: string
+*               lastName:
+*                 type: string
+*               phoneNumber:
+*                 type: string
+*               address:
+*                 type: string
+*               SelectedSecurityQuestions:
+*                 type: array
+*                 items:
+*                   type: string
+*               role:
+*                 type: string
+*               isDisabled:
+*                 type: boolean
+*     responses:
+*       '200':
+*         description: User updated successfully
+*       '400':
+*         description: Invalid request body
+*       '404':
+*         description: User not found
+*/
+
+router.put('/:empId', (req, res, next) => {
+  try {
+      const user = req.body;
+      const empId = Number(req.params.empId);
+
+      // Validate the request body
+      if (!user || typeof user !== 'object') {
+          const err = new Error('Invalid request body');
+          err.status = 400;
+          console.log('err', err);
+          next(err);
+          return; // exit out of the if statement
+      }
+
+      mongo(async db => {
+          const result = await db.collection('users').updateOne({ empId: empId }, { $set: user });
+
+          if (result.matchedCount === 0) {
+              const err = new Error('User not found');
+              err.status = 404;
+              console.log('err', err);
+              next(err);
+              return; // exit out of the if statement
+          }
+
+          res.send('User updated successfully'); // send success message back to the client
+      });
+
+  } catch (err) {
+      console.error('Error: ', err);
+      next(err);
+  }
+});
+
 /**
 * deleteUserById
 * @swagger
