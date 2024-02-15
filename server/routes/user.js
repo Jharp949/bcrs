@@ -10,31 +10,6 @@ const express = require('express');
 const router =  express.Router();
 const { mongo } = require('../utils/mongo');
 const { ObjectId } = require('mongodb');
-const Ajv = require('ajv');
-
-const ajv = new Ajv();
-
-
-const userSchema = {
-  type: 'object',
-  properties: {
-      empId: { type: 'string' },
-      email: { type: 'string' },
-      password: { type: 'string' },
-      firstName: { type: 'string' },
-      lastName: { type: 'string' },
-      phoneNumber: { type: 'integer' },
-      address: { type: 'string' },
-      isDisabled: { type: 'boolean', default: false },
-      role: { type: 'string' },
-      selectedSecurityQuestions: { type: 'array' }
-  },
-  required: ['empId', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'isDisabled', 'role', 'selectedSecurityQuestions']
-};
-
-const validateUser = ajv.compile(userSchema);
-
-const User = require('../models/user-model');
 
 /**
 * findAllUsers
