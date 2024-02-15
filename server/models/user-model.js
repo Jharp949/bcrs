@@ -17,7 +17,7 @@ const userSchema = new Schema({
   lastName: {type: String, required: true },
   phoneNumber: {type: String, required: true },
   address: {type: String, required: true },
-  securityQuestions: {type: Array, required: true},
+  securitySelectedQuestions: {type: Array, required: true},
   role: {type: String, required: true},
   isDisabled: {type: Boolean, default: false},
 }, { collection: 'users' });

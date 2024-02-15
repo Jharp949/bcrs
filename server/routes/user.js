@@ -167,7 +167,7 @@ router.post('/', (req, res, next) => {
         }
 
         // Check if any required fields are left blank
-        const requiredFields = ['empId', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'securityQuestions', 'role'];
+        const requiredFields = ['empId', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'selectedSecurityQuestions', 'role'];
         const missingFields = requiredFields.filter(field => !user[field]);
 
         if (missingFields.length > 0) {
@@ -183,6 +183,16 @@ router.post('/', (req, res, next) => {
 
             if (existingUser) {
                 const err = new Error('User with the same empId already exists');
+                err.status = 409;
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
+            const existingEmailUser = await db.collection('users').findOne({ email: user.email });
+
+            if (existingEmailUser) {
+                const err = new Error('User with the same email already exists');
                 err.status = 409;
                 console.log('err', err);
                 next(err);
@@ -290,7 +300,7 @@ router.put('/:empId', (req, res, next) => {
       }
 
       // Check if any required fields are left blank
-      const requiredFields = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'SelectedSecurityQuestions', 'role'];
+      const requiredFields = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'selectedSecurityQuestions', 'role'];
       const missingFields = requiredFields.filter(field => !user[field]);
       if (missingFields.length > 0) {
           const err = new Error(`Missing required fields: ${missingFields.join(', ')}`);
@@ -301,6 +311,7 @@ router.put('/:empId', (req, res, next) => {
       }
 
       mongo(async db => {
+
           const result = await db.collection('users').updateOne({ empId: empId }, { $set: user });
 
           if (result.matchedCount === 0) {
@@ -310,6 +321,17 @@ router.put('/:empId', (req, res, next) => {
               next(err);
               return; // exit out of the if statement
           }
+
+        const existingEmailUser = await db.collection('users').findOne({ email: user.email });
+
+        if (existingEmailUser && existingEmailUser.empId !== empId) {
+            const err = new Error('User with the same email already exists');
+            err.status = 409;
+            console.log('err', err);
+            next(err);
+            return; // exit out of the if statement
+        }
+
 
           res.send('User updated successfully'); // send success message back to the client
       });
