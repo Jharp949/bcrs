@@ -14,6 +14,26 @@ const Ajv = require('ajv');
 
 const ajv = new Ajv();
 
+
+const userSchema = {
+  type: 'object',
+  properties: {
+      empId: { type: 'string' },
+      email: { type: 'string' },
+      password: { type: 'string' },
+      firstName: { type: 'string' },
+      lastName: { type: 'string' },
+      phoneNumber: { type: 'integer' },
+      address: { type: 'string' },
+      isDisabled: { type: 'boolean', default: false },
+      role: { type: 'string' },
+      selectedSecurityQuestions: { type: 'array' }
+  },
+  required: ['empId', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'isDisabled', 'role', 'selectedSecurityQuestions']
+};
+
+const validateUser = ajv.compile(userSchema);
+
 const User = require('../models/user-model');
 
 /**
@@ -82,7 +102,7 @@ router.get('/:empId', (req, res, next) => {
 
     mongo(async db => {
         const user = await db.collection('users').findOne({empId}); // findOne returns a single document
-    
+
         if (!user) {
             const err = new Error('Unable to find user with empId ' + empId);
             err.status = 404;
@@ -93,13 +113,13 @@ router.get('/:empId', (req, res, next) => {
 
         res.send(user); // send the employee back to the client
     });
-    
+
 } catch (err) {
     console.error('Error: ', err);
     next(err);
     }
 });
-  
+
 /**
 * deleteUserById
 * @swagger
@@ -171,5 +191,175 @@ router.delete('/:empId', (req, res, next) => {
         next(err);
     }
 });
+
+/**
+* createUser
+* @swagger
+* /api/users:
+*   post:
+*     tags:
+*       - Users
+*     description: Creates a new user
+*     summary: createUser
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               empId:
+*                 type: string
+*               email:
+*                 type: string
+*               password:
+*                 type: string
+*               firstName:
+*                 type: string
+*               lastName:
+*                 type: string
+*               phoneNumber:
+*                 type: integer
+*               address:
+*                 type: string
+*               isDisabled:
+*                 type: boolean
+*               role:
+*                 type: string
+*               selectedSecurityQuestions:
+*                 type: array
+*     responses:
+*       '201':
+*         description: User created successfully
+*       '400':
+*         description:
+*           Bad Request. Check the request body for invalid or missing fields.
+*       '404':
+*         description:
+*           Not Found. The provided empId is not found in the database.
+*       '500':
+*         description:
+*           Internal Server Error. An unexpected error occurred while processing the request.
+*/
+router.post('/', async (req, res, next) => {
+  try {
+      const newUser = req.body;
+      const validationResult = validateUser(newUser);
+
+      if (!validationResult) {
+          const err = new Error('Bad Request');
+          err.status = 400;
+          console.log('err', err);
+          next(err);
+          return;
+      }
+
+      mongo(async db => {
+          const result = await db.collection('users').insertOne(newUser);
+
+          if (result.insertedCount === 0) {
+              const err = new Error('Internal Server Error');
+              err.status = 500;
+              console.log('err', err);
+              next(err);
+              return;
+          }
+
+          res.status(201).json({ message: 'User created successfully' });
+      });
+  } catch (err) {
+      console.error('Error: ', err);
+      next(err);
+  }
+});
+
+/**
+* updateUser
+* @swagger
+* /api/users/{empId}:
+*   put:
+*     tags:
+*       - Users
+*     description: Updates an existing user by ID
+*     summary: updateUser
+*     parameters:
+*       - name: empId
+*         in: path
+*         required: true
+*         description: User ID document
+*         schema:
+*           type: string
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               password:
+*                 type: string
+*               firstName:
+*                 type: string
+*               lastName:
+*                 type: string
+*               phoneNumber:
+*                 type: integer
+*               address:
+*                 type: string
+*               isDisabled:
+*                 type: boolean
+*               role:
+*                 type: string
+*               selectedSecurityQuestions:
+*                 type: array
+*     responses:
+*       '204':
+*         description: No Content
+*       '400':
+*         description:
+*           Bad Request. Check the request body for invalid or missing fields.
+*       '404':
+*         description:
+*           Not Found. The provided empId is not found in the database.
+*       '500':
+*         description:
+*           Internal Server Error. An unexpected error occurred while processing the request.
+*/
+router.put('/:empId', async (req, res, next) => {
+  try {
+      let { empId } = req.params;
+
+      const userUpdate = req.body;
+      const validationResult = validateUser(userUpdate);
+
+      if (!validationResult) {
+          const err = new Error('Bad Request');
+          err.status = 400;
+          console.log('err', err);
+          next(err);
+          return;
+      }
+
+      mongo(async db => {
+          const result = await db.collection('users').updateOne({ empId }, { $set: userUpdate });
+
+          if (result.matchedCount === 0) {
+              const err = new Error('Not Found');
+              err.status = 404;
+              console.log('err', err);
+              next(err);
+              return;
+          }
+
+          res.status(204).send();
+      });
+  } catch (err) {
+      console.error('Error: ', err);
+      next(err);
+  }
+});
+
 
 module.exports = router;
