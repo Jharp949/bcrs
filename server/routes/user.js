@@ -99,6 +99,83 @@ router.get('/:empId', (req, res, next) => {
     next(err);
     }
 });
+
+/**
+* createUser
+* @swagger
+* /api/users:
+*   post:
+*     tags:
+*       - createUsers
+*     description: Adds a new user to the MongoDB collection users
+*     summary: createUser
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               empId:
+*                 type: number
+*               email:
+*                 type: string
+*               password:
+*                 type: string
+*               firstName:
+*                 type: string
+*               lastName:
+*                 type: string
+*               phoneNumber:
+*                 type: string
+*               address:
+*                 type: string
+*               securityQuestions:
+*                 type: array
+*                 items:
+*                   type: string
+*               role:
+*                 type: string
+*               isDisabled:
+*                 type: boolean
+*     responses:
+*       '200':
+*         description: User added successfully
+*       '400':
+*         description: Invalid request body
+*/
+router.post('/', (req, res, next) => {
+    try {
+        const user = req.body;
+
+        // Validate the request body
+        if (!user || typeof user !== 'object') {
+            const err = new Error('Invalid request body');
+            err.status = 400;
+            console.log('err', err);
+            next(err);
+            return; // exit out of the if statement
+        }
+
+        mongo(async db => {
+            const result = await db.collection('users').insertOne(user); // insertOne adds a single document
+
+            if (result.insertedCount === 0) {
+                const err = new Error('Failed to add user');
+                err.status = 500;
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
+            res.send('User added successfully'); // send success message back to the client
+        });
+
+    } catch (err) {
+        console.error('Error: ', err);
+        next(err);
+    }
+});
   
 /**
 * deleteUserById
@@ -171,5 +248,6 @@ router.delete('/:empId', (req, res, next) => {
         next(err);
     }
 });
+
 
 module.exports = router;
