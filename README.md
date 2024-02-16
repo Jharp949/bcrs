@@ -1,4 +1,4 @@
-# Bob's Computer Repair Show
+# Bob's Computer Repair Shop
 
 ## Capstone project for Web 450 at Bellevue University
 
