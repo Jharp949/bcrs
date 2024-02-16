@@ -1,0 +1,40 @@
+<div id="user-list" class="container mt-5">
+  <h1 class="display-4">User List</h1>
+  <h2 class="lead">Here are the users that have been configured in the system:</h2>
+
+  <a id="new-user" routerLink="/users/new" class="btn btn-primary mb-3">Add new user</a>
+
+  <div *ngIf="users.length === 0 || !users" class="alert alert-warning">
+    <p id="no-users" class="mb-0">No users have been configured in the system yet.</p>
+  </div>
+
+  <div *ngIf="users.length > 0">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+          <th>Role</th>
+          <th>Functions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phoneNumber}}</td>
+          <td>{{user.address}}</td>
+          <td>{{user.role}}</td>
+          <td>
+            <a id="edit-user" routerLink="/users/{{user.empId}}" class="btn btn-sm btn-info">Edit</a>
+            <button id="delete-user" (click)="deleteUser(user.empId)" class="btn btn-sm btn-danger ml-2">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

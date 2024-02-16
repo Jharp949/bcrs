@@ -4,5 +4,44 @@
 * Date: 2/12/2024
 */
 -->
+<div class="container">
+  <div class="row justify-content-center mt-5">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card shadow">
+              <div class="card-title text-center border-bottom">
+                  <h2 class="p-3 text-blue display-5">Employee Sign In</h2>
+              </div>
 
-<p>signin works!</p>
+              <!-- error messages -->
+              <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                  {{ errorMessage }}
+              </div>
+
+              <div class="card-body">
+                  <form [formGroup]="signinForm" (ngSubmit)="signin(); signinForm.reset();">
+                      <div class="mb-4">
+                          <label for="email" class="form-label">Email:</label>
+                          <input type="email" class="form-control" id="email" formControlName="email" required>
+                      </div>
+                      <div class="mb-4">
+                          <label for="password" class="form-label">Password:</label>
+                          <input type="password" class="form-control" id="password" formControlName="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                          <small id="passwordHelp" class="form-text text-muted">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
+                      </div>
+
+                      <div class="d-grid">
+                          <button type="submit" class="btn text-cream" style="background-color: #123456;">
+                              <span *ngIf="!isLoading">Sign In</span>
+
+                              <div *ngIf="isLoading">
+                                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
+                              </div>
+                          </button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <a routerLink="/" class="text-blue text-underline-hover">Return</a>
+      </div>
+  </div>
+</div>
