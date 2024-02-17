@@ -22,12 +22,13 @@ import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { ServicesComponent } from './services/services.component';
-import { RegisterComponent } from './security/register/register.component';
 import { ServiceGraphComponent } from './service-graph/service-graph.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './security/register/register.component';
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,7 +44,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SecurityQuestionListComponent } from './security-question-list/security-question-list.component';
-
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { SecurityQuestionListComponent } from './security-question-list/security
     UserListComponent,
     UserDetailsComponent,
     SecurityQuestionsComponent,
-    SecurityQuestionListComponent
+    SecurityQuestionListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

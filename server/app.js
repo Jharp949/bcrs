@@ -8,13 +8,22 @@
 
 // Require statements
 const express = require('express');
-const createServer = require('http-errors');
+const createError = require('http-errors');
 const path = require('path');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const userRoute = require('./routes/user');
+// Imports for user related APIs
+const findAllUsersRoute = require('./routes/user-api/findAllUsers');
+const findUserByIdRoute = require('./routes/user-api/findUserById');
+const createUserRoute = require('./routes/user-api/createUser');
+const updateUserRoute = require('./routes/user-api/updateUser');
+const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
 
+//Imports for login related APIs
+const loginRoute = require('./routes/security-api/login');
+
+// Configuration object for Swagger
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -24,9 +33,17 @@ const swaggerOptions = {
       description: 'Test APIs for Bobs Computer Repair Shop'
     },
   },
-  apis: ['./server/routes/*.js'], // folder containing all APIs
+  // Array of file paths for APIs
+  apis: ['./server/routes/*.js',
+         './server/routes/user-api/*.js',
+         './server/routes/security-api/*.js'
+  ]
 };
 
+/*
+ * Generates Swagger documentation for each API based on the options
+ * specified in the swaggerOptions object.
+*/
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 // Create the Express app
@@ -38,13 +55,24 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../dist/nodebucket')))
 app.use('/', express.static(path.join(__dirname, '../dist/nodebucket')))
 
+// Swagger UI app
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.use('/api/users', userRoute); // add the routes to the Express app
+// User related APIs
+app.use('/api/users', findAllUsersRoute);
+app.use('/api/users', findUserByIdRoute);
+app.use('/api/users', createUserRoute);
+app.use('/api/users', updateUserRoute);
+app.use('/api/users', deleteUserByIdRoute);
+
+// Login Related APIs
+app.use('/api/login', loginRoute);
+
+
 
 // error handler for 404 errors
 app.use(function(req, res, next) {
-  next(createServer(404)) // forward to error handler
+  next(createError(404)) // forward to error handler
 })
 
 // error handler for all other errors

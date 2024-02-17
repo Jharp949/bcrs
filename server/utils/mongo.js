@@ -14,38 +14,27 @@ const config = require("./config")
 //Store a db connection URL as a variable
 const MONGO_URL = config.dbUrl;
 
+let db = config.db; // Create a variable to hold the database connection
+
 //Connect to the database and output a message saying so to the console
-const mongo = async(operations, next) => {
-  try {
-    console.log("Connecting to db...")
+const connect = async() => {
+  if (db) return db; // If the database connection exists, return it
 
     //Connect to MongoDB
-    const client = await MongoClient.connect(MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const client = await MongoClient.connect(MONGO_URL);
+    console.log("Connecting to MongoDB...");
 
-    //Set database as bcrs
-    const db = client.db(config.dbname);
-    console.log("Connected to db.")
+    //Set database as bcrsDB
+    db = client.db(config.dbname);
+    return db;
+};
 
-    //Await the connection to the database, and output a message stating its connected once successful
-    await operations(db);
-    console.log("Operation was successful")
+const mongo = async (operation) => {
+  const db = await connect(); // Connect to the database
+  console.log("Connected to MongoDB..");
 
-    //Close client
-    client.close()
+  console.log("Operation complete");
+  return operation(db); // Perform the operation
+};
 
-  } catch (err) {
-    //Upon failure to connect, set error status to 500 and create an error variable
-    const error = new Error("Error connecting to db: ", err);
-    error.status = 500;
-
-    //Output an error message to the console, and provide the error variable to next
-    console.log("Error connecting to db: ", err);
-    next(error);
-  }
-}
-
-//Export the mongo module
-module.exports = { mongo }
+module.exports = { mongo }; // Export the performOperation function

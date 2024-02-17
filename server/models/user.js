@@ -10,8 +10,8 @@ const Schema = mongoose.Schema;
 
 // user model
 const userSchema = new Schema({
-  empId: {type: Number, unique: true},
-  email: {type: String, unique: true, dropDups: true },
+  empId: {type: Number, required: true, unique: true},
+  email: {type: String, required: true, unique: true, dropDups: true },
   password: {type: String, required: true },
   firstName: {type: String, required: true },
   lastName: {type: String, required: true },
