@@ -23,8 +23,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { ServicesComponent } from './services/services.component';
 import { ServiceGraphComponent } from './service-graph/service-graph.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LoginComponent } from './user/login/login.component';
@@ -44,6 +42,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SecurityQuestionListComponent } from './security-question-list/security-question-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './admin/users/users.component';
+import { UserListComponent } from './admin/users/user-list/user-list.component';
+import { UserNewComponent } from './admin/users/user-new/user-new.component';
+import { UserViewComponent } from './admin/users/user-view/user-view.component';
+
 
 @NgModule({
   declarations: [
@@ -59,11 +63,14 @@ import { SecurityQuestionListComponent } from './security-question-list/security
     ServicesComponent,
     RegisterComponent, // Add the RegisterComponent here
     ServiceGraphComponent,
-    UserListComponent,
-    UserDetailsComponent,
     SecurityQuestionsComponent,
     SecurityQuestionListComponent,
-    LoginComponent
+    AdminComponent,
+    UsersComponent,
+    UserListComponent,
+    UserNewComponent,
+    UserViewComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -81,7 +88,10 @@ import { SecurityQuestionListComponent } from './security-question-list/security
     MatStepperModule,
     MatListModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

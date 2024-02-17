@@ -14,7 +14,6 @@ import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { authGuard } from './shared/authguard.guard';
-import { UserListComponent } from './user-list/user-list.component';
 import { RegisterComponent } from './security/register/register.component';
 import { SigninComponent } from './security/signin/signin.component';
 import { LoginComponent } from './user/login/login.component';

@@ -8,12 +8,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SecurityComponent } from './security.component';
+import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SecurityComponent,
     title: 'BCRS: Security'
+  },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    title: 'BCRS: Sign In'
   }
 ];
 
