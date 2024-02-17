@@ -17,6 +17,7 @@ import { authGuard } from './shared/authguard.guard';
 import { RegisterComponent } from './security/register/register.component';
 import { SigninComponent } from './security/signin/signin.component';
 import { LoginComponent } from './user/login/login.component';
+import { UserListComponent } from './admin/users/user-list/user-list.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
