@@ -58,6 +58,7 @@ import { UserViewComponent } from './admin/users/user-view/user-view.component';
     FooterComponent,
     AboutComponent,
     ContactComponent,
+    LoginComponent,
     NotFoundComponent,
     FaqComponent,
     ServicesComponent,
