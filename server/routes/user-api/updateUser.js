@@ -34,40 +34,28 @@ const { mongo } = require('../../utils/mongo');
 *             properties:
 *               empId:
 *                 type: number
-*                 required: true
-*                 dropDups: true
 *               email:
 *                 type: string
-*                 required: true
-*                 dropDups: true
 *               password:
 *                 type: string
-*                 required: true
 *               firstName:
 *                 type: string
-*                 required: true
 *               lastName:
 *                 type: string
-*                 required: true
 *               phoneNumber:
-*                 type: string
-*                 required: true
+*                 type: number
 *               address:
 *                 type: string
-*                 required: true
 *               selectedSecurityQuestions:
 *                 type: array
 *                 items:
 *                   type: string
-*                 required: true
 *                 maxItems: 3
 *               role:
 *                 type: string
-*                 required: true
+*                 default: standard
 *               isDisabled:
 *                 type: boolean
-*                 default: false
-*                 required: true
 *     responses:
 *       '200':
 *         description: User updated successfully
@@ -78,49 +66,57 @@ const { mongo } = require('../../utils/mongo');
 */
 
 router.put('/update/:empId', (req, res, next) => {
-  try {
-      const user = req.body;
-      const empId = Number(req.params.empId);
+    try {
+        const user = req.body;
 
-      // Validate the request body
-      if (!user || typeof user !== 'object') {
-          const err = new Error('Invalid request body');
-          err.status = 400;
-          console.log('err', err);
-          next(err);
-          return; // exit out of the if statement
-      }
-
-      mongo(async db => {
-
-          const result = await db.collection('users').updateOne({ empId: empId }, { $set: user });
-
-          if (result.matchedCount === 0) {
-              const err = new Error('User not found');
-              err.status = 404;
-              console.log('err', err);
-              next(err);
-              return; // exit out of the if statement
-          }
-
-        const existingEmailUser = await db.collection('users').findOne({ email: user.email });
-
-        if (existingEmailUser && existingEmailUser.empId !== empId) {
-            const err = new Error('User with the same email already exists');
-            err.status = 409;
+        // Validate the request body
+        if (!user || typeof user !== 'object') {
+            const err = new Error('Invalid request body');
+            err.status = 400;
             console.log('err', err);
             next(err);
             return; // exit out of the if statement
         }
 
+        const { empId, email } = user;
 
-          res.send('User updated successfully'); // send success message back to the client
-      });
+        mongo(async (db) => {
+            // Check if the empId already exists
+            const existingEmpId = await db.collection('users').findOne({ empId: empId });
+            if (existingEmpId) {
+                const err = new Error('User with the same empId already exists');
+                err.status = 409; // Conflict
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
 
-  } catch (err) {
-      console.error('Error: ', err);
-      next(err);
-  }
+            // Check if the email already exists
+            const existingEmail = await db.collection('users').findOne({ email: email });
+            if (existingEmail) {
+                const err = new Error('User with the same email already exists');
+                err.status = 409; // Conflict
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
+            const result = await db.collection('users').updateOne({ empId: empId }, { $set: user });
+
+            if (result.matchedCount === 0) {
+                const err = new Error('User not found');
+                err.status = 404;
+                console.log('err', err);
+                next(err);
+                return; // exit out of the if statement
+            }
+
+            res.send('User updated successfully'); // send success message back to the client
+        });
+    } catch (err) {
+        console.error('Error: ', err);
+        next(err);
+    }
 });
 
 module.exports = router;

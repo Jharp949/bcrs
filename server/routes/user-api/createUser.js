@@ -11,59 +11,60 @@ const router =  express.Router();
 const { mongo } = require('../../utils/mongo');
 
 /**
-* createUser
-* @swagger
-* /api/users/create:
-*   post:
-*     tags:
-*       - Users
-*     description: Adds a new user to the MongoDB collection users
-*     summary: createUser; creates a new user. All parameters required.
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               email:
-*                 type: string
-*                 required: true
-*                 dropDups: true
-*               password:
-*                 type: string
-*                 required: true
-*               firstName:
-*                 type: string
-*                 required: true
-*               lastName:
-*                 type: string
-*                 required: true
-*               phoneNumber:
-*                 type: string
-*                 required: true
-*               address:
-*                 type: string
-*                 required: true
-*               selectedSecurityQuestions:
-*                 type: array
-*                 items:
-*                   type: string
-*                 required: true
-*                 maxItems: 3
-*               role:
-*                 type: string
-*                 required: true
-*               isDisabled:
-*                 type: boolean
-*                 default: false
-*                 required: true
-*     responses:
-*       '200':
-*         description: User added successfully
-*       '400':
-*         description: Invalid request body
-*/
+ * createUser
+ * @swagger
+ * /api/users/create:
+ *   post:
+ *     tags:
+ *       - Users
+ *     description: Adds a new user to the MongoDB collection users
+ *     summary: createUser; creates a new user. All parameters required.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 required: true
+ *                 dropDups: true
+ *               password:
+ *                 type: string
+ *                 required: true
+ *               firstName:
+ *                 type: string
+ *                 required: true
+ *               lastName:
+ *                 type: string
+ *                 required: true
+ *               phoneNumber:
+ *                 type: number
+ *                 required: true
+ *               address:
+ *                 type: string
+ *                 required: true
+ *               selectedSecurityQuestions:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 required: true
+ *                 maxItems: 3
+ *               role:
+ *                 type: string
+ *                 default: "standard"
+ *                 required: true
+ *               isDisabled:
+ *                 type: boolean
+ *                 default: false
+ *                 required: true
+ *     responses:
+ *       '200':
+ *         description: User added successfully
+ *       '400':
+ *         description: Invalid request body
+ */
 
 let nextEmpId = 1001; // Initialize the nextEmpId variable
 
