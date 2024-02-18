@@ -10,12 +10,12 @@ const Schema = mongoose.Schema;
 
 // user model
 const userSchema = new Schema({
-  empId: {type: Number, required: true, unique: true},
-  email: {type: String, required: true, unique: true, dropDups: true },
+  empId: {type: Number, unique: true },
+  email: {type: String, required: true, unique: true },
   password: {type: String, required: true },
-  firstName: {type: String, required: true },
-  lastName: {type: String, required: true },
-  phoneNumber: {type: String, required: true },
+  firstName: {type: String},
+  lastName: {type: String},
+  phoneNumber: {type: String},
   address: {type: String, required: true },
   securitySelectedQuestions: {type: Array, required: true},
   role: {type: String, required: true},

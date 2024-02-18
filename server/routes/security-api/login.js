@@ -7,74 +7,48 @@
 "use strict";
 
 // Import the required modules
-const express = require("express");
-const bcrypt = require("bcryptjs");
+const express = require('express');
 const { mongo } = require("../../utils/mongo");
-const { ObjectId } = require("mongodb");
+const bcrypt = require("bcryptjs"); // Import the bcrypt module
 
 const router = express.Router(); // Create a new router object
 
-/**
- * @description This function registers a new user
- * @body email The user's email
- * @body password The user's password
- * @returns The user's ID
- * @method POST
- */
-router.post("/register", async (req, res, next) => {
-  try {
-    // Get the user's email and password from the request body and hash the password
-    const user = {
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 10)
-    };
-
-    // Insert the user into the users collection
-    const result = await performOperation(db => {
-      return db.collection("users").insertOne(user); // Insert the user into the users collection
-    })
-
-    res.json(result.insertedId); // Send the ID of the inserted user as a JSON response
-  } catch (err) {
-    next(err); // Pass any errors to the error handler
-  }
-});
-
-/**
- * @description This function logs the user in
- * @body email The user's email
- * @body password The user's password
- * @returns The user object
- * @method POST
- */
-
-/**
+  /**
+ * login
  * @swagger
- * /login:
+ * /api/login:
  *   post:
- *     summary: Log in user
- *     description: Log in user with email and password
  *     tags:
  *       - Security
+ *     name: login
+ *     summary: User login
  *     requestBody:
- *       required: true
+ *       description: User information
  *       content:
  *         application/json:
  *           schema:
- *             type: object
+ *             required:
+ *               - email
+ *               - password
  *             properties:
  *               email:
  *                 type: string
  *               password:
  *                 type: string
  *     responses:
- *       200:
- *         description: User object
- *       401:
- *         description: Invalid email or password
+ *       '200':
+ *         description: User logged in
+ *       '401':
+ *         description: Invalid username and/or password
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
  */
 
-router.post("/login", async (req, res, next) => {
+// Signin to the website
+
+router.post("/", async (req, res, next) => {
   try {
     // Get the user's email and password from the request body
     const user = {
@@ -96,6 +70,6 @@ router.post("/login", async (req, res, next) => {
   } catch (err) {
     next(err); // Pass any errors to the error handler
   }
-})
+});
 
-module.exports = router; // Export the router object
+module.exports = router;

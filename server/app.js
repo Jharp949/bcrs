@@ -22,6 +22,7 @@ const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
 
 //Imports for login related APIs
 const loginRoute = require('./routes/security-api/login');
+const registerRoute = require('./routes/security-api/register');
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -52,8 +53,8 @@ const app = express()
 // Configure the app
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '../dist/nodebucket')))
-app.use('/', express.static(path.join(__dirname, '../dist/nodebucket')))
+app.use(express.static(path.join(__dirname, '../dist/bcrs')))
+app.use('/', express.static(path.join(__dirname, '../dist/bcrs')))
 
 // Swagger UI app
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -67,7 +68,7 @@ app.use('/api/users', deleteUserByIdRoute);
 
 // Login Related APIs
 app.use('/api/login', loginRoute);
-
+app.use('/api/register', registerRoute);
 
 
 // error handler for 404 errors
