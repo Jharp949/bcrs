@@ -71,7 +71,7 @@ router.post("/register", async (req, res, next) => {
     const empId = lastUser ? lastUser.empId + 1 : 1001; // Create the value for empId by adding 1 to the last number or set it to 1001 if there are no users
 
     const user = {
-      empId: empId,
+      empId: empId, // auto generated empId
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
       firstName: req.body.firstName,
@@ -86,6 +86,17 @@ router.post("/register", async (req, res, next) => {
       role: "standard", //default role is standard
       isDisabled: false // default isDisabled is false
     };
+
+    // Check if the email already exists in the database collection
+    const existingUser = await mongo(db => {
+      return db.collection("users").findOne({ email: user.email });
+    });
+
+    if (existingUser) {
+      const error = new Error("Email already exists");
+      error.status = 400;
+      throw error;
+    }
 
     // Insert the user into the users collection
     const result = await mongo(db => {
