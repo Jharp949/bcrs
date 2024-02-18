@@ -18,7 +18,7 @@ const { mongo } = require('../../utils/mongo');
 *     tags:
 *       - Users
 *     description: Updates an existing user in the MongoDB collection users
-*     summary: updateUser
+*     summary: updateUser; input the necessary key:value pairs. None are required
 *     parameters:
 *       - name: empId
 *         in: path

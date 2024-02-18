@@ -18,7 +18,7 @@ const { mongo } = require('../../utils/mongo');
 *     tags:
 *       - Users
 *     description: Deletes User by the ID number
-*     summary: deleteUserById
+*     summary: deleteUserById; sets isDisabled to true
 *     parameters:
 *       - name: empId
 *         in: path

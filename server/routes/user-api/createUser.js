@@ -18,7 +18,7 @@ const { mongo } = require('../../utils/mongo');
 *     tags:
 *       - Users
 *     description: Adds a new user to the MongoDB collection users
-*     summary: createUser
+*     summary: createUser; creates a new user. All parameters required.
 *     requestBody:
 *       required: true
 *       content:
