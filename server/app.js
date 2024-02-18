@@ -21,7 +21,7 @@ const updateUserRoute = require('./routes/user-api/updateUser');
 const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
 
 //Imports for login related APIs
-const loginRoute = require('./routes/security-api/login');
+const signinRoute = require('./routes/security-api/signin');
 const registerRoute = require('./routes/security-api/register');
 
 // Configuration object for Swagger
@@ -67,7 +67,7 @@ app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 
 // Security Related APIs
-app.use('/api/security', loginRoute);
+app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);
 
 

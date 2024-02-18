@@ -103,7 +103,8 @@ router.post("/register", async (req, res, next) => {
       return db.collection("users").insertOne(user); // Insert the user into the users collection
     })
 
-    res.json(result.insertedId); // Send the ID of the inserted user as a JSON response
+    res.json(result.insertedempId); // Send the ID of the inserted user as a JSON response
+    console.log('User successfully created');
   } catch (err) {
     next(err); // Pass any errors to the error handler
   }

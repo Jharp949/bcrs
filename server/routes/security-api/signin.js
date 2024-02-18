@@ -14,14 +14,14 @@ const bcrypt = require("bcryptjs"); // Import the bcrypt module
 const router = express.Router(); // Create a new router object
 
   /**
- * login
+ * signin
  * @swagger
- * /api/security/login:
+ * /api/security/signin:
  *   post:
  *     tags:
  *       - Security
- *     name: login
- *     summary: User login
+ *     name: sigin
+ *     summary: User signin
  *     requestBody:
  *       description: User information
  *       content:
@@ -37,9 +37,9 @@ const router = express.Router(); // Create a new router object
  *                 type: string
  *     responses:
  *       '200':
- *         description: User logged in
+ *         description: User signed in
  *       '401':
- *         description: Invalid username and/or password
+ *         description: Invalid email and/or password
  *       '500':
  *         description: Server Exception
  *       '501':
@@ -48,7 +48,7 @@ const router = express.Router(); // Create a new router object
 
 // Signin to the website
 
-router.post("/login", async (req, res, next) => {
+router.post("/signin", async (req, res, next) => {
   try {
     // Get the user's email and password from the request body
     const user = {
