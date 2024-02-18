@@ -13,7 +13,7 @@ const { mongo } = require('../../utils/mongo');
 /**
 * findUserById
 * @swagger
-* /api/users/{empId}:
+* /api/users/find-one/{empId}:
 *   get:
 *     tags:
 *       - Users
@@ -34,7 +34,7 @@ const { mongo } = require('../../utils/mongo');
 *       '404':
 *         description: User ID not found
 */
-router.get('/:empId', (req, res, next) => {
+router.get('/find-one/:empId', (req, res, next) => {
     try {
         let { empId } = req.params;
         empId = parseInt(empId, 10);

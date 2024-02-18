@@ -16,7 +16,7 @@ const router = express.Router(); // Create a new router object
   /**
  * login
  * @swagger
- * /api/login:
+ * /api/security/login:
  *   post:
  *     tags:
  *       - Security
@@ -48,7 +48,7 @@ const router = express.Router(); // Create a new router object
 
 // Signin to the website
 
-router.post("/", async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   try {
     // Get the user's email and password from the request body
     const user = {

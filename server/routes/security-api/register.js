@@ -23,7 +23,7 @@ const router = express.Router(); // Create a new router object
 
 /**
  * @swagger
- * /api/register:
+ * /api/security/register:
  *   post:
  *     summary: Register a new user
  *     description: Register a new user with email and password
@@ -40,6 +40,20 @@ const router = express.Router(); // Create a new router object
  *                 type: string
  *               password:
  *                 type: string
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
+ *               phoneNumber:
+ *                 type: number
+ *               address:
+ *                 type: string
+ *               securitySelectedQuestions:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 minItems: 3
+ *                 maxItems: 3
  *     responses:
  *       200:
  *         description: ID of the inserted user
@@ -47,12 +61,30 @@ const router = express.Router(); // Create a new router object
  *         description: Internal server error
  */
 
-router.post("/", async (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   try {
-    // Get the user's email and password from the request body and hash the password
+    // Build the user's account information from the request body and hash the password
+    const lastUser = await mongo(db => {
+      return db.collection("users").findOne({}, { sort: { empId: -1 } }); // Find the last user in the collection
+    });
+
+    const empId = lastUser ? lastUser.empId + 1 : 1001; // Create the value for empId by adding 1 to the last number or set it to 1001 if there are no users
+
     const user = {
+      empId: empId,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 10)
+      password: bcrypt.hashSync(req.body.password, 10),
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      phoneNumber: req.body.phoneNumber,
+      address: req.body.address,
+      securitySelectedQuestions: [
+        req.body.securitySelectedQuestions[0],
+        req.body.securitySelectedQuestions[1],
+        req.body.securitySelectedQuestions[2]
+      ],
+      role: "standard", //default role is standard
+      isDisabled: false // default isDisabled is false
     };
 
     // Insert the user into the users collection

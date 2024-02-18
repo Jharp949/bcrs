@@ -66,9 +66,9 @@ app.use('/api/users', createUserRoute);
 app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 
-// Login Related APIs
-app.use('/api/login', loginRoute);
-app.use('/api/register', registerRoute);
+// Security Related APIs
+app.use('/api/security', loginRoute);
+app.use('/api/security', registerRoute);
 
 
 // error handler for 404 errors

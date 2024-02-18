@@ -13,7 +13,7 @@ const { mongo } = require('../../utils/mongo');
 /**
 * findAllUsers
 * @swagger
-* /api/users:
+* /api/users/find-all:
 *   get:
 *     tags:
 *       - Users
@@ -25,7 +25,7 @@ const { mongo } = require('../../utils/mongo');
 *       '500':
 *         description: Internal server error
 */
-router.get('/', (req, res, next) => {
+router.get('/find-all', (req, res, next) => {
     try {
         mongo(async db => {
             const users = await db.collection('users').find().toArray();

@@ -13,7 +13,7 @@ const { mongo } = require('../../utils/mongo');
 /**
 * createUser
 * @swagger
-* /api/users:
+* /api/users/create:
 *   post:
 *     tags:
 *       - Users
@@ -67,7 +67,7 @@ const { mongo } = require('../../utils/mongo');
 
 let nextEmpId = 1001; // Initialize the nextEmpId variable
 
-router.post('/', (req, res, next) => {
+router.post('/create', (req, res, next) => {
     try {
         const user = req.body;
 

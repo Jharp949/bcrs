@@ -13,7 +13,7 @@ const { mongo } = require('../../utils/mongo');
 /**
 * updateUser
 * @swagger
-* /api/users/{empId}:
+* /api/users/update/{empId}:
 *   put:
 *     tags:
 *       - Users
@@ -77,7 +77,7 @@ const { mongo } = require('../../utils/mongo');
 *         description: User not found
 */
 
-router.put('/:empId', (req, res, next) => {
+router.put('/update/:empId', (req, res, next) => {
   try {
       const user = req.body;
       const empId = Number(req.params.empId);
@@ -85,17 +85,6 @@ router.put('/:empId', (req, res, next) => {
       // Validate the request body
       if (!user || typeof user !== 'object') {
           const err = new Error('Invalid request body');
-          err.status = 400;
-          console.log('err', err);
-          next(err);
-          return; // exit out of the if statement
-      }
-
-      // Check if any required fields are left blank
-      const requiredFields = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'selectedSecurityQuestions', 'role'];
-      const missingFields = requiredFields.filter(field => !user[field]);
-      if (missingFields.length > 0) {
-          const err = new Error(`Missing required fields: ${missingFields.join(', ')}`);
           err.status = 400;
           console.log('err', err);
           next(err);
