@@ -46,6 +46,8 @@ import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
 import { UserViewComponent } from './admin/users/user-view/user-view.component';
+import { UserEditComponent } from './admin/users/user-edit/user-edit.component';
+import { UserDeleteComponent } from './admin/users/user-delete/user-delete.component';
 
 
 @NgModule({
@@ -69,6 +71,8 @@ import { UserViewComponent } from './admin/users/user-view/user-view.component';
     UserListComponent,
     UserNewComponent,
     UserViewComponent,
+    UserEditComponent,
+    UserDeleteComponent,
 
   ],
   imports: [
