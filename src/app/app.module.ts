@@ -25,7 +25,6 @@ import { ServicesComponent } from './services/services.component';
 import { ServiceGraphComponent } from './service-graph/service-graph.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { SigninComponent } from './security/signin/signin.component';
 import { RegisterComponent } from './security/register/register.component';
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -58,7 +57,6 @@ import { UserViewComponent } from './admin/users/user-view/user-view.component';
     FooterComponent,
     AboutComponent,
     ContactComponent,
-    SigninComponent,
     NotFoundComponent,
     FaqComponent,
     ServicesComponent,
