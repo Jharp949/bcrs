@@ -33,3 +33,20 @@ footer {
 .text-lt-green {
   color: #1a6534
 }
+
+/* Link Styles */
+.link-style {
+  color: #1a6534; /* Set the text color */
+  text-decoration: none; /* Remove the default underline */
+}
+
+/* Border Styles */
+.custom-border {
+  border-color: #869b3b !important;
+}
+
+/* Custom Button Styles */
+sign-btn {
+  background-color: #816d3b;
+  color: #fff !important;
+}

@@ -6,10 +6,10 @@
 -->
 <div class="container">
   <div class="row justify-content-center mt-5">
-      <div class="col-lg-4 col-md-6 col-sm-6">
-          <div class="card shadow">
+      <div class="col-lg-7 col-md-6 col-sm-6">
+          <div class="card shadow border-3 custom-border">
               <div class="card-title text-center border-bottom">
-                  <h2 class="p-3 text-blue display-5">Employee Sign In</h2>
+                  <h2 class="p-3 text-dk-green display-3" style="font-family: righteous">Sign In</h2>
               </div>
 
               <!-- error messages -->
@@ -26,22 +26,27 @@
                       <div class="mb-4">
                           <label for="password" class="form-label">Password:</label>
                           <input type="password" class="form-control" id="password" formControlName="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                          <small id="passwordHelp" class="form-text text-muted">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
+                          <small id="passwordHelp" class="form-text text-muted">*Must contain at least one number, one capital letter, and one special character</small>
                       </div>
 
                       <div class="d-grid">
-                          <button type="submit" class="btn text-cream" style="background-color: #123456;">
+                          <button type="submit" class="btn" style="background-color: #816d3b; color: white">
                               <span *ngIf="!isLoading">Sign In</span>
 
                               <div *ngIf="isLoading">
                                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
                               </div>
                           </button>
+                          <div class="d-flex justify-content-between mt-3">
+                            <a routerLink="" class="link-style">Forgot Password</a>
+                            <span class="text-muted">|</span>
+                            <a routerLink="/register" class="link-style">Create New Account</a>
+                        </div>
                       </div>
                   </form>
               </div>
           </div>
-          <a routerLink="/" class="text-blue text-underline-hover">Return</a>
+          <a routerLink="/" class="text-green link-style display-7">Return Home</a>
       </div>
   </div>
 </div>
