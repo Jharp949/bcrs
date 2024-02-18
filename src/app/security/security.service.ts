@@ -14,7 +14,7 @@ export class SecurityService {
 
   constructor(private http: HttpClient) { }
 
-  findEmployeeById(empId: number) {
+  findUserById(empId: number) {
     return this.http.get('/api/users/find-one' + empId); // retunrns the employee object
   }
 }
