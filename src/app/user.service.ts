@@ -29,29 +29,30 @@ export class UserService {
 
   createUser(user: User): Observable<any> {
     return this.http.post('/api/users/create', {
+      email: user.email,
+      password: user.password,
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
       address: user.address,
-      email: user.email,
-      password: user.password,
       selectedSecurityQuestions: user.selectedSecurityQuestions,
-      role: user.role,
-      isDisabled: user.isDisabled
+      role: 'standard',
+      isDisabled: false
     });
   }
 
   // Update user
 updateUser(empId: string, user: User): Observable<any> {
   return this.http.put(`/api/users/update/${empId}`, {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    phoneNumber: user.phoneNumber,
-    address: user.address,
-    email: user.email,
-    selectedSecurityQuestions: user.selectedSecurityQuestions,
-    role: user.role,
-    isDisabled: user.isDisabled
+      email: user.email,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
+      selectedSecurityQuestions: user.selectedSecurityQuestions,
+      role: 'standard',
+      isDisabled: false
   });
 }
 
