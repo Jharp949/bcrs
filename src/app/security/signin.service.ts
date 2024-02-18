@@ -10,6 +10,6 @@ export class SigninService {
   constructor(private http: HttpClient) { }
 
   signin(user: User): Observable<any> {
-    return this.http.post<any>('/api/signin', user);
+    return this.http.post<any>('/api/security/signin', user);
   }
 }
