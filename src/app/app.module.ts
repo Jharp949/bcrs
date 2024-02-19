@@ -26,6 +26,13 @@ import { ServiceGraphComponent } from './service-graph/service-graph.component';
 import { SecurityQuestionsComponent } from './security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RegisterComponent } from './security/register/register.component';
+import { SecurityQuestionListComponent } from './security-question-list/security-question-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './admin/users/users.component';
+import { UserListComponent } from './admin/users/user-list/user-list.component';
+import { UserNewComponent } from './admin/users/user-new/user-new.component';
+import { UserViewComponent } from './admin/users/user-view/user-view.component';
+
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,15 +47,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SecurityQuestionListComponent } from './security-question-list/security-question-list.component';
-import { AdminComponent } from './admin/admin.component';
-import { UsersComponent } from './admin/users/users.component';
-import { UserListComponent } from './admin/users/user-list/user-list.component';
-import { UserNewComponent } from './admin/users/user-new/user-new.component';
-import { UserViewComponent } from './admin/users/user-view/user-view.component';
-import { UserEditComponent } from './admin/users/user-edit/user-edit.component';
-import { UserDeleteComponent } from './admin/users/user-delete/user-delete.component';
-
 
 @NgModule({
   declarations: [
@@ -71,8 +69,7 @@ import { UserDeleteComponent } from './admin/users/user-delete/user-delete.compo
     UserListComponent,
     UserNewComponent,
     UserViewComponent,
-    UserEditComponent,
-    UserDeleteComponent,
+
 
   ],
   imports: [
