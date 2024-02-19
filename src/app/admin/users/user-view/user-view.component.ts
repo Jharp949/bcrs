@@ -5,8 +5,8 @@
 */
 
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/user.service';
-import { User } from '../user.interface';
+import { UserService } from 'src/app/shared/user.service';
+import { User } from '../../../shared/user.interface';
 
 @Component({
   selector: 'app-user-view',

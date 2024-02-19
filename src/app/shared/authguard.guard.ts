@@ -17,7 +17,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   } else {
     console.log('User is not logged in and cannot access the Utilities page');
     const router = inject(Router); // injects the router
-    router.navigate(['/security/signin'], { queryParams:  {returnUrl: state.url }}); // navigates the user to the signin page
+    router.navigate(['/signin'], { queryParams:  {returnUrl: state.url }}); // navigates the user to the signin page
     return false;
   }
 };
