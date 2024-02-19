@@ -6,6 +6,8 @@
 // imports statements
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { SecurityRoutingModule } from './security-routing.module';
 import { SecurityComponent } from './security.component';
@@ -22,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SecurityRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule,
+    HttpClientModule
   ]
 })
 export class SecurityModule { }
