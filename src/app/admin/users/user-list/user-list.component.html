@@ -1,8 +1,8 @@
 <div id="user-list" class="container mt-5">
-  <h1 class="display-4">User List</h1>
-  <h2 class="lead">Here are the users that have been configured in the system:</h2>
+  <h1 class="display-4 text-dk-green" style="font-family: righteous">User List</h1>
+  <h2 class="lead text-muted">Here are the users that have been configured in the system:</h2>
 
-  <a id="new-user" routerLink="/users/new" class="btn btn-primary mb-3">Add new user</a>
+  <a id="new-user" routerLink="/register" class="btn mb-3" style="background-color: #816d3b; color: white">Add new user</a>
 
   <div *ngIf="users.length === 0 || !users" class="alert alert-warning">
     <p id="no-users" class="mb-0">No users have been configured in the system yet.</p>
