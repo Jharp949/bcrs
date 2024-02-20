@@ -23,6 +23,7 @@ const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
 //Imports for login related APIs
 const signinRoute = require('./routes/security-api/signin');
 const registerRoute = require('./routes/security-api/register');
+const verifyUserRoute = require('./routes/security-api/verifyUser');
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -69,6 +70,8 @@ app.use('/api/users', deleteUserByIdRoute);
 // Security Related APIs
 app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);
+app.use('/api/security', verifyUserRoute);
+
 
 
 // error handler for 404 errors
