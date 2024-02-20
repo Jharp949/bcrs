@@ -17,8 +17,8 @@ import { authGuard } from './shared/authguard.guard';
 import { RegisterComponent } from './security/register/register.component';
 import { SigninComponent } from './security/signin/signin.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
-
-// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
+import { UserEditComponent } from './admin/users/user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
+import { RoleGuard } from './role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
   {
     path: '',
@@ -67,8 +67,15 @@ const routes: Routes = [
       {
         path: 'user-list', //title for task page
         component: UserListComponent,
-        canActivate: [authGuard]
-      }
+        canActivate: [authGuard, RoleGuard], // Add the RoleGuard to the canActivate array
+        data: { expectedRole: 'admin'}
+       },
+       {
+        path: 'user-edit/:id',
+        component: UserEditComponent,
+        canActivate: [authGuard, RoleGuard],
+        data: { expectedRole: 'admin' } // Specify the expected role for admin access
+      },
     ]
   },
   {

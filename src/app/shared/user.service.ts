@@ -60,4 +60,6 @@ updateUser(empId: string, user: User): Observable<any> {
  deleteUser(empId: string): Observable<any> {
   return this.http.delete(`/api/users/delete/${empId}`, { observe: 'response' });
 }
+
+
 }
