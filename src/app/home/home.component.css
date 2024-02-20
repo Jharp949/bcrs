@@ -140,7 +140,7 @@
       /* 24px - 32px */
       padding: clamp(1.5rem, 3vw, 2rem);
       background-color: #fff;
-      box-shadow: 0px 12px 80px 0px rgba(26, 26, 26, 0.08);
+      box-shadow: 0px 5px 10px 0px #869b3b;
       /* prevents padding from affecting height and width */
       box-sizing: border-box;
       grid-column: span 12;
@@ -151,6 +151,8 @@
       justify-content: center;
       position: relative;
       z-index: 1;
+      border-radius: 10px; /*Rounded corners for the cards- laurel*/
+      border: 3px solid #869b3b; /*Border color for the cards- laurel*/
     }
     /*icons within cs cards*/
     #hero-1619 .cs-icon {
