@@ -5,7 +5,7 @@
 */
 -->
 
-<nav>
+<!-- <nav>
   <nav class="navbar navbar-expand-lg navbar-dark gradient-custom text-gray">
     <div class="container-fluid">
       <a class="navbar-brand"  RouterLink=""><img src="/assets/bcrslogo.PNG" alt="Logo" style="height: 60px"> <span class="ms-2 text-gray" style="font-size: 25px; font-weight: bold;">Bob's Computer Repair Shop</span>
@@ -36,7 +36,7 @@
             <a class="nav-link text-gray" routerLink="security/signin" style="font-size: 20px; font-weight: bold;"><i class="bi bi-info-circle text-gray"></i> Sign In</a>
           </li>
 
-          <!--
+
           <li *ngIf="!isLoggedIn">
             <a class="nav-link text-gray" routerLink="security/signin"><i class="bi bi-person text-gray"></i> Sign In</a>
           </li>
@@ -54,9 +54,80 @@
                 <a (click)="signout()" class="dropdown-item link text-blue"><i class="bi bi-box-arrow-right text-gray"></i> Sign Out</a>
               </li>
             </ul>
-          </li> -->
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+</nav> -->
+<nav class="navbar navbar-expand-lg navbar-dark gradient-custom text-gray">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="">
+      <img src="/assets/bcrslogo.PNG" alt="Logo" style="height: 60px" />
+      <span class="ms-2 text-gray" style="font-size: 25px; font-weight: bold;">Bob's Computer Repair Shop</span>
+    </a>
+
+    <button class="navbar-toggler text-gray" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-gray"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-gray" routerLink="" style="font-size: 20px; font-weight: bold;">
+            <i class="bi bi-house-door text-gray"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-gray" routerLink="/services" style="font-size: 20px; font-weight: bold;">
+            <i class="bi bi-tools text-gray"></i> Services
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-gray" routerLink="/contact" style="font-size: 20px; font-weight: bold;">
+            <i class="bi bi-info-circle text-gray"></i> Contact
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-gray" routerLink="/about" style="font-size: 20px; font-weight: bold;">
+            <i class="bi bi-envelope text-gray"></i> About
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link text-gray" routerLink="security/signin" style="font-size: 20px; font-weight: bold;">
+            <i class="bi bi-info-circle text-gray"></i> Sign In
+          </a>
+        </li>
+
+       <!-- Display "Signed In" and dropdown menu when the user is logged in -->
+<li class="nav-item dropdown" *ngIf="isLoggedIn">
+  <a class="nav-link dropdown-toggle text-gray" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="bi bi-person text-gray"></i> Signed In
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" routerLink="/user-list" *ngIf="isAdmin">User List</a>
+    <a class="dropdown-item" routerLink="/service-repair" *ngIf="isAdmin">Service Repair</a>
+    <a class="dropdown-item" routerLink="/service-graph" *ngIf="isAdmin">Service Graph</a>
+    <a class="dropdown-item" routerLink="/user-view" *ngIf="isStandardUser">User View</a>
+    <a class="dropdown-item" routerLink="/service-repair" *ngIf="isStandardUser">Service Repair</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" (click)="signOut()">Sign Out</a>
+  </div>
+</li>
+
+<!-- Display "Register" and "Sign In" links when the user is not logged in -->
+<li class="nav-item" *ngIf="!isLoggedIn">
+  <a class="nav-link text-gray" routerLink="/register" style="font-size: 20px; font-weight: bold;">
+    <i class="bi bi-info-circle text-gray"></i> Register
+  </a>
+</li>
+<li class="nav-item" *ngIf="!isLoggedIn">
+  <a class="nav-link text-gray" routerLink="security/signin" style="font-size: 20px; font-weight: bold;">
+    <i class="bi bi-info-circle text-gray"></i> Sign In
+  </a>
+</li>
+      </ul>
+    </div>
+  </div>
 </nav>

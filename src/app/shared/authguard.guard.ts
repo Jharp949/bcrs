@@ -5,22 +5,22 @@
 * Date: 2/12/2024
 */
 
-// Import statements
-import { CanActivateFn, Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const cookie = inject(CookieService); // Inject the cookie service from the ngx-cookie-service package
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  constructor(private cookieService: CookieService, private router: Router) {}
 
-  /**
-   * if the user is logged in, allow the route to load
-   */
-  if (cookie.get('session_user')) {
-    return true; // Allow the route to load
-  } else {
-    const router = inject(Router); // Inject the router service from the @angular/router package
-    router.navigate((['/signin'])); // Redirect to login page
-    return false; // Prevent the route from loading
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.cookieService.get('session_user')) {
+      return true; // Allow the route to load
+    } else {
+      this.router.navigate(['/signin']); // Redirect to login page
+      return false; // Prevent the route from loading
+    }
   }
-};
+}

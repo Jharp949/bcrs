@@ -21,7 +21,6 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
-import { ServicesComponent } from './services/services.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
 import { SecurityQuestionsComponent } from './security/security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -48,6 +47,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { ServicesComponent } from './services/services.component';
+import { ServiceRepairComponent } from './service-repair/service-repair.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,6 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     ContactComponent,
     NotFoundComponent,
     FaqComponent,
-    ServicesComponent,
     RegisterComponent,
     ServiceGraphComponent,
     SecurityQuestionsComponent,
@@ -71,6 +71,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserNewComponent,
     UserViewComponent,
     UserEditComponent,
+    ServicesComponent,
+    ServiceRepairComponent
 
 
   ],

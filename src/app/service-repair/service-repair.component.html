@@ -1,0 +1,36 @@
+<!---
+* Project Name: service-repair.component.html
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+-->
+<div class="container mt-5 custom-border">
+  <div class="custom-service-box p-4" style="width: 75%; border: solid 3px #869b3b">
+    <h2 class="text-dk-green display-3" style="font-family: righteous">Service Repair</h2>
+
+    <div class="services-list">
+      <div *ngFor="let service of services" class="service-item mb-3">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="service.checked" id="{{ service.name }}">
+          <label class="form-check-label" for="{{ service.name }}">{{ service.name }}</label>
+          <span class="service-price"><strong>{{ service.price | currency:'USD':'symbol':'1.2-2' }}</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-service mt-4">
+      <h4 class="text-dk-green display-4" style="font-family: righteous">Custom Service</h4>
+      <div class="mb-3">
+        <label for="parts" class="form-label">Parts Cost:</label>
+        <input type="number" class="form-control" id="parts" [(ngModel)]="customService.parts" placeholder="Enter parts cost">
+      </div>
+      <div class="mb-3">
+        <label for="hours" class="form-label">Labor Hours:</label>
+        <input type="number" class="form-control" id="hours" [(ngModel)]="customService.hours" placeholder="Enter labor hours">
+      </div>
+      <button class="btn" style="background-color: #816d3b; color: white" (click)="calculateCustomService()">Calculate Custom Service</button>
+      <div *ngIf="customService.total" class="mt-3">
+        <p>Total Cost: {{ customService.total | currency:'USD':'symbol':'1.2-2' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
