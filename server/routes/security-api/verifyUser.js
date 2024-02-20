@@ -47,7 +47,7 @@ const router = express.Router();
 
 // Verify User API
 router.post('/verify/users/:email', async (req, res) => {
-    
+    // Input from the user
     const { email } = req.params;
 
     try {
@@ -71,7 +71,5 @@ router.post('/verify/users/:email', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
-
 
 module.exports = router;
