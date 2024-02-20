@@ -6,10 +6,12 @@
 
 'use strict';
 
+const { mongo } = require('../../utils/mongo');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();
+
 // Verify User API
 /**
  * @swagger
@@ -42,14 +44,34 @@ const router = express.Router();
  *                   type: string
  *                   description: JWT token
  */
-router.post('/verify/users/:email', (req, res) => {
-    // TODO: Implement user verification logic here
 
-    // Generate JWT token
-    const token = jwt.sign({ email: req.params.email }, 'secretKey');
+// Verify User API
+router.post('/verify/users/:email', async (req, res) => {
+    
+    const { email } = req.params;
 
-    // Return success response with token
-    res.status(200).json({ message: 'User verified successfully', token });
+    try {
+        // Check if the email exists in the MongoDB collection 'users'
+        const user = await mongo(db => {
+            return db.collection("users").findOne({ email }); // Find the user in the users collection
+          });
+
+        if (user) {
+            // Generate a JWT token
+            const token = jwt.sign({ email }, 'secretKey');
+
+            // Return the success message and the token
+            res.status(200).json({ message: 'User verified successfully', token });
+        } else {
+            // Return an error message if the email does not exist
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        // Return an error message if there is an error in the database query
+        res.status(500).json({ message: 'Internal server error' });
+    }
 });
+
+
 
 module.exports = router;
