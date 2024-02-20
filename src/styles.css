@@ -20,6 +20,12 @@
  background: linear-gradient(to right, #2B4A32, #1a6534);
 }
 
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+  color: #2B4A32 !important; /* Set the text color */
+
+}
 /* Footer Styles */
 footer {
   margin-top: 40px; /* Update margin-top once other pages have been built */
@@ -31,12 +37,16 @@ footer {
   color: #98a4a0;
 }
 
+.text-white {
+  color: #fff;
+}
+
 .text-dk-green {
   color: #2b4a32
 }
 
 .text-lt-green {
-  color: #1a6534
+  color: #1a6534 !important;
 }
 
 /* Link Styles */
@@ -54,4 +64,12 @@ footer {
 custom-btn {
   background-color: #816d3b;
   color: #fff !important;
+}
+
+/* Image Shadow Styles */
+.glow-img {
+  box-shadow: 0 0 20px #869B3B;
+  max-width: 100%;
+  border-radius: 10px;
+  padding: 10px;
 }
