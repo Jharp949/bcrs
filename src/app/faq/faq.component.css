@@ -2,4 +2,26 @@
 * Project Name: faq.component.css
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
+
 */
+
+.accordion {
+    width: 90%;
+    margin: auto;
+  }
+  
+  .header {
+    width: 90%;
+    margin: auto;
+  }
+  
+  .accordion-item {
+    --bs-accordion-btn-bg:  #eeba35;
+    --bs-accordion-border-color: black;
+    --bs-accordion-active-bg: #7D6B5D;
+    --bs-accordion-active-color: white;
+  }
+  
+  .faq-img {
+    width: 90%;
+  }
