@@ -1,15 +1,21 @@
+/**
+ * Author: Professor Krasso
+ * Date: 2/21/2021
+ * File Name: user.interface.ts
+ * Description: User interface
+ */
 
+// selected security question interface with question and answer
+export interface SelectedSecurityQuestion {
+  question: string;
+  answer: string;
+}
 
-// Exports the user interface
+// user interface with email, password, first name, last name, and selected security questions
 export interface User {
-  empId: number;
   email: string;
   password: string;
   firstName: string;
   lastName: string;
-  phoneNumber: string;
-  address: string;
-  selectedSecurityQuestions: string[];
-  role: string;
-  isDisabled: boolean;
+  selectedSecurityQuestions: SelectedSecurityQuestion[];
 }

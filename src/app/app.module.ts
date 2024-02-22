@@ -25,13 +25,15 @@ import { ServicesComponent } from './services/services.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
 import { SecurityQuestionsComponent } from './security/security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { RegisterComponent } from './security/register/register.component';
-import { SecurityQuestionListComponent } from './security/security-question-list/security-question-list.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
 import { UserViewComponent } from './admin/users/user-view/user-view.component';
+import { RegisterComponent } from './security/register/register.component';
+import { VerifySecurityQuestionsComponent } from './security/verify-security-questions/verify-security-questions.component';}
+import { VerifyEmailComponent } from './security/verify-email/verify-email.component';}
+import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
 
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -61,17 +63,18 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     NotFoundComponent,
     FaqComponent,
     ServicesComponent,
-    RegisterComponent,
     ServiceGraphComponent,
     SecurityQuestionsComponent,
-    SecurityQuestionListComponent,
     AdminComponent,
     UsersComponent,
     UserListComponent,
     UserNewComponent,
     UserViewComponent,
     UserEditComponent,
-
+    RegisterComponent,
+    VerifySecurityQuestionsComponent,
+    VerifyEmailComponent,
+    ResetPasswordComponent
 
   ],
   imports: [

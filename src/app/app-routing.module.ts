@@ -14,11 +14,15 @@ import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { authGuard } from './shared/authguard.guard';
-import { RegisterComponent } from './security/register/register.component';
 import { SigninComponent } from './security/signin/signin.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
 import { RoleGuard } from './role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
+import { RegisterComponent } from './users/register/register.component';
+import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
+import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -58,6 +62,21 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         title: 'BCRS: Register'
+      },
+      {
+        path: 'verify-email',
+        component: VerifyEmailComponent,
+        title: 'BCRS: Verify Email'
+      },
+      {
+        path: 'verify-security-questions',
+        component: VerifySecurityQuestionsComponent,
+        title: 'BCRS: Verify Security Questions'
+      },
+      {
+        path: 'reset-password-component',
+        component: ResetPasswordComponent,
+        title: 'BCRS: Reset Password'
       },
       {
         path: 'signin',
