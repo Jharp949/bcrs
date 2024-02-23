@@ -24,6 +24,7 @@ const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
 const signinRoute = require('./routes/security-api/signin');
 const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
+const resetPasswordRoute = require('./routes/security-api/resetPassword');
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -71,6 +72,7 @@ app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);
 app.use('/api/security', verifyUserRoute);
+app.use('/api/security', resetPasswordRoute);
 
 
 

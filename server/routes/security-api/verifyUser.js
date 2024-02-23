@@ -26,7 +26,7 @@ router.get("/verify-email/:email", async (req, res, next) => {
       console.log("email", email)
   
       // Check if the user already exists
-      const savedUser = await performOperation(db => {
+      const savedUser = await mongo(db => {
         return db.collection("users").findOne({ email: email }); // Find a user with the same email
       })
   

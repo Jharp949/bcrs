@@ -26,7 +26,7 @@ router.post("/verify-security-questions/:email", async (req, res, next) => {
       const { securityQuestions } = req.body; // Get the security questions from the request body
   
       // Check if the user already exists
-      const user = await performOperation(db => {
+      const user = await mongo(db => {
         return db.collection("users").findOne({ email: email }); // Find a user with the same email
       })
   
@@ -70,7 +70,7 @@ router.get("/security-questions/:email", async (req, res, next) => {
       const email = req.params.email; // Get the email from the request parameters
   
       // Check if the user already exists
-      const user = await performOperation(db => {
+      const user = await mongo(db => {
         return db.collection("users").findOne({ email: email }); // Find a user with the same email
       })
   
@@ -89,3 +89,5 @@ router.get("/security-questions/:email", async (req, res, next) => {
       next(err); // Pass any errors to the error handler
     }
   });
+
+  module.exports = router;
