@@ -13,24 +13,26 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
+
+
 /**
  * @swagger
- * /api/users/security-questions/{email}:
+ * /api/users/{email}/security-questions:
  *   get:
- *     summary: Get user's security questions
- *     description: Retrieve the user's security questions based on the provided email.
  *     tags:
  *       - Users
+ *     summary: Get selected security questions for a user
+ *     description: Retrieve the selected security questions for a user based on their email.
  *     parameters:
  *       - in: path
  *         name: email
- *         description: The user's email
  *         required: true
+ *         description: User's email address
  *         schema:
  *           type: string
  *     responses:
  *       200:
- *         description: User found
+ *         description: OK
  *         content:
  *           application/json:
  *             schema:
@@ -44,9 +46,17 @@ const router = express.Router();
  *                     type: string
  *       404:
  *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                 message:
+ *                   type: string
  */
-
-router.get("/security-questions/:email", async (req, res, next) => {
+router.get("/:email/security-questions", async (req, res, next) => {
     try {
       const email = req.params.email; // Get the email from the request parameters
   

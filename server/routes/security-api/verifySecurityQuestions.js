@@ -20,25 +20,26 @@ const router = express.Router();
  * @returns {object} The user's security questions
  * @method GET
  */
+
 /**
  * @swagger
- * /api/security/verify-security-questions/{email}:
+ * /api/security/verify/users/{email}/security-questions:
  *   post:
- *     summary: Verify user's security questions
- *     description: Verify if the user's security questions match the provided answers.
  *     tags:
  *       - Security
+ *     summary: Verify user's security questions
+ *     description: Verify if the user's security questions match the stored answers.
  *     parameters:
  *       - in: path
  *         name: email
- *         description: The user's email
  *         required: true
+ *         description: The user's email address.
  *         schema:
  *           type: string
  *       - in: body
  *         name: securityQuestions
- *         description: The user's security questions and answers
  *         required: true
+ *         description: The user's security questions and answers.
  *         schema:
  *           type: object
  *           properties:
@@ -53,39 +54,21 @@ const router = express.Router();
  *                     type: string
  *     responses:
  *       200:
- *         description: User found and security questions match
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 _id:
- *                   type: string
- *                 email:
- *                   type: string
- *                 selectedSecurityQuestions:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       question:
- *                         type: string
- *                       answer:
- *                         type: string
+ *         description: User found and security questions match.
  *       401:
- *         description: Unauthorized - Security questions do not match
+ *         description: Unauthorized - Security questions do not match.
  *       404:
- *         description: User not found
+ *         description: User not found.
  */
 
-router.post("/verify-security-questions/:email", async (req, res, next) => {
+router.post("/verify/users/:email/security-questions", async (req, res, next) => {
   try {
     const email = req.params.email; // Get the email from the request parameters
     const { securityQuestions } = req.body; // Get the security questions from the request body
 
     // Check if the user already exists
     const user = await mongo(db => {
-      return db.collection("selectedSecurityQuestions").findOne({ email: email }); // Find a user with the same email
+      return db.collection("users").findOne({ email: email }); // Find a user with the same email
     })
 
     // If the user does not exist, send a 404 error
