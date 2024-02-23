@@ -10,61 +10,90 @@
 
 const { mongo } = require('../../utils/mongo');
 const express = require('express');
-const bcrypt = require("bcryptjs");
-
+const Ajv = require('ajv');
 const router = express.Router();
+const ajv = new Ajv();
 
-  /**
- * @description This route is used to retrieve a user's security questions
+// Define the schema for the request body
+const schema = {
+  type: 'object',
+  properties: {
+    securityQuestions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          question: { type: 'string' },
+          answer: { type: 'string' }
+        },
+        required: ['question', 'answer']
+      }
+    }
+  },
+  required: ['securityQuestions']
+};
+
+/**
+ * @description This route is used to verify a user's security questions
  * @param {string} email - The user's email
- * @returns {object} The user's security questions
- * @method GET
+ * @body {array} securityQuestions - The user's security questions
+ * @returns {object} The user object
+ * @method POST
  */
 
 /**
  * @swagger
- * /api/security/verify/users/{email}/security-questions:
+ * /api/security/verify/users/security-questions/{email}:
  *   post:
+ *     summary: Verify a user's security questions
+ *     description: This route is used to verify a user's security questions
  *     tags:
  *       - Security
- *     summary: Verify user's security questions
- *     description: Verify if the user's security questions match the stored answers.
  *     parameters:
  *       - in: path
  *         name: email
+ *         description: The user's email
  *         required: true
- *         description: The user's email address.
  *         schema:
  *           type: string
  *       - in: body
- *         name: securityQuestions
+ *         name: body
+ *         description: The user's security questions
  *         required: true
- *         description: The user's security questions and answers.
  *         schema:
- *           type: object
- *           properties:
- *             securityQuestions:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   question:
- *                     type: string
- *                   answer:
- *                     type: string
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               question:
+ *                 type: string
+ *                 description: The security question
+ *               answer:
+ *                 type: string
+ *                 description: The user's answer to the security question
  *     responses:
  *       200:
- *         description: User found and security questions match.
- *       401:
- *         description: Unauthorized - Security questions do not match.
- *       404:
- *         description: User not found.
+ *         description: Questions validated
+ *       400:
+ *         description: Invalid request body
+ *       500:
+ *         description: Internal server error
  */
 
-router.post("/verify/users/:email/security-questions", async (req, res, next) => {
+router.post("/verify/users/security-questions/:email", async (req, res, next) => {
   try {
     const email = req.params.email; // Get the email from the request parameters
     const { securityQuestions } = req.body; // Get the security questions from the request body
+
+    // Validate the request body against the schema
+    const valid = ajv.validate(schema, req.body);
+
+    // If the request body is not valid, send a 400 error
+    if (!valid) {
+      console.error("Invalid request body", ajv.errors); // Log a message to the console
+      next({ status: 400, message: "Invalid request body" }); // Send a 400 error if the request body is not valid
+      return; // Return early to exit the function
+    }
 
     // Check if the user already exists
     const user = await mongo(db => {
@@ -79,11 +108,9 @@ router.post("/verify/users/:email/security-questions", async (req, res, next) =>
     };
 
     // if the security questions do not match return a 401 error to the client
-    if (
-      securityQuestions[0].answer !== user.selectedSecurityQuestions[0].answer ||
+    if (securityQuestions[0].answer !== user.selectedSecurityQuestions[0].answer ||
       securityQuestions[1].answer !== user.selectedSecurityQuestions[1].answer ||
-      securityQuestions[2].answer !== user.selectedSecurityQuestions[2].answer
-      ) {
+      securityQuestions[2].answer !== user.selectedSecurityQuestions[2].answer) {
       const err = new Error('Unauthorized') // create a new Error object
       err.status = 401 // set the error status to 401
       err.message = 'Unauthorized: Security questions do not match' // set the error message to 'Security questions do not match'

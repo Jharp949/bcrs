@@ -13,8 +13,6 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-
-
 /**
  * @swagger
  * /api/users/{email}/security-questions:
