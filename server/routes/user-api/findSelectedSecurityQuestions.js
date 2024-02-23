@@ -15,7 +15,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /security-questions/{email}:
+ * /api/users/security-questions/{email}:
  *   get:
  *     summary: Get user's security questions
  *     description: Retrieve the user's security questions based on the provided email.

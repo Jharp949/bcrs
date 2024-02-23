@@ -22,7 +22,7 @@ const router = express.Router();
  */
 /**
  * @swagger
- * /verify-security-questions/{email}:
+ * /api/security/verify-security-questions/{email}:
  *   post:
  *     summary: Verify user's security questions
  *     description: Verify if the user's security questions match the provided answers.
@@ -85,7 +85,7 @@ router.post("/verify-security-questions/:email", async (req, res, next) => {
 
     // Check if the user already exists
     const user = await mongo(db => {
-      return db.collection("users").findOne({ email: email }); // Find a user with the same email
+      return db.collection("selectedSecurityQuestions").findOne({ email: email }); // Find a user with the same email
     })
 
     // If the user does not exist, send a 404 error
@@ -96,9 +96,11 @@ router.post("/verify-security-questions/:email", async (req, res, next) => {
     };
 
     // if the security questions do not match return a 401 error to the client
-    if (securityQuestions[0].answer !== user.selectedSecurityQuestions[0].answer ||
+    if (
+      securityQuestions[0].answer !== user.selectedSecurityQuestions[0].answer ||
       securityQuestions[1].answer !== user.selectedSecurityQuestions[1].answer ||
-      securityQuestions[2].answer !== user.selectedSecurityQuestions[2].answer) {
+      securityQuestions[2].answer !== user.selectedSecurityQuestions[2].answer
+      ) {
       const err = new Error('Unauthorized') // create a new Error object
       err.status = 401 // set the error status to 401
       err.message = 'Unauthorized: Security questions do not match' // set the error message to 'Security questions do not match'
@@ -116,7 +118,5 @@ router.post("/verify-security-questions/:email", async (req, res, next) => {
     next(err); // Pass any errors to the error handler
   }
 });
-
-
 
 module.exports = router;
