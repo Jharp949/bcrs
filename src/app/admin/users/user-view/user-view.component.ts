@@ -30,7 +30,7 @@ export class UserViewComponent {
     });
   }
 
-  deleteUser(empId: string | undefined) {
+  deleteUser(empId: number | undefined) {
     if (empId !== undefined) {
       if (!confirm('Are you sure you want to delete this user?')) {
         return;

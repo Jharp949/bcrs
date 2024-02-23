@@ -14,21 +14,11 @@ import { SecurityComponent } from './security.component';
 import { SigninComponent } from './signin/signin.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { VerifySecurityQuestionsComponent } from './verify-security-questions/verify-security-questions.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
 
 @NgModule({
   declarations: [
     SecurityComponent,
     SigninComponent,
-    RegisterComponent,
-    VerifyEmailComponent,
-    VerifySecurityQuestionsComponent,
-    ResetPasswordComponent,
-
   ],
   imports: [
     CommonModule,

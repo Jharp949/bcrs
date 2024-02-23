@@ -83,6 +83,8 @@ export class RegisterComponent {
       lastName: this.registerForm.get('lastName')?.value,
       email: this.registerForm.get('email')?.value,
       password: this.registerForm.get('password')?.value,
+      phoneNumber: this.registerForm.get('phoneNumber')?.value,
+      address: this.registerForm.get('address')?.value,
       selectedSecurityQuestions: [
         {
           question: this.registerForm.get('question1')?.value,
@@ -96,7 +98,10 @@ export class RegisterComponent {
           question: this.registerForm.get('question3')?.value,
           answer: this.registerForm.get('answer3')?.value
         }
-      ]
+      ],
+      role: 'standard', // set default value for role
+      isDisabled: false, // set default value for isDisabled
+      empId: 0 // set default value for empId
     }
 
     console.log('Registering new user', this.user) // log the employee object to the console

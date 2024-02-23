@@ -17,5 +17,24 @@ export interface User {
   password: string;
   firstName: string;
   lastName: string;
+  phoneNumber: number;
+  address: string;
   selectedSecurityQuestions: SelectedSecurityQuestion[];
+  role: string;
+  isDisabled: boolean;
+  empId: number;
 }
+
+// Assign default values to the properties
+export const defaultUser: User = {
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  phoneNumber: 0,
+  address: '',
+  selectedSecurityQuestions: [],
+  role: 'standard',
+  isDisabled: false,
+  empId: 0
+};

@@ -8,14 +8,14 @@
 // import statements
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../shared/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SelectedSecurityQuestion } from '../user.interface';
+import { SelectedSecurityQuestion } from '../../shared/user.interface';
 
 @Component({
   selector: 'app-verify-security-questions',
   templateUrl: './verify-security-questions.component.html',
-  styleUrl: './verify-security-questions.component.css'
+  styleUrls: ['./verify-security-questions.component.css']
 })
 export class VerifySecurityQuestionsComponent {
   selectedSecurityQuestions: SelectedSecurityQuestion[] // security questions view model array
@@ -131,3 +131,4 @@ export class VerifySecurityQuestionsComponent {
     })
   }
 }
+

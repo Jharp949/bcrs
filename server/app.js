@@ -19,12 +19,14 @@ const findUserByIdRoute = require('./routes/user-api/findUserById');
 const createUserRoute = require('./routes/user-api/createUser');
 const updateUserRoute = require('./routes/user-api/updateUser');
 const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
+const findUserSecurityQuestionsRoute = require('./routes/user-api/findSelectedSecurityQuestions');
 
-//Imports for login related APIs
+//Imports for security related APIs
 const signinRoute = require('./routes/security-api/signin');
 const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
+const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -67,12 +69,14 @@ app.use('/api/users', findUserByIdRoute);
 app.use('/api/users', createUserRoute);
 app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
+app.use('/api/users', findUserSecurityQuestionsRoute);
 
 // Security Related APIs
 app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);
 app.use('/api/security', verifyUserRoute);
 app.use('/api/security', resetPasswordRoute);
+app.use('/api/security', verifySecurityQuestionsRoute);
 
 
 

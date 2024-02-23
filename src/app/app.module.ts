@@ -30,10 +30,6 @@ import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
 import { UserViewComponent } from './admin/users/user-view/user-view.component';
-import { RegisterComponent } from './security/register/register.component';
-import { VerifySecurityQuestionsComponent } from './security/verify-security-questions/verify-security-questions.component';}
-import { VerifyEmailComponent } from './security/verify-email/verify-email.component';}
-import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
 
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -50,6 +46,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { RegisterComponent } from './users/register/register.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
+import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
+import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 
 @NgModule({
   declarations: [
@@ -72,9 +72,9 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserViewComponent,
     UserEditComponent,
     RegisterComponent,
-    VerifySecurityQuestionsComponent,
+    ResetPasswordComponent,
     VerifyEmailComponent,
-    ResetPasswordComponent
+    VerifySecurityQuestionsComponent,
 
   ],
   imports: [

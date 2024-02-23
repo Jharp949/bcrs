@@ -9,12 +9,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service'
+import { UserService } from '../../shared/user.service'
 
 @Component({
   selector: 'app-verify-email',
   templateUrl: './verify-email.component.html',
-  styleUrl: './verify-email.component.css'
+  styleUrls: ['./verify-email.component.css']
 })
 export class VerifyEmailComponent {
   errorMessage: string // error message variable

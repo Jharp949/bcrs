@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit {
 
       console.log('Deleting user:', empId);
 
-      this.userService.deleteUser(empId.toString()).subscribe({
+      this.userService.deleteUser(empId).subscribe({
         next: (result) => {
           console.log('result:', result);
           this.users = this.users.filter((user) => user.empId !== empId);
@@ -50,4 +50,5 @@ export class UserListComponent implements OnInit {
       console.error('User ID is undefined or null');
     }
   }
+  
 }

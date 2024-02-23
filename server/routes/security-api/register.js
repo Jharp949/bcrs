@@ -30,7 +30,7 @@ const router = express.Router(); // Create a new router object
  *     tags:
  *       - Security
  *     summary: Register a new user
- *     description: Register a new user with email and password
+ *     description: Register a new user with email, password, and additional properties
  *     requestBody:
  *       required: true
  *       content:
@@ -42,6 +42,18 @@ const router = express.Router(); // Create a new router object
  *                 type: string
  *               password:
  *                 type: string
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
+ *               phoneNumber:
+ *                 type: number
+ *               address:
+ *                 type: string
+ *               selectedSecurityQuestions:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     responses:
  *       200:
  *         description: ID of the inserted user
@@ -72,7 +84,6 @@ router.post("/register", async (req, res, next) => {
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10)
     };
-console.log(user.password);
     // Check if the user already exists
     const savedUser = await mongo(async (db) => {
       return db.collection("users").findOne({ email: user.email }); // Find a user with the same email
@@ -86,7 +97,7 @@ console.log(user.password);
       next({ status: 401, message: "User already exists"}) // Send a 404 error if the user already exists
       return; // Return early to prevent the user from being inserted
     }
-
+/*
     // Find the last user in the collection
     let empId = 1001;
     let isEmpIdUnique = false;
@@ -102,12 +113,12 @@ console.log(user.password);
         isEmpIdUnique = true;
       }
     }
-
+*/
     // Insert the user into the users collection
     const result = await mongo(db => {
 
       const registeredUser = {
-        empId: empId,
+//        empId: empId,
         email: user.email,
         password: user.password,
         firstName: req.body.firstName,

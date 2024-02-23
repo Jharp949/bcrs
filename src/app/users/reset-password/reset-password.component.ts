@@ -8,13 +8,13 @@
 // import statements
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../user.service';
+import { UserService } from '../../shared/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.css'
+  styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent {
   errorMessage: string // error message variable
@@ -59,3 +59,4 @@ export class ResetPasswordComponent {
 
   } // end changePassword
 }
+
