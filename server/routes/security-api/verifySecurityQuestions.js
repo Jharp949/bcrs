@@ -13,6 +13,7 @@ const express = require('express');
 const Ajv = require('ajv');
 const router = express.Router();
 const ajv = new Ajv();
+const bcrypt = require('bcryptjs');
 
 // Define the schema for the request body
 const schema = {
@@ -34,21 +35,13 @@ const schema = {
 };
 
 /**
- * @description This route is used to verify a user's security questions
- * @param {string} email - The user's email
- * @body {array} securityQuestions - The user's security questions
- * @returns {object} The user object
- * @method POST
- */
-
-/**
  * @swagger
  * /api/security/verify/users/security-questions/{email}:
  *   post:
- *     summary: Verify a user's security questions
- *     description: This route is used to verify a user's security questions
  *     tags:
  *       - Security
+ *     summary: Verify a user's security questions
+ *     description: Use this API to verify a user's security questions.
  *     parameters:
  *       - in: path
  *         name: email
@@ -56,29 +49,79 @@ const schema = {
  *         required: true
  *         schema:
  *           type: string
- *       - in: body
- *         name: body
- *         description: The user's security questions
- *         required: true
- *         schema:
- *           type: array
- *           items:
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
  *             type: object
  *             properties:
- *               question:
- *                 type: string
- *                 description: The security question
- *               answer:
- *                 type: string
- *                 description: The user's answer to the security question
+ *               securityQuestions:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     question:
+ *                       type: string
+ *                     answer:
+ *                       type: string
+ *                 minItems: 3
+ *                 maxItems: 3
+ *             required:
+ *               - securityQuestions
  *     responses:
- *       200:
- *         description: Questions validated
- *       400:
- *         description: Invalid request body
- *       500:
- *         description: Internal server error
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: object
+ *                   description: The user object
+ *       '400':
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: The error message
+ *       '401':
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: The error message
+ *       '404':
+ *         description: Not Found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: The error message
+ *       '500':
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: The error message
  */
+
 
 router.post("/verify/users/security-questions/:email", async (req, res, next) => {
   try {
