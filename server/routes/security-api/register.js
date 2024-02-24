@@ -97,7 +97,11 @@ router.post("/register", async (req, res, next) => {
       next({ status: 401, message: "User already exists"}) // Send a 404 error if the user already exists
       return; // Return early to prevent the user from being inserted
     }
-/*
+
+    // This loop scans the database for the next available empId.
+/*  // Excluded from the file since a trigger was added to the DB
+    // which performs the same function upon new registration.
+
     // Find the last user in the collection
     let empId = 1001;
     let isEmpIdUnique = false;

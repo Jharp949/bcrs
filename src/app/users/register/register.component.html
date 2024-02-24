@@ -19,8 +19,8 @@
                 <div class="col-md-6">
                   <label class="form-label" for="email">Email:</label>
                   <input class="form-control" formControlName="email" type="text" id="email" name="email" required>
-  
-                   <!-- validation errors -->
+
+                  <!-- validation errors -->
                   <div class="alert alert-danger mt-2" *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
                     <div *ngIf="registerForm.controls['email'].hasError('required')">
                       Email is required.
