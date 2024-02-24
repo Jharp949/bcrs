@@ -6,7 +6,6 @@
 
 'use strict';
 
-
 const { mongo } = require('../../utils/mongo');
 const express = require('express');
 const bcrypt = require("bcryptjs");

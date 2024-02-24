@@ -1,5 +1,6 @@
 /**
  * Author: Professor Krasso
+ * Contributors: Laurel Condon, James Harper, Danielle Taplin
  * Date: 2/21/2021
  * File Name: user.interface.ts
  * Description: User interface

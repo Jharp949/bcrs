@@ -1,4 +1,3 @@
-
 /*
 * Project Name: signin.component.ts
 * Authors: Laurel Condon, James Harper, Danielle Taplin

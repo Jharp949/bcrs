@@ -1,5 +1,6 @@
 /**
  * Author: Professor Krasso
+ * Contributors: Authors: Laurel Condon, James Harper, Danielle Taplin
  * Date: 2/21/2024
  * File Name: reset-password.component.ts
  * Description: Reset password component

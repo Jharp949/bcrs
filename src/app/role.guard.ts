@@ -1,4 +1,8 @@
-
+/*
+* Project Name: role.guard.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
 
 // role.guard.ts
 import { Injectable } from '@angular/core';

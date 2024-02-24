@@ -1,3 +1,9 @@
+/*
+* Project Name: register.interface.js
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/24/2024
+*/
+
 /**
  * Register Interface
  */
