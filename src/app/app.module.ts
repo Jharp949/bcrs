@@ -4,7 +4,6 @@
 * Date: 2/12/2024
 */
 
-
 // imports statements
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,13 +22,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { ServicesComponent } from './services/services.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
-import { SecurityQuestionsComponent } from './security/security-questions/security-questions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
 import { UserViewComponent } from './admin/users/user-view/user-view.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { RegisterComponent } from './users/register/register.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
+import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
+import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -45,11 +48,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { RegisterComponent } from './users/register/register.component';
-import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
-import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
-import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +62,6 @@ import { VerifySecurityQuestionsComponent } from './users/verify-security-questi
     FaqComponent,
     ServicesComponent,
     ServiceGraphComponent,
-    SecurityQuestionsComponent,
     AdminComponent,
     UsersComponent,
     UserListComponent,

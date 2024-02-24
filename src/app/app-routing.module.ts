@@ -3,6 +3,7 @@
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */
+
 // imports statements
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,7 +19,10 @@ import { authGuard } from './shared/authguard.guard';
 import { SigninComponent } from './security/signin/signin.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
-import { RoleGuard } from './role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
+import { RoleGuard } from './shared/role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
+import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
+import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
 
 const routes: Routes = [
   {
@@ -54,6 +58,27 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         title: 'BCRS: Register'
+      },
+      {
+        path:'verify-email',
+        component: VerifyEmailComponent,
+        title: 'BCRS: Forgot Password',
+//        canActivate: [authGuard, RoleGuard],
+//        data: { expectedRoles: ['admin', 'standard']}
+      },
+      {
+        path:'verify-security-questions',
+        component: VerifySecurityQuestionsComponent,
+        title: 'BCRS: Forgot Password',
+//        canActivate: [authGuard, RoleGuard],
+//        data: { expectedRoles: ['admin', 'standard']}
+      },
+      {
+        path:'reset-password',
+        component: ResetPasswordComponent,
+        title: 'BCRS: Forgot Password',
+//        canActivate: [authGuard, RoleGuard],
+//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path: 'faq',

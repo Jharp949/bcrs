@@ -34,7 +34,7 @@ export class ResetPasswordComponent {
     // if no email address is found, redirect to the forgot password page
     if (!this.email) {
       console.log('No email address found')
-      this.router.navigate(['/'])
+      this.router.navigate(['/reset-password'])
     } // end if
   } // end constructor
 
@@ -46,7 +46,7 @@ export class ResetPasswordComponent {
     this.userService.resetPassword(this.email, password).subscribe({
       next: (data) => {
         console.log(data)
-        this.router.navigate(['/']) // redirect to the signin page
+        this.router.navigate(['/signin']) // redirect to the signin page
       },
       error: (err) => {
         console.log(err)
