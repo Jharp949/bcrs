@@ -33,6 +33,8 @@ export class RegisterComponent {
     lastName: [null, Validators.compose([Validators.required])],
     email: [null, Validators.compose([Validators.required, Validators.email])],
     password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')])],
+    phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
+    address: [null, Validators.compose([Validators.required])],
     question1: [null, Validators.compose([Validators.required])],
     answer1: [null, Validators.compose([Validators.required])],
     question2: [null, Validators.compose([Validators.required])],
@@ -110,7 +112,7 @@ export class RegisterComponent {
     this.userService.registerUser(this.user).subscribe({
       next: (result) => {
         console.log('Result from Register API call: ', result) // log the result to the console
-        this.router.navigate(['/']) // navigate to the signin page
+        this.router.navigate(['/security/signin']) // navigate to the signin page
       },
       error: (err) => {
         if (err.error.message) {

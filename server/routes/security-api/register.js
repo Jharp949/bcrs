@@ -126,12 +126,9 @@ router.post("/register", async (req, res, next) => {
         phoneNumber: req.body.phoneNumber,
         address: req.body.address,
         selectedSecurityQuestions: [
-          "Q1", "Q2", "Q3"
-          /*
           req.body.selectedSecurityQuestions[0],
           req.body.selectedSecurityQuestions[1],
           req.body.selectedSecurityQuestions[2]
-          */
         ],
         role: "standard",
         isDisabled: false

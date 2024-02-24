@@ -33,7 +33,11 @@ export const defaultUser: User = {
   lastName: '',
   phoneNumber: 0,
   address: '',
-  selectedSecurityQuestions: [],
+  selectedSecurityQuestions: [
+    { question: '', answer: '' },
+    { question: '', answer: '' },
+    { question: '', answer: '' }
+  ],
   role: 'standard',
   isDisabled: false,
   empId: 0

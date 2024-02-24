@@ -69,7 +69,33 @@
                   <!-- validation errors -->
                   <div class="alert alert-danger mt-2" *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)">
                     <div *ngIf="registerForm.controls['lastName'].hasError('required')">
-                      First name is required.
+                      Last name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="col-md-6">
+                  <label for="pNum" class="form-label">Phone Number:</label>
+                  <input type="number" id="pNum" formControlName="phoneNumber" name="pNum" class="form-control" required>
+  
+                  <!-- validation errors -->
+                  <div class="alert alert-danger mt-2" *ngIf="registerForm.controls['phoneNumber'].invalid && (registerForm.controls['phoneNumber'].dirty || registerForm.controls['phoneNumber'].touched)">
+                    <div *ngIf="registerForm.controls['phoneNumber'].hasError('required')">
+                      Phone number is required.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Address -->
+                <div class="col-md-6">
+                  <label for="address" class="form-label">Address:</label>
+                  <input type="text" id="adrs" formControlName="address" name="adrs" class="form-control" required>
+  
+                  <!-- validation errors -->
+                  <div class="alert alert-danger mt-2" *ngIf="registerForm.controls['address'].invalid && (registerForm.controls['address'].dirty || registerForm.controls['address'].touched)">
+                    <div *ngIf="registerForm.controls['address'].hasError('required')">
+                      Address is required.
                     </div>
                   </div>
                 </div>

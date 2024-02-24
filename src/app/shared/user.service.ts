@@ -66,7 +66,7 @@ updateUser(empId: number, user: User): Observable<any> {
    * @returns - response from the API
    */
 registerUser(user: User) {
-  return this.http.post('/api/users/register', user);
+  return this.http.post('/api/security/register', user);
 }
 
 /**
@@ -75,7 +75,7 @@ registerUser(user: User) {
  * @returns - response from the API
  */
 verifyEmail(email: string) {
-  return this.http.get(`/api/users/verify-email/${email}`);
+  return this.http.get(`/api/security/verify-email/${email}`);
 }
 
 /**
@@ -85,7 +85,7 @@ verifyEmail(email: string) {
  * @returns - response from the API
  */
 verifySecurityQuestions(email: string, securityQuestions: SelectedSecurityQuestion[]) {
-  return this.http.post(`/api/users/verify-security-questions/${email}`, { securityQuestions });
+  return this.http.post(`/api/security/verify/users/security-questions/${email}`, { securityQuestions });
 }
 
 /**
@@ -95,7 +95,7 @@ verifySecurityQuestions(email: string, securityQuestions: SelectedSecurityQuesti
  * @returns - response from the API
  */
 resetPassword(email: string, password: string) {
-  return this.http.post(`/api/users/reset-password/${email}`, { password });
+  return this.http.post(`/api/security/reset-password/${email}`, { password });
 }
 
 /**
@@ -104,7 +104,7 @@ resetPassword(email: string, password: string) {
  * @returns - response from the API
  */
 getSecurityQuestions(email: string) {
-  return this.http.get(`/api/users/security-questions/${email}`);
+  return this.http.get(`/api/users/${email}/security-questions`);
 }
 
 }
