@@ -17,10 +17,12 @@ export const authGuard: CanActivateFn = (route, state) => {
    * if the user is logged in, allow the route to load
    */
   if (cookie.get('session_user')) {
-    return true; // Allow the route to load
+    console.log('User is signed in and can access the Dashboard page');
+    return true;
   } else {
-    const router = inject(Router); // Inject the router service from the @angular/router package
-    router.navigate((['/signin'])); // Redirect to login page
-    return false; // Prevent the route from loading
+    console.log('User is not signed in and cannot access the Dashboard page');
+    const router = inject(Router); // injects the router
+    router.navigate(['/signin'], { queryParams:  {returnUrl: state.url }}); // navigates the user to the signin page
+    return false;
   }
 };

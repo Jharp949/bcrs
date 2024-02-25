@@ -32,18 +32,14 @@
           <li class="nav-item">
             <a class="nav-link text-gray" routerLink="/register" style="font-size: 20px; font-weight: bold;"><i class="bi bi-info-circle text-gray"></i> Register</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-gray" routerLink="security/signin" style="font-size: 20px; font-weight: bold;"><i class="bi bi-info-circle text-gray"></i> Sign In</a>
+
+          <li *ngIf="!isSignedIn">
+            <a class="nav-link text-gray" routerLink="security/signin" style="font-size: 20px; font-weight: bold;"><i class="bi bi-person text-gray"></i> Sign In</a>
           </li>
 
-          <!--
-          <li *ngIf="!isLoggedIn">
-            <a class="nav-link text-gray" routerLink="security/signin"><i class="bi bi-person text-gray"></i> Sign In</a>
-          </li>
-
-          <li *ngIf="isLoggedIn">
-            <a href="#" class="nav-link pe-3 text-gray" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person text-gray"></i> Signed In {{ appUser.fullName }}
+          <li *ngIf="isSignedIn">
+            <a href="#" class="nav-link pe-3 text-gray" style="font-size: 20px; font-weight: bold;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person text-gray"></i> Signed In {{ appUser.firstName }}
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -54,7 +50,7 @@
                 <a (click)="signout()" class="dropdown-item link text-blue"><i class="bi bi-box-arrow-right text-gray"></i> Sign Out</a>
               </li>
             </ul>
-          </li> -->
+          </li>
         </ul>
       </div>
     </div>
