@@ -14,12 +14,13 @@ const routes: Routes = [
   {
     path: '',
     component: SecurityComponent,
-    title: 'BCRS: Security'
-  },
-  {
-    path: 'signin',
-    component: SigninComponent,
-    title: 'BCRS: Sign In'
+    children : [
+      {
+        path: 'signin',
+        component: SigninComponent,
+        title: 'Nodebucket: Sign In'
+      }
+    ]
   }
 ];
 

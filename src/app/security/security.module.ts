@@ -18,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     SecurityComponent,
-    SigninComponent
+    SigninComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class SecurityModule { }

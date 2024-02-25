@@ -1,75 +1,70 @@
-/*
-* Project Name: verifyUser.js
-* Authors: Laurel Condon, James Harper, Danielle Taplin
-* Date: 2/12/2024
-*/
+/**
+ * Author: Professor Krasso
+ * Date: 2/21/2024
+ * File Name: index.js
+ * Description: User routes
+ */
 
 'use strict';
 
 const { mongo } = require('../../utils/mongo');
 const express = require('express');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-// Verify User API
 /**
  * @swagger
- * /api/security/verify/users/{email}:
- *   post:
+ * /api/security/verify-email/{email}:
+ *   get:
+ *     summary: Verify user email
+ *     description: Verify if a user with the given email exists
  *     tags:
  *       - Security
- *     name: sigin
- *     summary: Verify user
- *     description: Verify a user and generate a JWT token
  *     parameters:
  *       - in: path
  *         name: email
- *         required: true
- *         description: User's email address
  *         schema:
  *           type: string
+ *         required: true
+ *         description: The email of the user to verify
  *     responses:
- *       200:
- *         description: User verified successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Success message
- *                 token:
- *                   type: string
- *                   description: JWT token
+ *       '200':
+ *         description: User found
+ *       '404':
+ *         description: User not found
+ *       '500':
+ *         description: Internal server error
  */
 
+<<<<<<< HEAD
 /** // Verify User API
 router.post('/verify/users/:email', async (req, res) => {
     // Input from the user
     const { email } = req.params;
+=======
+>>>>>>> f68afc29fe58eda933942aeb540b598f62f12e21
 
-    try {
-        // Check if the email exists in the MongoDB collection 'users'
-        const user = await mongo(db => {
-            return db.collection("users").findOne({ email }); // Find the user in the users collection
-          });
+router.get("/verify-email/:email", async (req, res, next) => {
+  try {
+    const email = req.params.email; // Get the email from the request parameters
 
-        if (user) {
-            // Generate a JWT token
-            const token = jwt.sign({ email }, 'secretKey');
+    // Check if the user already exists
+    const savedUser = await mongo(db => {
+      return db.collection("users").findOne({ email: email }); // Find a user with the same email
+    })
 
-            // Return the success message and the token
-            res.status(200).json({ message: 'User verified successfully', token });
-        } else {
-            // Return an error message if the email does not exist
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        // Return an error message if there is an error in the database query
-        res.status(500).json({ message: 'Internal server error' });
+    // If the user exists, send the user as a JSON response
+    if (savedUser) {
+      res.send(savedUser); // Send the user as a JSON response
+    } else {
+      console.log("User not found"); // Log a message to the console
+      next({ status: 404, message: "User not found" }); // Send a 404 error if the user does not exist
     }
+  } catch (err) {
+    console.error("err", err);
+    next(err); // Pass any errors to the error handler
+  }
 });
 
 module.exports = router; */
