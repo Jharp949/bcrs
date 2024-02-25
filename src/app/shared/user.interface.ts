@@ -12,19 +12,7 @@ export interface SelectedSecurityQuestion {
   answer: string;
 }
 
-// user interface with email, password, first name, last name, and selected security questions
 export interface User {
-  empId?: number;
-  email?: string;
-  password?: string;
-  firstName?: string;
-  lastName?: string;
-  phoneNumber?: string;
-  address?: string;
-  selectedSecurityQuestions?: string[];
-  role?: string;
-  isDisabled?: boolean;
-}
   email: string;
   password: string;
   firstName: string;
@@ -36,6 +24,7 @@ export interface User {
   isDisabled: boolean;
   empId: number;
 }
+
 
 // Assign default values to the properties
 export const defaultUser: User = {

@@ -12,15 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { RegisterComponent } from './users/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
-import { AuthGuard } from './shared/authguard.guard';
 import { RegisterComponent } from './security/register/register.component';
-import { SigninComponent } from './security/signin/signin.component';
-import { UserListComponent } from './admin/users/user-list/user-list.component';
-import { UserEditComponent } from './user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
-import { RoleGuard } from './role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
 import { UserViewComponent } from './admin/users/user-view/user-view.component';
