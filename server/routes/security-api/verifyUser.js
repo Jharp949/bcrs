@@ -45,7 +45,7 @@ const router = express.Router();
  *                   description: JWT token
  */
 
-// Verify User API
+/** // Verify User API
 router.post('/verify/users/:email', async (req, res) => {
     // Input from the user
     const { email } = req.params;
@@ -70,6 +70,32 @@ router.post('/verify/users/:email', async (req, res) => {
         // Return an error message if there is an error in the database query
         res.status(500).json({ message: 'Internal server error' });
     }
+});
+
+module.exports = router; */
+
+router.post('/verify/users', async (req, res) => {
+  const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+
+  try {
+    if (token) {
+      const decoded = jwt.verify(token, 'yourSecretKey');
+
+      const user = await mongo(db => {
+        return db.collection("users").findOne({ email: decoded.email });
+      });
+
+      if (user) {
+        res.status(200).json({ message: 'User verified successfully', user });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } else {
+      res.status(401).json({ message: 'Unauthorized' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 module.exports = router;

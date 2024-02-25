@@ -34,7 +34,7 @@ const { mongo } = require('../../utils/mongo');
 *       '404':
 *         description: User ID not found
 */
-router.get('/find-one/:empId', (req, res, next) => {
+/* router.get('/find-one/:empId', (req, res, next) => {
     try {
         let { empId } = req.params;
         empId = parseInt(empId, 10);
@@ -65,6 +65,29 @@ router.get('/find-one/:empId', (req, res, next) => {
     console.error('Error: ', err);
     next(err);
     }
+});
+
+*/
+router.get('/find-one/:empId', async (req, res, next) => {
+  try {
+    const { empId } = req.params;
+
+    const db = await mongo();
+    const user = await db.collection('users').findOne({ empId });
+
+    if (!user) {
+      const err = new Error('Unable to find user with empId ' + empId);
+      err.status = 404;
+      console.log('err', err);
+      next(err);
+      return;
+    }
+
+    res.send(user);
+  } catch (err) {
+    console.error('Error: ', err);
+    next(err);
+  }
 });
 
 module.exports = router;

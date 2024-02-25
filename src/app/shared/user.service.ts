@@ -8,11 +8,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.interface';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  private token: string | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +58,7 @@ updateUser(empId: string, user: User): Observable<any> {
       isDisabled: false
   });
 }
+
 
  // Delete user
  deleteUser(empId: string): Observable<any> {

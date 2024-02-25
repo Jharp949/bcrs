@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SigninService } from '../signin.service';
+import { SecurityService } from '../../security/security.service';
 
 // Component metadata
 @Component({
@@ -29,7 +30,8 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder, // for building the form
     private SigninService: SigninService, // for handling sign-in
     private router: Router, // for navigation
-    private cookieService: CookieService // for managing cookies
+    private cookieService: CookieService, // for managing cookies
+    private securityService: SecurityService // for managing security
   ) { }
 
   // Initialize the form when the component is created
@@ -59,13 +61,19 @@ export class SigninComponent implements OnInit {
     this.SigninService.signin(this.signinForm.value).subscribe(
       // If the request is successful, set cookies and navigate to the home page
       data => {
+
         this.cookieService.set('session_user', data.email, 1);
         this.cookieService.set('session_name', `${data.firstName} ${data.lastName}`, 1);
         this.cookieService.set('session_role', data.role, 1);
+
+        this.securityService.userSignedIn.next();
         this.router.navigate(['/']);
+
+        console.log('User has logged in');
       },
       // If the request fails, show an error message and set loading state to false
       error => {
+        console.log('Error logging in:', error)
         this.errorMessage = 'Invalid email or password.';
         this.isLoading = false;
       }

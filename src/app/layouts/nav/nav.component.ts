@@ -5,33 +5,42 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { SecurityService } from 'src/app/security/security.service'; // Import SecurityService
+import { CookieService } from 'ngx-cookie-service';
+import { SecurityService } from 'src/app/security/security.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
-  templateUrl: './nav.component.html', // Make sure this path is correct
+  templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  isLoggedIn: boolean;
   isAdmin: boolean = false;
   isStandardUser: boolean = false;
-  isLoggedIn: boolean = false; // Add this property
+  empId: number | null = null;
 
   constructor(
-    private securityService: SecurityService, // Inject SecurityService
+    private cookieService: CookieService,
+    private securityService: SecurityService,
     private router: Router
-  ) {}
+  ) {
+    this.isLoggedIn = this.cookieService.get('session_user') ? true : false;
 
-  ngOnInit(): void {
-    this.checkUserRole();
-    this.isLoggedIn = !!this.securityService.getUser(); // Set isLoggedIn based on whether the user is logged in
+    if (this.isLoggedIn) {
+      // Set empId if available
+      const empId = this.cookieService.get('session_empId');
+      this.empId = empId ? +empId : null;
+
+      this.checkUserRole();
+    }
   }
 
-  private checkUserRole() {
-    let userRoles = this.securityService.getUserRoles(); // Use securityService to get user roles
+  ngOnInit(): void {}
 
-    // If userRoles is a string, convert it to an array
+  private checkUserRole() {
+    let userRoles = this.cookieService.get('session_role').split(',');
+
     if (typeof userRoles === 'string') {
       userRoles = [userRoles];
     }
@@ -40,8 +49,9 @@ export class NavComponent implements OnInit {
     this.isStandardUser = userRoles.includes('standard');
   }
 
-  signOut(): void {
-    this.securityService.signOut(); // Use securityService to sign out
+  signOut() {
+    console.log('Signing out...');
+    this.cookieService.deleteAll();
     this.router.navigate(['/signin']);
   }
 }

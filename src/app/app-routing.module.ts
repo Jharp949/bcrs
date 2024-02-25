@@ -21,6 +21,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';  // Import 
 import { RoleGuard } from './role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
+import { UserViewComponent } from './admin/users/user-view/user-view.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,12 @@ const routes: Routes = [
         component: UserListComponent,
         canActivate: [AuthGuard, RoleGuard], // Add the RoleGuard to the canActivate array
         data: { expectedRole: 'admin'}
+       },
+       {
+        path: 'user-view/:id',
+        component: UserViewComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { expectedRole: ['admin', 'standard'] }
        },
        {
         path: 'user-edit/:id',
