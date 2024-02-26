@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -26,12 +25,14 @@ import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
-import { UserViewComponent } from './admin/users/user-view/user-view.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
 import { RegisterComponent } from './users/register/register.component';
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ServicesComponent } from './services/services.component';
+import { ServiceRepairComponent } from './service-repair/service-repair.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -47,12 +48,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-<<<<<<< HEAD
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { ServicesComponent } from './services/services.component';
-import { ServiceRepairComponent } from './service-repair/service-repair.component';
-=======
->>>>>>> f68afc29fe58eda933942aeb540b598f62f12e21
 
 @NgModule({
   declarations: [
@@ -65,28 +60,20 @@ import { ServiceRepairComponent } from './service-repair/service-repair.componen
     ContactComponent,
     NotFoundComponent,
     FaqComponent,
-<<<<<<< HEAD
     RegisterComponent,
-=======
     ServicesComponent,
->>>>>>> f68afc29fe58eda933942aeb540b598f62f12e21
     ServiceGraphComponent,
     AdminComponent,
     UsersComponent,
     UserListComponent,
     UserNewComponent,
-    UserViewComponent,
     UserEditComponent,
-<<<<<<< HEAD
     ServicesComponent,
-    ServiceRepairComponent
-
-=======
-    RegisterComponent,
+    ServiceRepairComponent,
     ResetPasswordComponent,
     VerifyEmailComponent,
     VerifySecurityQuestionsComponent,
->>>>>>> f68afc29fe58eda933942aeb540b598f62f12e21
+    UserProfileComponent,
 
   ],
   imports: [

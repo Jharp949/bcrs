@@ -5,36 +5,20 @@
 * Date: 2/12/2024
 */
 
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
-  constructor(private cookieService: CookieService, private router: Router) {}
+export const AuthGuard: CanActivateFn = (route, state) => {
+  const cookie = inject(CookieService); // injects the cookie service
 
-<<<<<<< HEAD
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.cookieService.get('session_user')) {
-      return true; // Allow the route to load
-    } else {
-      this.router.navigate(['/signin']); // Redirect to login page
-      return false; // Prevent the route from loading
-    }
-=======
-  /**
-   * if the user is logged in, allow the route to load
-   */
   if (cookie.get('session_user')) {
-    console.log('User is signed in and can access the Dashboard page');
+    console.log('User is logged in and can access the Task page');
     return true;
   } else {
-    console.log('User is not signed in and cannot access the Dashboard page');
+    console.log('User is not logged in and cannot access the Task page');
     const router = inject(Router); // injects the router
-    router.navigate(['/signin'], { queryParams:  {returnUrl: state.url }}); // navigates the user to the signin page
+    router.navigate(['/security/signin'], { queryParams:  {returnUrl: state.url }}); // navigates the user to the signin page
     return false;
->>>>>>> f68afc29fe58eda933942aeb540b598f62f12e21
   }
 }

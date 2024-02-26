@@ -14,10 +14,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
-import { RegisterComponent } from './security/register/register.component';
+import { RegisterComponent } from './users/register/register.component';
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
-import { UserViewComponent } from './admin/users/user-view/user-view.component';
 import { AuthGuard } from './shared/authguard.guard';
 import { SigninComponent } from './security/signin/signin.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
@@ -26,6 +25,7 @@ import { RoleGuard } from './shared/role.guard';// routes array with a path, com
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -66,21 +66,21 @@ const routes: Routes = [
         path:'verify-email',
         component: VerifyEmailComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [authGuard, RoleGuard],
+//        canActivate: [AuthGuard, RoleGuard],
 //        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path:'verify-security-questions',
         component: VerifySecurityQuestionsComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [authGuard, RoleGuard],
+//        canActivate: [AuthGuard, RoleGuard],
 //        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path:'reset-password',
         component: ResetPasswordComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [authGuard, RoleGuard],
+//        canActivate: [AuthGuard, RoleGuard],
 //        data: { expectedRoles: ['admin', 'standard']}
       },
       {
@@ -100,12 +100,6 @@ const routes: Routes = [
         data: { expectedRole: 'admin'}
        },
        {
-        path: 'user-view/:id',
-        component: UserViewComponent,
-        canActivate: [AuthGuard, RoleGuard],
-        data: { expectedRole: ['admin', 'standard'] }
-       },
-       {
         path: 'user-edit/:id',
         component: UserEditComponent,
         canActivate: [AuthGuard, RoleGuard],
@@ -122,8 +116,14 @@ const routes: Routes = [
         component: ServiceGraphComponent,
         canActivate: [AuthGuard, RoleGuard],
         data: { expectedRole: 'admin' }
-      }
-
+      },
+      {
+        path:'user-profile',
+        component: UserProfileComponent,
+        title: 'BCRS: User Profile',
+//        canActivate: [AuthGuard, RoleGuard],
+//        data: { expectedRoles: ['admin', 'standard']}
+      },
     ]
   },
   {

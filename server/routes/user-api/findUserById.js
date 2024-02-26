@@ -34,40 +34,7 @@ const { mongo } = require('../../utils/mongo');
 *       '404':
 *         description: User ID not found
 */
-/* router.get('/find-one/:empId', (req, res, next) => {
-    try {
-        let { empId } = req.params;
-        empId = parseInt(empId, 10);
 
-        if (isNaN(empId)) {
-            const err = new Error('User ID must be a number');
-            err.status = 400;
-            console.log('err', err);
-            next(err);
-            return; // exit out of the if statement
-        }
-
-    mongo(async db => {
-        const user = await db.collection('users').findOne({empId}); // findOne returns a single document
-
-        if (!user) {
-            const err = new Error('Unable to find user with empId ' + empId);
-            err.status = 404;
-            console.log('err', err);
-            next(err);
-            return; // exit out of the if statement
-        }
-
-        res.send(user); // send the employee back to the client
-    });
-
-} catch (err) {
-    console.error('Error: ', err);
-    next(err);
-    }
-});
-
-*/
 router.get('/find-one/:empId', async (req, res, next) => {
   try {
     const { empId } = req.params;

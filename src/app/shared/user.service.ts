@@ -8,15 +8,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.interface';
-import { tap } from 'rxjs/operators';
 import { SelectedSecurityQuestion } from '../shared/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  private token: string | null = null;
 
   constructor(private http: HttpClient) { }
 

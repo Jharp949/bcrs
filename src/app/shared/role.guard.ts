@@ -1,13 +1,9 @@
-<<<<<<< HEAD:src/app/role.guard.ts
-=======
 /*
 * Project Name: role.guard.ts
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */
 
->>>>>>> f68afc29fe58eda933942aeb540b598f62f12e21:src/app/shared/role.guard.ts
-// role.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';

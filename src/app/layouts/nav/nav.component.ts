@@ -52,6 +52,6 @@ export class NavComponent implements OnInit {
   signOut() {
     console.log('Signing out...');
     this.cookieService.deleteAll();
-    this.router.navigate(['/signin']);
+    window.location.href = '/';
   }
 }
