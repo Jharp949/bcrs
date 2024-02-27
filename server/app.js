@@ -27,6 +27,7 @@ const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
 const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
+const createInvoice = require('./routes/user-api/createInvoice');
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -70,6 +71,7 @@ app.use('/api/users', createUserRoute);
 app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/users', findUserSecurityQuestionsRoute);
+app.use('/api/users', createInvoice);
 
 // Security Related APIs
 app.use('/api/security', signinRoute);
