@@ -33,6 +33,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ServicesComponent } from './services/services.component';
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { ChartModule } from 'primeng/chart';
 
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -96,6 +97,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
