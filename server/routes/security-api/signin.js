@@ -40,6 +40,8 @@ const router = express.Router(); // Create a new router object
  *         description: User signed in
  *       '401':
  *         description: Invalid email and/or password
+ *       '404':
+ *         description: User not found
  *       '500':
  *         description: Server Exception
  *       '501':
@@ -62,7 +64,7 @@ router.post("/signin", async (req, res, next) => {
     });
 
     if (result.isDisabled === true) { // Checks if the user has been disabled.
-      next({ status: 404, message: "User profile has been disabled" });
+      next({ status: 404, message: "User not found" });
       return; // Return early to prevent further execution
     }
 

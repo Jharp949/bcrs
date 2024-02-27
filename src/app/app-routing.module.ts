@@ -123,7 +123,7 @@ const routes: Routes = [
         title: 'BCRS: User Profile',
 //        canActivate: [AuthGuard, RoleGuard],
 //        data: { expectedRoles: ['admin', 'standard']}
-      },
+      }
     ]
   },
   {
