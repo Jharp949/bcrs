@@ -62,7 +62,7 @@ router.post("/signin", async (req, res, next) => {
     });
 
     if (result.isDisabled === true) { // Checks if the user has been disabled.
-      next({ status: 404, message: "User profile has been disabled" }); // User disabled
+      next({ status: 404, message: "User profile has been disabled" });
       return; // Return early to prevent further execution
     }
 
