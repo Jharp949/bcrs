@@ -78,8 +78,6 @@ app.use('/api/security', verifyUserRoute);
 app.use('/api/security', resetPasswordRoute);
 app.use('/api/security', verifySecurityQuestionsRoute);
 
-
-
 // error handler for 404 errors
 app.use(function(req, res, next) {
   next(createError(404)) // forward to error handler
@@ -87,7 +85,7 @@ app.use(function(req, res, next) {
 
 // error handler for all other errors
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500) //  set response status code
+  res.status(err.status || 500) //  Internal service error
 
   // send response to client in JSON format with a message and stack trace
   res.json({

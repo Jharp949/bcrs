@@ -53,13 +53,18 @@ router.post("/signin", async (req, res, next) => {
     // Get the user's email and password from the request body
     const user = {
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     };
 
     // Find the user in the users collection
     const result = await mongo(db => {
       return db.collection("users").findOne({ email: user.email }); // Find the user in the users collection
     });
+
+    if (result.isDisabled === true) { // Checks if the user has been disabled.
+      next({ status: 404, message: "User profile has been disabled" }); // User disabled
+      return; // Return early to prevent further execution
+    }
 
     // If the user is found and the password is correct, send the user object as a JSON response
     if (result && bcrypt.compareSync(user.password, result.password)) {
