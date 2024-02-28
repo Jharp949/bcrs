@@ -61,12 +61,17 @@ export class SigninComponent implements OnInit {
       // If the request is successful, set cookies and navigate to the home page
       data => {
 
+        console.log('empId:', data.empId);
+        this.cookieService.set('session_empId', data.empId, 1);
+        console.log('session_empId cookie:', this.cookieService.get('session_empId'));
         this.cookieService.set('session_user', data.email, 1);
         this.cookieService.set('session_name', `${data.firstName} ${data.lastName}`, 1);
         this.cookieService.set('session_role', data.role, 1);
+        console.log('empId:', data.empId);
+
 
         this.securityService.userSignedIn.next();
-        this.router.navigate(['/']);
+        this.router.navigate(['/service-repair']);
 
         console.log('User has logged in');
       },
@@ -79,4 +84,3 @@ export class SigninComponent implements OnInit {
     );
   }
 }
-  

@@ -1,5 +1,5 @@
 <!---
-* Project Name: service-repair.component.html
+* Project name: service-repair.component.html
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 -->
@@ -30,6 +30,7 @@
       <button class="btn" style="background-color: #816d3b; color: white" (click)="calculateCustomService()">Calculate Custom Service</button>
       <div *ngIf="customService.total" class="mt-3">
         <p>Total Cost: {{ customService.total | currency:'USD':'symbol':'1.2-2' }}</p>
+        <!--<button (click)="generateInvoice()">Generate Invoice</button> -->
       </div>
     </div>
   </div>

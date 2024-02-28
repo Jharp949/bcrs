@@ -106,6 +106,12 @@ const routes: Routes = [
         data: { expectedRole: 'admin' } // Specify the expected role for admin access
       },
       {
+        path: 'user-profile',
+        component: UserProfileComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { expectedRole: 'standard' }
+      },
+      {
         path: 'service-repair',
         component: ServiceRepairComponent,
         canActivate: [AuthGuard, RoleGuard],
@@ -116,14 +122,7 @@ const routes: Routes = [
         component: ServiceGraphComponent,
         canActivate: [AuthGuard, RoleGuard],
         data: { expectedRole: 'admin' }
-      },
-      {
-        path:'user-profile',
-        component: UserProfileComponent,
-        title: 'BCRS: User Profile',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
-      },
+      }
     ]
   },
   {

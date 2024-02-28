@@ -27,6 +27,7 @@ const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
 const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
+const createInvoice = require('./routes/invoice-api/createInvoice');
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -41,7 +42,8 @@ const swaggerOptions = {
   // Array of file paths for APIs
   apis: ['./server/routes/*.js',
          './server/routes/user-api/*.js',
-         './server/routes/security-api/*.js'
+         './server/routes/security-api/*.js',
+          './server/routes/invoice-api/*.js'
   ]
 };
 
@@ -71,6 +73,7 @@ app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/users', findUserSecurityQuestionsRoute);
 
+
 // Security Related APIs
 app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);
@@ -78,7 +81,8 @@ app.use('/api/security', verifyUserRoute);
 app.use('/api/security', resetPasswordRoute);
 app.use('/api/security', verifySecurityQuestionsRoute);
 
-
+// Invoice Related APIs
+app.use('/api/invoice', createInvoice);
 
 // error handler for 404 errors
 app.use(function(req, res, next) {
@@ -87,7 +91,7 @@ app.use(function(req, res, next) {
 
 // error handler for all other errors
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500) //  set response status code
+  res.status(err.status || 500) //  Internal service error
 
   // send response to client in JSON format with a message and stack trace
   res.json({

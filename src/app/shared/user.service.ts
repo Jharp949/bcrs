@@ -43,17 +43,9 @@ export class UserService {
   }
 
   // Update user
-updateUser(empId: number, user: User): Observable<any> {
-  return this.http.put(`/api/users/update/${empId}`, {
-      email: user.email,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phoneNumber: user.phoneNumber,
-      address: user.address,
-      selectedSecurityQuestions: user.selectedSecurityQuestions,
-  });
-}
+  updateUser(empId: number, user: Partial<User>): Observable<any> {
+    return this.http.put(`/api/users/update/${empId}`, user, { responseType: 'text' });
+  }
 
 
  // Delete user

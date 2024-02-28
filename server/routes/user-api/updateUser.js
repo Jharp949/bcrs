@@ -65,6 +65,35 @@ const { mongo } = require('../../utils/mongo');
 *         description: User not found
 */
 
+
+router.put('/update/:empId', async (req, res, next) => {
+  try {
+    let user = req.body;
+    const { empId } = user;
+
+    // Remove the _id field from the user object
+    delete user._id;
+
+    await mongo(async (db) => {
+      const result = await db.collection('users').updateOne({ empId: Number(empId) }, { $set: user });
+
+      if (result.matchedCount === 0) {
+        const err = new Error('User not found');
+        err.status = 404;
+        console.log('err', err);
+        next(err);
+        return;
+      }
+
+      res.status(200).json({ success: true, message: 'User updated successfully' });
+    });
+  } catch (err) {
+    console.error('Error: ', err);
+    next(err);
+  }
+});
+
+/*
 router.put('/update/:empId', (req, res, next) => {
     try {
         const user = req.body;
@@ -117,6 +146,32 @@ router.put('/update/:empId', (req, res, next) => {
         console.error('Error: ', err);
         next(err);
     }
+});
+
+module.exports = router;
+*/
+router.put('/update/:empId', (req, res, next) => {
+  try {
+    const user = req.body;
+    const { empId } = user;
+
+    mongo(async (db) => {
+      const result = await db.collection('users').updateOne({ empId: Number(empId) }, { $set: user });
+
+      if (result.matchedCount === 0) {
+        const err = new Error('User not found');
+        err.status = 404;
+        console.log('err', err);
+        next(err);
+        return;
+      }
+
+      res.send('User updated successfully');
+    });
+  } catch (err) {
+    console.error('Error: ', err);
+    next(err);
+  }
 });
 
 module.exports = router;

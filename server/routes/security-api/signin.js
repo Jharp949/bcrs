@@ -4,6 +4,12 @@
 * Date: 2/12/2024
 */
 
+/*
+* Project Name: login.js
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
+
 "use strict";
 
 // Import the required modules
@@ -40,6 +46,8 @@ const router = express.Router(); // Create a new router object
  *         description: User signed in
  *       '401':
  *         description: Invalid email and/or password
+ *       '404':
+ *         description: User not found
  *       '500':
  *         description: Server Exception
  *       '501':
@@ -53,7 +61,7 @@ router.post("/signin", async (req, res, next) => {
     // Get the user's email and password from the request body
     const user = {
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     };
 
     // Find the user in the users collection
@@ -61,9 +69,16 @@ router.post("/signin", async (req, res, next) => {
       return db.collection("users").findOne({ email: user.email }); // Find the user in the users collection
     });
 
+    if (result.isDisabled === true) { // Checks if the user has been disabled.
+      next({ status: 404, message: "User not found" });
+      return; // Return early to prevent further execution
+    }
+
     // If the user is found and the password is correct, send the user object as a JSON response
     if (result && bcrypt.compareSync(user.password, result.password)) {
+      console.log('User object:', result);
       res.json(result);
+
     } else {
       next({ status: 401, message: "Invalid email or password" }); // Pass an error to the error handler if the user is not found or the password is incorrect
     }

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { User } from '../shared/user.interface';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +33,20 @@ export class SecurityService {
   register(email: string, password: string, firstName: string, lastName: string, phoneNumber: number, address: string,) {
     return this.http.post('/api/security/register', { email, password, firstName, lastName, phoneNumber, address }); // returns the email and password
   }
+
+  findOne(empId: number) {
+    return this.http.get(`/api/users/find-one/${empId}`);
+  }
+
   getUserRoles(): string[] {
     const roles = this.cookieService.get('session_role');
     return roles ? roles.split(',') : [];
   }
 
-  getUser(): User | null {
-    const userString = this.cookieService.get('session_user');
-    this.isLoggedIn.next(userString ? true : false); // Set the value based on the presence of 'session_user'
-    return userString ? JSON.parse(userString) : null;
+  getUser(): Observable<User | null> {
+    const userString = this.cookieService.get('session_empId');
+    this.isLoggedIn.next(userString ? true : false);
+    return of(userString ? JSON.parse(userString) : null);
   }
 
   signOut(): void {
