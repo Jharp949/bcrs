@@ -66,22 +66,16 @@ const routes: Routes = [
         path:'verify-email',
         component: VerifyEmailComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path:'verify-security-questions',
         component: VerifySecurityQuestionsComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path:'reset-password',
         component: ResetPasswordComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path: 'faq',
