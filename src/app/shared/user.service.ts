@@ -50,7 +50,7 @@ export class UserService {
 
  // Delete user
  deleteUser(empId: number): Observable<any> {
-  return this.http.delete(`/api/users/delete/${empId}`, { observe: 'response' });
+  return this.http.delete(`/api/users/delete/${empId}`, { responseType: 'text' });
 }
 
 /**

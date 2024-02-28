@@ -7,6 +7,9 @@
 
 
 <div id="user-list" class="container mt-5">
+  <div class="alert alert-success" role="alert" *ngIf="alertMessage">
+    {{ alertMessage }}
+  </div>
   <h1 class="display-4 text-dk-green" style="font-family: righteous">User List</h1>
   <h2 class="lead text-muted">Here are the users that have been configured in the system:</h2>
 
@@ -14,6 +17,7 @@
 
   <div *ngIf="users.length === 0 || !users" class="alert alert-warning">
     <p id="no-users" class="mb-0">No users have been configured in the system yet.</p>
+
   </div>
 
   <div *ngIf="users.length > 0">
