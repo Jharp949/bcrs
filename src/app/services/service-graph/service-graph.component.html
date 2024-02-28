@@ -2,7 +2,18 @@
 * Project Name: service-graph.component.html
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
-*/
 -->
 
-<p>service-graph works!</p>
+
+
+<div class="container text-center">
+    <h1 style="color:green">Service Graph</h1>
+
+    <h2>Percentage of purchases by service</h2> 
+
+    <div class="row">
+        <div class="col-md-6" style="width: 75%">
+            <p-chart type="pie" [data]="data" [options]="options" ariaLabel="Statistics for purchases"></p-chart> 
+        </div>
+    </div>
+</div>

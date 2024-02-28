@@ -72,6 +72,7 @@ app.use('/api/users', createUserRoute);
 app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/users', findUserSecurityQuestionsRoute);
+app.use('/api/users', createInvoice);
 
 
 // Security Related APIs
