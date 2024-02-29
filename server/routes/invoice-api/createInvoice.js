@@ -99,8 +99,15 @@ router.post('/createInvoice', (req, res, next) => {
                 return; // exit out of the if statement
             }
 
-            res.send('Invoice added successfully'); // send success message back to the client
-        });
+            // Send the newly created invoice back to the client
+            res.json({
+              message: 'Invoice added successfully',
+              invoice: {
+                id: result.insertedId,
+                ...invoice
+              }
+            });
+});
 
     } catch (err) {
         console.error('Error: ', err);
