@@ -34,6 +34,7 @@ import { ServicesComponent } from './services/services.component';
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { ChartModule } from 'primeng/chart';
+import { InvoiceSummaryComponent } from './invoice-summary/invoice-summary.component';
 
 //Material design
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -75,6 +76,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     VerifyEmailComponent,
     VerifySecurityQuestionsComponent,
     UserProfileComponent,
+    InvoiceSummaryComponent,
 
   ],
   imports: [

@@ -26,6 +26,7 @@ import { ResetPasswordComponent } from './users/reset-password/reset-password.co
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { InvoiceSummaryComponent } from './invoice-summary/invoice-summary.component';
 
 const routes: Routes = [
   {
@@ -123,7 +124,13 @@ const routes: Routes = [
         title: 'BCRS: User Profile',
 //        canActivate: [AuthGuard, RoleGuard],
 //        data: { expectedRoles: ['admin', 'standard']}
-      }
+      },
+      {
+        path: 'invoice-summary',
+        component: InvoiceSummaryComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { expectedRole: ['admin', 'standard'] }
+      },
     ]
   },
   {

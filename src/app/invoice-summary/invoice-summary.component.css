@@ -1,0 +1,12 @@
+/*
+* Project Name: invoice-summary.component.css
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/26/2024
+*/
+
+.invoice-container {
+    width: 100%;
+    min-width: 500px;
+    max-width: 750px;
+    margin: 50px auto 50px;
+  }
