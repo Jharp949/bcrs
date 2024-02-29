@@ -11,21 +11,56 @@ const router = express.Router();
 const { mongo } = require('../../utils/mongo');
 
 /**
- * findPurchasesByService
+ * findInvoiceByServices
  * @swagger
- * /api/invoices/purchases-by-service:
+ * /api/invoice/findInvoiceByServices:
  *   get:
  *     tags:
  *       - Invoices
- *     description: Finds purchases by service
- *     summary: findPurchasesByService
+ *     description: Fetches all invoices that include the specified services
+ *     summary: findInvoiceByServices; fetches invoices by services. All parameters required.
+ *     parameters:
+ *       - in: query
+ *         name: services
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: string
+ *         required: true
+ *         description: The names of the services to match
  *     responses:
  *       '200':
- *         description: Purchases by service
- *       '500':
- *         description: Internal Server Error
+ *         description: A list of invoices
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Invoice'
+ *       '400':
+ *         description: Invalid or missing services
  */
+router.get('/findInvoiceByServices', async (req, res, next) => {
+  try {
+    const services = req.query.services;
 
+    if (!services || !Array.isArray(services)) {
+      const err = new Error('Invalid or missing services');
+      err.status = 400;
+      next(err);
+      return;
+    }
+
+    mongo(async db => {
+      const invoices = await db.collection('invoices').find({ 'items.name': { $in: services } }).toArray();
+
+      res.json(invoices);
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+/*
 router.get('/purchases-by-service', async (req, res) => {
   try {
     const db = await mongo();
@@ -47,5 +82,6 @@ router.get('/purchases-by-service', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+*/
 
 module.exports = router;

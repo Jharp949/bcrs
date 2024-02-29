@@ -41,15 +41,20 @@ constructor(private http: HttpClient) { } // Inject the HttpClient service
   }
 
   // Generate Invoice here when api is established
-  /*  generateInvoice() {
-    this.http.post('http://localhost:3000/api/invoices/', {
-      services: this.services.filter(service => service.checked),
-      customService: this.customService
+ /* generateInvoice() {
+    const selectedServices = this.services.filter(service => service.checked);
+
+    this.http.post('http://localhost:3000/api/invoice/createInvoice', {
+      invoiceNumber: 'INV' + Date.now(), // Generate a unique invoice number
+      amount: this.customService.total,
+      dueDate: new Date().toISOString(), // Set the due date to now
+      customerId: 'CUSTOMER_ID', // Replace with actual customer ID
+      items: selectedServices.map(service => ({ name: service.name, quantity: 1, price: service.price }))
     }).subscribe((response: any) => {
       console.log('Invoice generated successfully:', response);
     });
   }
-*/
 
   }
-
+*/
+}
