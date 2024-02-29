@@ -59,7 +59,7 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
       items: selectedServices.map(service => ({ name: service.name, quantity: 1, price: service.price }))
     };
 
-    this.http.post('/api/invoice/createInvoice', invoiceData).subscribe(
+    this.http.post('/api/invoice/createInvoice', invoiceData, { responseType: 'text' }).subscribe(
       (response: any) => {
         console.log('Response from server:', response);
         console.log('Invoice generated successfully:', response);
