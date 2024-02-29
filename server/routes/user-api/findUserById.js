@@ -35,8 +35,6 @@ const { mongo } = require('../../utils/mongo');
 *         description: User ID not found
 */
 
-
-
 router.get('/find-one/:empId', async (req, res, next) => {
   try {
     const empId = Number(req.params.empId);
@@ -60,25 +58,4 @@ router.get('/find-one/:empId', async (req, res, next) => {
   }
 });
 
-
-
-/* router.get('/find-one/:empId', async (req, res) => {
-  try {
-    const { empId } = req.params;
-
-    const db = await mongo();
-    const user = await db.collection('users').findOne({ empId });
-
-    if (!user) {
-      return res.status(404).send({ error: 'User not found' });
-    }
-
-    res.send(user);
-  } catch (err) {
-    console.error('Error: ', err);
-    res.status(500).send({ error: 'Internal Server Error' });
-  }
-});
-
-*/
 module.exports = router;
