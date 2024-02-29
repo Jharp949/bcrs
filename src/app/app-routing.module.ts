@@ -67,22 +67,16 @@ const routes: Routes = [
         path:'verify-email',
         component: VerifyEmailComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path:'verify-security-questions',
         component: VerifySecurityQuestionsComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path:'reset-password',
         component: ResetPasswordComponent,
         title: 'BCRS: Forgot Password',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path: 'faq',
@@ -105,6 +99,12 @@ const routes: Routes = [
         component: UserEditComponent,
         canActivate: [AuthGuard, RoleGuard],
         data: { expectedRole: 'admin' } // Specify the expected role for admin access
+      },
+      {
+        path: 'user-profile',
+        component: UserProfileComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { expectedRole: 'standard' }
       },
       {
         path: 'service-repair',

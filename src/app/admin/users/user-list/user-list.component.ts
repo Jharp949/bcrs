@@ -15,13 +15,15 @@ import { User } from '../../../shared/user.interface';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  alertMessage: string | null = null;
+
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.findAllUsers().subscribe({
-      next: (users) => {
-        this.users = users;
+      next: (users: User[]) => {
+        this.users = users.filter((user: User) => !user.isDisabled);
       },
       error: (err) => {
         console.error('error:', err);
@@ -40,7 +42,24 @@ export class UserListComponent implements OnInit {
       this.userService.deleteUser(empId).subscribe({
         next: (result) => {
           console.log('result:', result);
-          this.users = this.users.filter((user) => user.empId !== empId);
+
+        // Set the alert message
+          this.alertMessage = 'User has been disabled';
+
+        // Remove the alert message after 3 seconds
+        setTimeout(() => {
+          this.alertMessage = null;
+        }, 3000);
+
+          // Refresh the user list
+          this.userService.findAllUsers().subscribe({
+            next: (users: User[]) => {
+              this.users = users.filter((user: User) => !user.isDisabled);
+            },
+            error: (err) => {
+              console.error('Error fetching users:', err);
+            }
+          });
         },
         error: (err) => {
           console.error('error:', err);
@@ -50,5 +69,5 @@ export class UserListComponent implements OnInit {
       console.error('User ID is undefined or null');
     }
   }
-  
+
 }

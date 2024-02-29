@@ -4,6 +4,12 @@
 * Date: 2/12/2024
 */
 
+/*
+* Project Name: login.js
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 2/12/2024
+*/
+
 "use strict";
 
 // Import the required modules
@@ -70,7 +76,9 @@ router.post("/signin", async (req, res, next) => {
 
     // If the user is found and the password is correct, send the user object as a JSON response
     if (result && bcrypt.compareSync(user.password, result.password)) {
+      console.log('User object:', result);
       res.json(result);
+
     } else {
       next({ status: 401, message: "Invalid email or password" }); // Pass an error to the error handler if the user is not found or the password is incorrect
     }

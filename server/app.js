@@ -28,7 +28,11 @@ const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
 const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
+<<<<<<< HEAD
 
+=======
+const createInvoice = require('./routes/invoice-api/createInvoice');
+>>>>>>> 5a9f2a85f52490cf61dabf6bab1b4b70f9cd843d
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -43,7 +47,8 @@ const swaggerOptions = {
   // Array of file paths for APIs
   apis: ['./server/routes/*.js',
          './server/routes/user-api/*.js',
-         './server/routes/security-api/*.js'
+         './server/routes/security-api/*.js',
+          './server/routes/invoice-api/*.js'
   ]
 };
 
@@ -74,12 +79,16 @@ app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/users', findUserSecurityQuestionsRoute);
 app.use('/api/users', createInvoice);
 
+
 // Security Related APIs
 app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);
 app.use('/api/security', verifyUserRoute);
 app.use('/api/security', resetPasswordRoute);
 app.use('/api/security', verifySecurityQuestionsRoute);
+
+// Invoice Related APIs
+app.use('/api/invoice', createInvoice);
 
 // error handler for 404 errors
 app.use(function(req, res, next) {

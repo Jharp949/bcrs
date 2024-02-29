@@ -5,6 +5,7 @@
 */
 
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-service-repair',
@@ -12,6 +13,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./service-repair.component.css']
 })
 export class ServiceRepairComponent {
+constructor(private http: HttpClient) { } // Inject the HttpClient service
+
   services = [
     { name: 'Password Reset', price: 39.99, checked: false },
     { name: 'Spyware Removal', price: 99.99, checked: false },
@@ -36,4 +39,17 @@ export class ServiceRepairComponent {
     // Custom service charge: flat fee for parts ($100) + (number of hours * $50) + selected services total
     this.customService.total = this.customService.parts * 100 + this.customService.hours * 50 + selectedServicesTotal;
   }
-}
+
+  // Generate Invoice here when api is established
+  /*  generateInvoice() {
+    this.http.post('http://localhost:3000/api/invoices/', {
+      services: this.services.filter(service => service.checked),
+      customService: this.customService
+    }).subscribe((response: any) => {
+      console.log('Invoice generated successfully:', response);
+    });
+  }
+*/
+
+  }
+

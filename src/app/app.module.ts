@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -25,12 +26,11 @@ import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 import { RegisterComponent } from './users/register/register.component';
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { ServicesComponent } from './services/services.component';
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { ChartModule } from 'primeng/chart';
@@ -62,19 +62,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ContactComponent,
     NotFoundComponent,
     FaqComponent,
-    RegisterComponent,
-    ServicesComponent,
     ServiceGraphComponent,
     AdminComponent,
     UsersComponent,
     UserListComponent,
     UserNewComponent,
     UserEditComponent,
-    ServicesComponent,
-    ServiceRepairComponent,
+    RegisterComponent,
     ResetPasswordComponent,
     VerifyEmailComponent,
     VerifySecurityQuestionsComponent,
+    ServiceRepairComponent,
     UserProfileComponent,
     InvoiceSummaryComponent,
 

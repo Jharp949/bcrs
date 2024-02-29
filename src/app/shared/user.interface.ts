@@ -19,7 +19,11 @@ export interface User {
   lastName: string;
   phoneNumber: number;
   address: string;
-  selectedSecurityQuestions: SelectedSecurityQuestion[];
+  selectedSecurityQuestions: [
+    { question: '', answer: '' },
+    { question: '', answer: '' },
+    { question: '', answer: '' }
+  ],
   role: string;
   isDisabled: boolean;
   empId: number;
