@@ -75,6 +75,7 @@ router.post('/createInvoice', async (req, res, next) => {
       orderDate: req.body.orderDate
 
     };
+    console.log(invoice);
 
     // Validate the request body
     if (!invoice || typeof invoice !== 'object') {
@@ -90,12 +91,12 @@ router.post('/createInvoice', async (req, res, next) => {
     const missingFields = requiredFields.filter(field => !invoice[field]);
 
     // Check if partsAmount or laborAmount are null or undefined
-if (invoice.partsAmount === null || invoice.partsAmount === undefined) {
-  missingFields.push('partsAmount');
-}
-if (invoice.laborAmount === null || invoice.laborAmount === undefined) {
-  missingFields.push('laborAmount');
-}
+    if (invoice.partsAmount === null || invoice.partsAmount === undefined) {
+      missingFields.push('partsAmount');
+    }
+    if (invoice.laborAmount === null || invoice.laborAmount === undefined) {
+      missingFields.push('laborAmount');
+    }
 
     if (missingFields.length > 0) {
       const err = new Error(`Missing required fields: ${missingFields.join(', ')}`);
@@ -114,6 +115,17 @@ if (invoice.laborAmount === null || invoice.laborAmount === undefined) {
         console.log('err', err);
         next(err);
         return;
+      }
+
+      // Increase tally of matching lineItems
+      const lineItems = req.body.lineItems;
+      if (lineItems && Array.isArray(lineItems)) {
+        for (const item of lineItems) {
+          const matchingItem = await db.collection('lineItems').findOne({ name: item.name });
+          if (matchingItem) {
+            await db.collection('lineItems').updateOne({ _id: matchingItem._id }, { $inc: { tally: 1 } });
+          }
+        }
       }
 
       // Send the newly created invoice back to the client as JSON

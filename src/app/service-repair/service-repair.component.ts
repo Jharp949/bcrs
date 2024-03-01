@@ -43,14 +43,14 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     const selectedServicesTotal = selectedServices.reduce((total, service) => total + service.price, 0);
 
     // Custom service charge: flat fee for parts ($100) + (number of hours * $50) + selected services total
-    this.customService.total = this.customService.parts * 100 + this.customService.hours * 50 + selectedServicesTotal;
+    this.customService.total = this.customService.parts + this.customService.hours * 50 + selectedServicesTotal;
   }
 
   submitInvoice() {
     // Calculate total based on checkboxes and custom service details
     const selectedServices = this.services.filter(service => service.checked);
+    const customServiceTotal = this.customService.parts + this.customService.hours * 50;
     const selectedServicesTotal = selectedServices.reduce((total, service) => total + service.price, 0);
-    const customServiceTotal = this.customService.parts * 100 + this.customService.hours * 50;
     const total = selectedServicesTotal + customServiceTotal;
 
     // Prepare data for the invoice
