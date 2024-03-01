@@ -26,7 +26,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
 import { UserNewComponent } from './admin/users/user-new/user-new.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserEditComponent } from './admin/users/user-edit/user-edit.component';
 import { RegisterComponent } from './users/register/register.component';
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { VerifyEmailComponent } from './users/verify-email/verify-email.component';

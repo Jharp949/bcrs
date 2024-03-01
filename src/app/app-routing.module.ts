@@ -20,7 +20,7 @@ import { ServiceGraphComponent } from './services/service-graph/service-graph.co
 import { AuthGuard } from './shared/authguard.guard';
 import { SigninComponent } from './security/signin/signin.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
-import { UserEditComponent } from './user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
+import { UserEditComponent } from './admin/users/user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
 import { RoleGuard } from './shared/role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
@@ -95,7 +95,7 @@ const routes: Routes = [
         data: { expectedRole: 'admin'}
        },
        {
-        path: 'user-edit/:id',
+        path: 'user-edit/:empId',
         component: UserEditComponent,
         canActivate: [AuthGuard, RoleGuard],
         data: { expectedRole: 'admin' } // Specify the expected role for admin access
@@ -118,13 +118,7 @@ const routes: Routes = [
         canActivate: [AuthGuard, RoleGuard],
         data: { expectedRole: 'admin' }
       },
-      {
-        path:'user-profile',
-        component: UserProfileComponent,
-        title: 'BCRS: User Profile',
-        canActivate: [AuthGuard, RoleGuard],
-        data: { expectedRoles: ['admin', 'standard']}
-      },
+
       {
         path: 'invoice-summary',
         component: InvoiceSummaryComponent,
