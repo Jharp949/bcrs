@@ -30,7 +30,8 @@
           <th>Phone Number</th>
           <th>Address</th>
           <th>Role</th>
-          <th>EmpId/th>
+          <th>EmpId</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -43,9 +44,8 @@
           <td>{{user.role}}</td>
           <td>{{user.empId}}</td>
           <td>
-            <a id="edit-user" [routerLink]="['/user-edit', user.empId]" class="btn btn-sm btn-info">Edit</a>
-            <button id="delete-user" (click)="deleteUser(user.empId)" class="btn btn-sm btn-danger ml-2">Delete</button>
-          </td>
+            <a id="edit-user" [routerLink]="['/user-edit', user.empId]"style="background-color: #816d3b; color: white" class="btn btn-sm btn-info">Edit</a>
+            <button id="delete-user" (click)="deleteUser(user.empId)" class="btn btn-sm btn-danger" style="margin-left: 16px;">Delete</button>          </td>
         </tr>
       </tbody>
     </table>
