@@ -34,7 +34,7 @@ export class InvoiceSummaryComponent implements OnInit {
         this.invoice = data.invoice;
       }
   }
-  
+
   ngOnInit(): void {
     // Alternatively, you can subscribe to changes in the InvoiceService
     this.invoiceService.selectedInvoice$.subscribe((invoice) => {
@@ -42,5 +42,35 @@ export class InvoiceSummaryComponent implements OnInit {
         this.invoice = invoice;
       }
     });
+  }
+printInvoice() {
+    let printContents: string;
+    const invoiceContainer = document.getElementById('invoice-container');
+    if (invoiceContainer) {
+      printContents = invoiceContainer.innerHTML;
+      const printWindow = window.open('', '_blank');
+      if (printWindow) {
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Print Invoice</title>
+              <style>
+                body {
+                  font-family:'Quicksand', sans-serif;
+                }
+                h2, h3, h4 {
+                  color: #2b4a32;
+                }
+                .no-print {
+                  display: none;
+                }
+              </style>
+            </head>
+            <body onload="window.print();window.close()">${printContents}</body>
+          </html>`
+        );
+        printWindow.document.close();
+      }
+    }
   }
 }

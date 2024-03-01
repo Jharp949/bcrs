@@ -10,3 +10,14 @@
     max-width: 750px;
     margin: 50px auto 50px;
   }
+
+  /* Change the color of the buttons */
+button[color="accent"] {
+  background-color: #816d38 !important;
+  color: white !important;
+}
+
+button[color="primary"] {
+  background-color: #f95f62 !important;
+  color: white !important;
+}

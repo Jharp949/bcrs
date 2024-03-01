@@ -20,14 +20,14 @@ p {
 	color: Black;
 	font-size: 25px;
     text-align: center;
-	
+
 }
 .about {
 	width: 95%;
 	margin: 10px auto;
 	background-color: #2B4A32;
-};
+}
 
 card-title, card-text {
 	font-family: 'Quicksand', sans-serif;
-};
+}

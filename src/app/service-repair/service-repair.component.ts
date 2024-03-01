@@ -73,7 +73,11 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
         const parsedResponse = JSON.parse(response); // Parse the response string into a JSON object
         console.log('Invoice generated successfully:', parsedResponse.invoice);
         this.invoiceService.updateInvoice(parsedResponse.invoice);
-        this.dialog.open(InvoiceSummaryComponent, { data: { invoice: parsedResponse.invoice } });
+        this.dialog.open(InvoiceSummaryComponent, {
+          data: { invoice: parsedResponse.invoice },
+          width: '600px',
+          height: '800px'
+        });
       },
 
       (error: any) => {
