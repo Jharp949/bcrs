@@ -73,6 +73,7 @@ router.post('/createInvoice', async (req, res, next) => {
       lineItemTotal: req.body.lineItemTotal,
       total: req.body.total,
       orderDate: req.body.orderDate
+
     };
     console.log(invoice);
 

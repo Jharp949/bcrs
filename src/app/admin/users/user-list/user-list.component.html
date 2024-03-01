@@ -10,7 +10,7 @@
   <div class="alert alert-success" role="alert" *ngIf="alertMessage">
     {{ alertMessage }}
   </div>
-  <h1 class="display-4 text-dk-green" style="font-family: righteous">User List</h1>
+  <h1 class="display-4 text-dk-green">User List</h1>
   <h2 class="lead text-muted">Here are the users that have been configured in the system:</h2>
 
   <a id="new-user" routerLink="/register" class="btn mb-3" style="background-color: #816d3b; color: white">Add new user</a>
@@ -30,7 +30,7 @@
           <th>Phone Number</th>
           <th>Address</th>
           <th>Role</th>
-          <th>Functions</th>
+          <th>EmpId/th>
         </tr>
       </thead>
       <tbody>
@@ -41,8 +41,9 @@
           <td>{{user.phoneNumber}}</td>
           <td>{{user.address}}</td>
           <td>{{user.role}}</td>
+          <td>{{user.empId}}</td>
           <td>
-            <a id="edit-user" [routerLink]="['/users', user.empId]" class="btn btn-sm btn-info">Edit</a>
+            <a id="edit-user" [routerLink]="['/user-edit', user.empId]" class="btn btn-sm btn-info">Edit</a>
             <button id="delete-user" (click)="deleteUser(user.empId)" class="btn btn-sm btn-danger ml-2">Delete</button>
           </td>
         </tr>

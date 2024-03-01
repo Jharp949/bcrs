@@ -13,10 +13,11 @@
   .header {
     width: 90%;
     margin: auto;
+    
   }
   
   .accordion-item {
-    --bs-accordion-btn-bg:  #eeba35;
+    --bs-accordion-btn-bg:  #1a6534;
     --bs-accordion-border-color: black;
     --bs-accordion-active-bg: #7D6B5D;
     --bs-accordion-active-color: white;
@@ -24,4 +25,8 @@
   
   .faq-img {
     width: 90%;
+  }
+  .accordion-button {
+    background-color: #1a6534;
+    color: white;
   }
