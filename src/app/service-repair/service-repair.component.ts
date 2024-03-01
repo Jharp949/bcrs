@@ -56,7 +56,7 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     // Prepare data for the invoice
     const invoiceData = {
       username: this.username,
-      lineItems: selectedServices.map(service => ({ title: service.name, quantity: 1, price: service.price })),
+      lineItems: selectedServices.map(service => ({ name: service.name, quantity: 1, price: service.price })),
       partsAmount: this.customService.parts * 100,
       laborAmount: this.customService.hours * 50,
       lineItemTotal: selectedServicesTotal,

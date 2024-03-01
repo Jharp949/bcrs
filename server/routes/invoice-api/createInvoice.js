@@ -76,8 +76,6 @@ router.post('/createInvoice', async (req, res, next) => {
 
     };
 
-    const servicesCount = req.body.lineItems.length;
-
     // Validate the request body
     if (!invoice || typeof invoice !== 'object') {
       const err = new Error('Invalid request body');
@@ -117,9 +115,6 @@ if (invoice.laborAmount === null || invoice.laborAmount === undefined) {
         next(err);
         return;
       }
-
-        // Store services count in a separate collection
-        await db.collection('servicesCount').insertOne({ invoiceId: result.insertedId, servicesCount: servicesCount });
 
       // Send the newly created invoice back to the client as JSON
       res.json({ invoice: invoice });
