@@ -28,11 +28,6 @@ const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
 const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
-<<<<<<< HEAD
-
-=======
-const createInvoice = require('./routes/invoice-api/createInvoice');
->>>>>>> 5a9f2a85f52490cf61dabf6bab1b4b70f9cd843d
 
 // Configuration object for Swagger
 const swaggerOptions = {

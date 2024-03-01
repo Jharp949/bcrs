@@ -6,7 +6,7 @@
 
 h1 {
 	margin-left: 20px;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	text-shadow: 1px 8px 8px rgba(6, 5, 1, 0.6);
     text-align: center;
     margin-bottom: 50px;
@@ -14,7 +14,7 @@ h1 {
 }
 
 p {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	line-height: 40px;
 	text-align: justify;
 	color: #816D3B;
@@ -26,4 +26,8 @@ p {
 	width: 95%;
 	margin: 10px auto;
 	background-color: #2B4A32;
-}
+};
+
+card-title, card-text {
+	font-family: 'Quicksand', sans-serif;
+};

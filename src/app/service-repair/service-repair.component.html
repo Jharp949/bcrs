@@ -5,7 +5,7 @@
 -->
 <div class="container mt-5 custom-border">
   <div class="custom-service-box p-4" style="width: 75%; border: solid 3px #869b3b">
-    <h2 class="text-dk-green display-3" style="font-family: righteous">Service Repair</h2>
+    <h2 class="text-dk-green display-3">Service Repair</h2>
 
     <div class="services-list">
       <div *ngFor="let service of services" class="service-item mb-3">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="custom-service mt-4">
-      <h4 class="text-dk-green display-4" style="font-family: righteous">Custom Service</h4>
+      <h4 class="text-dk-green display-4">Custom Service</h4>
       <div class="mb-3">
         <label for="parts" class="form-label">Parts Cost:</label>
         <input type="number" class="form-control" id="parts" [(ngModel)]="customService.parts" placeholder="Enter parts cost">
