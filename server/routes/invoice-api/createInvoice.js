@@ -17,7 +17,7 @@ const { mongo } = require('../../utils/mongo');
  * /api/invoice/createInvoice:
  *   post:
  *     tags:
- *       - Users
+ *       - Invoice
  *     description: Adds a new invoice to the MongoDB collection invoices
  *     summary: createInvoice; creates a new invoice. All parameters required.
  *     requestBody:
@@ -63,7 +63,7 @@ const { mongo } = require('../../utils/mongo');
  *         description: Invalid request body
  */
 
-router.post('/createInvoice', (req, res, next) => {
+router.post('/createInvoice', async (req, res, next) => {
     try {
         const invoice = req.body;
 
@@ -98,6 +98,15 @@ router.post('/createInvoice', (req, res, next) => {
                 next(err);
                 return; // exit out of the if statement
             }
+
+            // Find all purchased lineItems by name
+            const lineItemNames = invoice.items.map(item => item.name);
+            const lineItems = await db.collection('lineItems').find({ name: { $in: lineItemNames } }).toArray();
+
+            // Increase the tally count by 1 for each item listed
+            lineItems.forEach(async lineItem => {
+                await db.collection('lineItems').updateOne({ _id: lineItem._id }, { $inc: { tally: 1 } });
+            });
 
             res.send('Invoice added successfully'); // send success message back to the client
         });

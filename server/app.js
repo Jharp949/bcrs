@@ -20,7 +20,6 @@ const createUserRoute = require('./routes/user-api/createUser');
 const updateUserRoute = require('./routes/user-api/updateUser');
 const deleteUserByIdRoute = require('./routes/user-api/deleteUserById');
 const findUserSecurityQuestionsRoute = require('./routes/user-api/findSelectedSecurityQuestions');
-const createInvoice = require('./routes/user-api/createInvoice');
 
 //Imports for security related APIs
 const signinRoute = require('./routes/security-api/signin');
@@ -28,6 +27,10 @@ const registerRoute = require('./routes/security-api/register');
 const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
 const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
+
+//Imports for invoice related API's
+const createInvoiceRoute = require('./routes/invoice-api/createInvoice');
+const findPurchasesByServiceRoute = require('./routes/invoice-api/findPurchasesByService')
 
 // Configuration object for Swagger
 const swaggerOptions = {
@@ -43,7 +46,7 @@ const swaggerOptions = {
   apis: ['./server/routes/*.js',
          './server/routes/user-api/*.js',
          './server/routes/security-api/*.js',
-          './server/routes/invoice-api/*.js'
+         './server/routes/invoice-api/*.js'
   ]
 };
 
@@ -72,8 +75,6 @@ app.use('/api/users', createUserRoute);
 app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/users', findUserSecurityQuestionsRoute);
-app.use('/api/users', createInvoice);
-
 
 // Security Related APIs
 app.use('/api/security', signinRoute);
@@ -83,7 +84,8 @@ app.use('/api/security', resetPasswordRoute);
 app.use('/api/security', verifySecurityQuestionsRoute);
 
 // Invoice Related APIs
-app.use('/api/invoice', createInvoice);
+app.use('/api/invoice', findPurchasesByServiceRoute);
+app.use('/api/invoice', createInvoiceRoute);
 
 // error handler for 404 errors
 app.use(function(req, res, next) {

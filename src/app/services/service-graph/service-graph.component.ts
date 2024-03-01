@@ -1,10 +1,10 @@
 /*
 * Project Name: service-graph.component.ts
 * Authors: Laurel Condon, James Harper, Danielle Taplin
-* Date: 2/12/2024
+* Date: 2/26/2024
 */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-service-graph',
@@ -16,7 +16,9 @@ export class ServiceGraphComponent {
   data: any;
   options: any;
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit(): void {
     this.data = {
       labels: [
         'Password Reset',
@@ -45,9 +47,5 @@ export class ServiceGraphComponent {
           ]
       }]
     };
-    }
-
-    ngOnInit(): void {
-      // Initialize data and options here, or fetch them from a service
-    }
+  }
 }
