@@ -108,8 +108,15 @@ router.post('/createInvoice', async (req, res, next) => {
                 await db.collection('lineItems').updateOne({ _id: lineItem._id }, { $inc: { tally: 1 } });
             });
 
-            res.send('Invoice added successfully'); // send success message back to the client
-        });
+            // Send the newly created invoice back to the client
+            res.json({
+              message: 'Invoice added successfully',
+              invoice: {
+                id: result.insertedId,
+                ...invoice
+              }
+            });
+});
 
     } catch (err) {
         console.error('Error: ', err);
