@@ -16,7 +16,7 @@ const { mongo } = require('../../utils/mongo');
  * /api/invoice/findInvoiceByServices:
  *   get:
  *     tags:
- *       - Invoices
+ *       - Invoice
  *     description: Fetches all invoices that include the specified services
  *     summary: findInvoiceByServices; fetches invoices by services. All parameters required.
  *     parameters:
