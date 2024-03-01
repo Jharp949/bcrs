@@ -63,56 +63,65 @@ const { mongo } = require('../../utils/mongo');
  *         description: Invalid request body
  */
 
-router.post('/createInvoice', (req, res, next) => {
-    try {
-        const invoice = req.body;
+router.post('/createInvoice', async (req, res, next) => {
+  try {
+    const invoice = {
+      username: req.body.username,
+      lineItems: req.body.lineItems,
+      partsAmount: req.body.partsAmount,
+      laborAmount: req.body.laborAmount,
+      lineItemTotal: req.body.lineItemTotal,
+      total: req.body.total,
+      orderDate: req.body.orderDate
+    };
 
-        // Validate the request body
-        if (!invoice || typeof invoice !== 'object') {
-            const err = new Error('Invalid request body');
-            err.status = 400;
-            console.log('err', err);
-            next(err);
-            return; // exit out of the if statement
-        }
-
-        // Check if any required fields are left blank
-        const requiredFields = ['invoiceNumber', 'amount', 'dueDate', 'customerId', 'items'];
-        const missingFields = requiredFields.filter(field => !invoice[field]);
-
-        if (missingFields.length > 0) {
-            const err = new Error(`Missing required fields: ${missingFields.join(', ')}`);
-            err.status = 400;
-            console.log('err', err);
-            next(err);
-            return; // exit out of the if statement
-        }
-
-        mongo(async db => {
-            const result = await db.collection('invoices').insertOne(invoice); // insertOne adds a single document
-
-            if (result.insertedCount === 0) {
-                const err = new Error('Failed to add invoice');
-                err.status = 500;
-                console.log('err', err);
-                next(err);
-                return; // exit out of the if statement
-            }
-
-            // Send the newly created invoice back to the client
-            res.json({
-              message: 'Invoice added successfully',
-              invoice: {
-                id: result.insertedId,
-                ...invoice
-              }
-            });
-});
-
-    } catch (err) {
-        console.error('Error: ', err);
-        next(err);
+    // Validate the request body
+    if (!invoice || typeof invoice !== 'object') {
+      const err = new Error('Invalid request body');
+      err.status = 400;
+      console.log('err', err);
+      next(err);
+      return;
     }
+
+    // Check if any required fields are left blank
+    const requiredFields = ['username', 'lineItems','lineItemTotal', 'total', 'orderDate'];
+    const missingFields = requiredFields.filter(field => !invoice[field]);
+
+    // Check if partsAmount or laborAmount are null or undefined
+if (invoice.partsAmount === null || invoice.partsAmount === undefined) {
+  missingFields.push('partsAmount');
+}
+if (invoice.laborAmount === null || invoice.laborAmount === undefined) {
+  missingFields.push('laborAmount');
+}
+
+    if (missingFields.length > 0) {
+      const err = new Error(`Missing required fields: ${missingFields.join(', ')}`);
+      err.status = 400;
+      console.log('err', err);
+      next(err);
+      return;
+    }
+
+    mongo(async db => {
+      const result = await db.collection('invoices').insertOne(invoice);
+
+      if (result.insertedCount === 0) {
+        const err = new Error('Failed to add invoice');
+        err.status = 500;
+        console.log('err', err);
+        next(err);
+        return;
+      }
+
+      // Send the newly created invoice back to the client as JSON
+      res.json({ invoice: invoice });
+    });
+  } catch (err) {
+    console.error('Error: ', err);
+    next(err);
+  }
 });
 
 module.exports = router;

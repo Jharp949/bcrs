@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InvoiceSummaryComponent } from '../invoice-summary/invoice-summary.component';
 import { InvoiceService } from '../shared/invoice.service';
 
+
 @Component({
   selector: 'app-service-repair',
   templateUrl: './service-repair.component.html',
@@ -17,6 +18,8 @@ import { InvoiceService } from '../shared/invoice.service';
 })
 export class ServiceRepairComponent {
 constructor(private http: HttpClient, private dialog: MatDialog, private invoiceService: InvoiceService) { } // Inject the HttpClient service
+
+  username = '';
 
   services = [
     { name: 'Password Reset', price: 39.99, checked: false },
@@ -52,20 +55,27 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
 
     // Prepare data for the invoice
     const invoiceData = {
+      username: this.username,
+      lineItems: selectedServices.map(service => ({ title: service.name, quantity: 1, price: service.price })),
+      partsAmount: this.customService.parts * 100,
+      laborAmount: this.customService.hours * 50,
+      lineItemTotal: selectedServicesTotal,
+      total: total,
+      orderDate: new Date().toISOString(),
       invoiceNumber: 'INV' + Date.now(),
       amount: total,
-      dueDate: new Date().toISOString(),
-      customerId: 'CUSTOMER_ID', // Replace with actual customer ID
-      items: selectedServices.map(service => ({ name: service.name, quantity: 1, price: service.price }))
-    };
 
+    };
+    console.log(invoiceData)
     this.http.post('/api/invoice/createInvoice', invoiceData, { responseType: 'text' }).subscribe(
       (response: any) => {
         console.log('Response from server:', response);
-        console.log('Invoice generated successfully:', response);
-        this.invoiceService.updateInvoice(response.invoice); // Use updateInvoice instead of changeInvoice
-        this.dialog.open(InvoiceSummaryComponent, { data: { invoice: response.invoice } });
+        const parsedResponse = JSON.parse(response); // Parse the response string into a JSON object
+        console.log('Invoice generated successfully:', parsedResponse.invoice);
+        this.invoiceService.updateInvoice(parsedResponse.invoice);
+        this.dialog.open(InvoiceSummaryComponent, { data: { invoice: parsedResponse.invoice } });
       },
+
       (error: any) => {
         console.error('Error generating invoice:', error);
         console.error('Error status:', error.status);
