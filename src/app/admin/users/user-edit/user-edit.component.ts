@@ -1,5 +1,5 @@
 /*
-* Project Name: services.component.ts
+* Project Name: user-edit.component.ts
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/27/2024
 */
