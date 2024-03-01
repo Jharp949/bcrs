@@ -1,0 +1,10 @@
+/*
+user-list.component.css
+Danielle, Laurel, James
+This file contains the css for the user-list component
+2.29.2024
+*/
+
+p, h1, h2, tr, th, a {
+    font-family: 'Quicksand', sans-serif;
+};

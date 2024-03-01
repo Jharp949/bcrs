@@ -66,4 +66,3 @@ export class UserService {
     return this.http.get(`/api/users/security-questions/${email}`);
   }
 }
-

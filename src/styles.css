@@ -4,6 +4,8 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* import bootstrap icons */
 @import '~bootstrap-icons/font/bootstrap-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 * {
   margin: 0;
@@ -24,6 +26,7 @@
 /* Heading Styles */
 h1, h2, h3, h4, h5, h6 {
   color: #2B4A32 !important; /* Set the text color */
+  font-family: 'Quicksand', sans-serif; /* Set the font family */
 
 }
 /* Footer Styles */

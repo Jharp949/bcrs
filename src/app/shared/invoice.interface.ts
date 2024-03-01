@@ -1,10 +1,10 @@
 
-import { LineItem } from './line-item.interface';
+import { LineItems } from './line-item.interface';
 
 //Notifying any file that wants to use this , it needs to import it first
 export interface Invoice {
     username: string;
-    lineItems: LineItem[];
+    lineItems: LineItems[];
     partsAmount: number;
     laborAmount: number;
     lineItemTotal: number;

@@ -25,7 +25,6 @@ export class InvoiceSummaryComponent implements OnInit {
     orderDate: new Date()
   };
 
-
   constructor(private dialogRef: MatDialogRef<InvoiceSummaryComponent>,
   @Inject(MAT_DIALOG_DATA) data: any,
   private invoiceService: InvoiceService) {
@@ -35,7 +34,7 @@ export class InvoiceSummaryComponent implements OnInit {
         this.invoice = data.invoice;
       }
   }
-
+  
   ngOnInit(): void {
     // Alternatively, you can subscribe to changes in the InvoiceService
     this.invoiceService.selectedInvoice$.subscribe((invoice) => {

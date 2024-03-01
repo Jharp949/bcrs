@@ -11,77 +11,32 @@ const router = express.Router();
 const { mongo } = require('../../utils/mongo');
 
 /**
- * findInvoiceByServices
  * @swagger
- * /api/invoice/findInvoiceByServices:
+ * /api/invoice/purchases-graph:
  *   get:
  *     tags:
  *       - Invoice
- *     description: Fetches all invoices that include the specified services
- *     summary: findInvoiceByServices; fetches invoices by services. All parameters required.
- *     parameters:
- *       - in: query
- *         name: services
- *         schema:
- *           type: array
- *           items:
- *             type: string
- *         required: true
- *         description: The names of the services to match
+ *     summary: Retrieve all line items for purchases by service
+ *     description: Retrieve all line items for purchases by service from the database
  *     responses:
- *       '200':
- *         description: A list of invoices
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Invoice'
- *       '400':
- *         description: Invalid or missing services
+ *       200:
+ *         description: A list of line items for purchases by service
+ *       500:
+ *         description: Internal Server Error
  */
-router.get('/findInvoiceByServices', async (req, res, next) => {
+
+
+router.get('/purchases-graph', async (req, res) => {
+
   try {
-    const services = req.query.services;
-
-    if (!services || !Array.isArray(services)) {
-      const err = new Error('Invalid or missing services');
-      err.status = 400;
-      next(err);
-      return;
-    }
-
     mongo(async db => {
-      const invoices = await db.collection('invoices').find({ 'items.name': { $in: services } }).toArray();
-
-      res.json(invoices);
+      const lineItems = await db.collection('lineItems').find().toArray();
+      res.send(lineItems);
     });
-  } catch (err) {
-    next(err);
-  }
-});
-/*
-router.get('/purchases-by-service', async (req, res) => {
-  try {
-    const db = await mongo();
-    const lineItems = await db.collection('lineItems').find().toArray();
-
-    const purchasesByService = lineItems.reduce((result, item) => {
-      const { name, price } = item;
-      if (!result[name]) {
-        result[name] = { totalAmount: 0, purchaseCount: 0 };
-      }
-      result[name].totalAmount += price;
-      result[name].purchaseCount += 1;
-      return result;
-    }, {});
-
-    res.status(200).json(purchasesByService);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-*/
 
 module.exports = router;
