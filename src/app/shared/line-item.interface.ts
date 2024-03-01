@@ -1,6 +1,6 @@
 
 export interface LineItems {
-    name: String;
-    price: String;
-    tally: Number;
+    name: string;
+    price: string;
+    tally: number;
  }
