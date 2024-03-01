@@ -38,7 +38,8 @@ export class ServiceGraphComponent implements OnInit {
             "#F28907",
             "#001120",
             "#002A20",
-            "#6F7274"
+            "#6F7274",
+            "#0D0D0D"
           ],
           hoverBackgroundColor: [
             "#FF6384",
