@@ -110,7 +110,7 @@ const routes: Routes = [
         path: 'service-repair',
         component: ServiceRepairComponent,
         canActivate: [AuthGuard, RoleGuard],
-        data: { expectedRole: ['admin', 'standard'] }
+        data: { expectedRoles: ['admin', 'standard'] }
       },
       {
         path: 'service-graph',
@@ -122,14 +122,14 @@ const routes: Routes = [
         path:'user-profile',
         component: UserProfileComponent,
         title: 'BCRS: User Profile',
-//        canActivate: [AuthGuard, RoleGuard],
-//        data: { expectedRoles: ['admin', 'standard']}
+        canActivate: [AuthGuard, RoleGuard],
+        data: { expectedRoles: ['admin', 'standard']}
       },
       {
         path: 'invoice-summary',
         component: InvoiceSummaryComponent,
         canActivate: [AuthGuard, RoleGuard],
-        data: { expectedRole: ['admin', 'standard'] }
+        data: { expectedRoles: ['admin', 'standard'] }
       },
     ]
   },

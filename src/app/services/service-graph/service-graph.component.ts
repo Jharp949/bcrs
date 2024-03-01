@@ -1,53 +1,63 @@
 /*
 * Project Name: service-graph.component.ts
 * Authors: Laurel Condon, James Harper, Danielle Taplin
-* Date: 2/12/2024
+* Date: 2/26/2024
 */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { InvoiceService } from 'src/app/shared/invoice.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-service-graph',
   templateUrl: './service-graph.component.html',
   styleUrls: ['./service-graph.component.css']
 })
-export class ServiceGraphComponent {
-  title = "Bob's Computer Repair Shop: Services Graph";
+export class ServiceGraphComponent implements OnInit {
+  
   data: any;
   options: any;
+  chart: any;
 
-  constructor() {
-    this.data = {
-      labels: [
-        'Password Reset',
-        'Spyware Removal',
-        'RAM Upgrade',
-        'Software Installation',
-        'PC Tune-up',
-        'Keyboard Cleaning',
-        'Disk Clean-up'
-      ],
-      datasets: [{
-          data: [300, 50, 100, 75, 225, 100, 265],
+  constructor(private invoiceService: InvoiceService) { }
+
+  ngOnInit(): void {
+    this.invoiceService.getLineItems().subscribe((lineItems: any) => {
+      
+      const labels = lineItems.map((item: any) => item.name);
+      const data = lineItems.map((item: any) => item.tally);
+
+      this.data = {
+        labels: labels,
+        datasets: [{
+          data: data,
           backgroundColor: [
-              "#F2B90C",
-              "#E8EBEB",
-              "#007551",
-              "#F28907",
-              "#001120",
-              "#002A20",
-              "#6F7274"
+            "#F2B90C",
+            "#E8EBEB",
+            "#007551",
+            "#F28907",
+            "#001120",
+            "#002A20",
+            "#6F7274"
           ],
           hoverBackgroundColor: [
-              "#FF6384",
-              "#36A2EB",
-              "#FFCE56"
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
           ]
-      }]
-    };
-    }
+        }]
+      };
 
-    ngOnInit(): void {
-      // Initialize data and options here, or fetch them from a service
-    }
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: false
+      };
+
+      this.chart = new Chart('purchases', {
+        type: 'pie',
+        data: this.data,
+        options: this.options
+      });
+    });
+  }
 }

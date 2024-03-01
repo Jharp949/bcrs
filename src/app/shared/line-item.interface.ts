@@ -1,5 +1,6 @@
 
-export interface LineItem{
-    title: string;
-    price: number;
-}
+export interface LineItems {
+    name: string;
+    price: string;
+    tally: number;
+ }

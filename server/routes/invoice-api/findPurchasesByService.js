@@ -11,40 +11,31 @@ const router = express.Router();
 const { mongo } = require('../../utils/mongo');
 
 /**
- * findPurchasesByService
  * @swagger
- * /api/invoices/purchases-by-service:
+ * /api/invoice/purchases-graph:
  *   get:
  *     tags:
- *       - Invoices
- *     description: Finds purchases by service
- *     summary: findPurchasesByService
+ *       - Invoice
+ *     summary: Retrieve all line items for purchases by service
+ *     description: Retrieve all line items for purchases by service from the database
  *     responses:
- *       '200':
- *         description: Purchases by service
- *       '500':
+ *       200:
+ *         description: A list of line items for purchases by service
+ *       500:
  *         description: Internal Server Error
  */
 
-router.get('/purchases-by-service', async (req, res) => {
+
+router.get('/purchases-graph', async (req, res) => {
+
   try {
-    const db = await mongo();
-    const lineItems = await db.collection('lineItems').find().toArray();
-
-    const purchasesByService = lineItems.reduce((result, item) => {
-      const { name, price } = item;
-      if (!result[name]) {
-        result[name] = { totalAmount: 0, purchaseCount: 0 };
-      }
-      result[name].totalAmount += price;
-      result[name].purchaseCount += 1;
-      return result;
-    }, {});
-
-    res.status(200).json(purchasesByService);
+    mongo(async db => {
+      const lineItems = await db.collection('lineItems').find().toArray();
+      res.send(lineItems);
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 

@@ -6,6 +6,10 @@
 
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { InvoiceSummaryComponent } from '../invoice-summary/invoice-summary.component';
+import { InvoiceService } from '../shared/invoice.service';
+
 
 @Component({
   selector: 'app-service-repair',
@@ -13,7 +17,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./service-repair.component.css']
 })
 export class ServiceRepairComponent {
-constructor(private http: HttpClient) { } // Inject the HttpClient service
+constructor(private http: HttpClient, private dialog: MatDialog, private invoiceService: InvoiceService) { } // Inject the HttpClient service
+
+  username = '';
 
   services = [
     { name: 'Password Reset', price: 39.99, checked: false },
@@ -40,16 +46,43 @@ constructor(private http: HttpClient) { } // Inject the HttpClient service
     this.customService.total = this.customService.parts * 100 + this.customService.hours * 50 + selectedServicesTotal;
   }
 
-  // Generate Invoice here when api is established
-  /*  generateInvoice() {
-    this.http.post('http://localhost:3000/api/invoices/', {
-      services: this.services.filter(service => service.checked),
-      customService: this.customService
-    }).subscribe((response: any) => {
-      console.log('Invoice generated successfully:', response);
-    });
-  }
-*/
+  submitInvoice() {
+    // Calculate total based on checkboxes and custom service details
+    const selectedServices = this.services.filter(service => service.checked);
+    const selectedServicesTotal = selectedServices.reduce((total, service) => total + service.price, 0);
+    const customServiceTotal = this.customService.parts * 100 + this.customService.hours * 50;
+    const total = selectedServicesTotal + customServiceTotal;
 
+    // Prepare data for the invoice
+    const invoiceData = {
+      username: this.username,
+      lineItems: selectedServices.map(service => ({ title: service.name, quantity: 1, price: service.price })),
+      partsAmount: this.customService.parts * 100,
+      laborAmount: this.customService.hours * 50,
+      lineItemTotal: selectedServicesTotal,
+      total: total,
+      orderDate: new Date().toISOString(),
+      invoiceNumber: 'INV' + Date.now(),
+      amount: total,
+
+    };
+    console.log(invoiceData)
+    this.http.post('/api/invoice/createInvoice', invoiceData, { responseType: 'text' }).subscribe(
+      (response: any) => {
+        console.log('Response from server:', response);
+        const parsedResponse = JSON.parse(response); // Parse the response string into a JSON object
+        console.log('Invoice generated successfully:', parsedResponse.invoice);
+        this.invoiceService.updateInvoice(parsedResponse.invoice);
+        this.dialog.open(InvoiceSummaryComponent, { data: { invoice: parsedResponse.invoice } });
+      },
+
+      (error: any) => {
+        console.error('Error generating invoice:', error);
+        console.error('Error status:', error.status);
+        console.error('Error message:', error.message);
+        console.error('Error body:', error.error);
+      }
+    );
   }
+}
 
