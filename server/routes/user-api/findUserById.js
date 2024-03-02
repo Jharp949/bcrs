@@ -42,7 +42,7 @@ router.get('/find-one/:empId', async (req, res, next) => {
     const user = await mongo(async (db) => {
       return db.collection('users').findOne({ empId });
     });
-    console.log('User:', user);
+
     if (!user) {
       const err = new Error('Unable to find user with empId ' + empId);
       err.status = 404;

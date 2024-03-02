@@ -33,8 +33,6 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-    let empId: number;
     this.route.params.subscribe(params => {
       const empId = Number(params['empId']);
 
@@ -55,29 +53,20 @@ export class UserEditComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.userService.updateUser(this.user.empId, this.user).subscribe(
-      (response) => {
+    this.userService.updateUser(this.user.empId, this.user).subscribe({
+      next: (response) => {
         console.log(response); // Log the response
         this.updateMessage = 'User updated successfully';
 
         // Clear the updateMessage after 3 seconds
-      setTimeout(() => {
-        this.updateMessage = '';
-      }, 3000);
+        setTimeout(() => {
+          this.updateMessage = '';
+        }, 3000);
       },
-      (err) => {
+      error: (err) => {
         console.error('Error updating user:', err);
         this.updateMessage = 'Error updating user'; // Set an error message
-
-      // Clear the updateMessage after 3 seconds
-      setTimeout(() => {
-        this.updateMessage = '';
-      }, 3000);
       }
-    );
+    });
   }
-
-  
-
-
 }
