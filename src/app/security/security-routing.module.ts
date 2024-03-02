@@ -18,7 +18,7 @@ const routes: Routes = [
       {
         path: 'signin',
         component: SigninComponent,
-        title: 'Nodebucket: Sign In'
+        title: 'BCRS: Sign In'
       }
     ]
   }

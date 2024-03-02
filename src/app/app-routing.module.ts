@@ -7,6 +7,10 @@
 // imports statements
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/authguard.guard';
+import { RoleGuard } from './shared/role.guard';
+
+// Components for the app
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
@@ -17,11 +21,9 @@ import { FaqComponent } from './faq/faq.component';
 import { RegisterComponent } from './users/register/register.component';
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
-import { AuthGuard } from './shared/authguard.guard';
 import { SigninComponent } from './security/signin/signin.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
-import { UserEditComponent } from './admin/users/user-edit/user-edit.component';  // Import the UserEditComponent from the user-edit.component.ts file
-import { RoleGuard } from './shared/role.guard';// routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
+import { UserEditComponent } from './admin/users/user-edit/user-edit.component'; 
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 import { VerifyEmailComponent } from './users/verify-email/verify-email.component';
@@ -36,7 +38,7 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        title: 'BCRS: Home' // title for the home page
+        title: 'BCRS: Home'
       },
       {
         path: 'home',
