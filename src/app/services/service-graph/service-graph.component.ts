@@ -51,7 +51,7 @@ export class ServiceGraphComponent implements OnInit {
 
       this.options = {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
       };
 
       this.chart = new Chart('purchases', {
