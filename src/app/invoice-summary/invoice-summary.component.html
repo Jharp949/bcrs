@@ -34,7 +34,7 @@
       <h4>Standard Fees</h4>
       <mat-list>
           <mat-list-item>
-              Parts:
+              Parts (with $100 fee):
               <div fxFlex></div>
               {{invoice.partsAmount | currency}}
           </mat-list-item>
@@ -58,7 +58,7 @@
 
       <!--Mat dialog actions start-->
       <div mat-dialog-actions align="end">
-          <button class="no-print" mat-raised-button matDialogClose="cancel" color="primary">Cancel</button>
+          <button class="no-print" mat-raised-button matDialogClose="cancel" color="primary">Close</button>
           <button class="no-print" mat-raised-button (click)="printInvoice()" color="accent" cdkFocusInitial>Print</button>      </div>
       <!--Mat dialog actions end-->
 </div>

@@ -75,7 +75,6 @@ router.post('/createInvoice', async (req, res, next) => {
       orderDate: req.body.orderDate
 
     };
-    console.log(invoice);
 
     // Validate the request body
     if (!invoice || typeof invoice !== 'object') {

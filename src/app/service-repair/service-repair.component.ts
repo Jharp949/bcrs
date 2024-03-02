@@ -28,7 +28,8 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     { name: 'Software Installation', price: 49.99, checked: false },
     { name: 'PC Tune-up', price: 89.99, checked: false },
     { name: 'Keyboard Cleaning', price: 45.00, checked: false },
-    { name: 'Disk Clean-up', price: 129.99, checked: false }
+    { name: 'Disk Clean-up', price: 129.99, checked: false },
+    { name: 'Custom Service', price: 0, checked: false }
   ];
 
   customService = {
@@ -37,36 +38,57 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     total: 0
   };
 
-  calculateCustomService() {
-    // Calculate total based on checkboxes
-    const selectedServices = this.services.filter(service => service.checked);
-    const selectedServicesTotal = selectedServices.reduce((total, service) => total + service.price, 0);
+  totalCost = {
+    total: 0
+  };
 
-    // Custom service charge: flat fee for parts ($100) + (number of hours * $50) + selected services total
-    this.customService.total = this.customService.parts + this.customService.hours * 50 + selectedServicesTotal;
+    /* Calculates the parts and labor for Custom Service,
+    and updates the lineItem total */
+  calculateCustomService() {
+    // Calculate the total price for custom service
+    const partsPrice = this.customService.parts > 0 ? this.customService.parts + 100 : 0;
+    const laborPrice = this.customService.hours * 50;
+    const customServiceTotal = partsPrice + laborPrice;
+
+    // Update the services array with the custom service details
+    const customServiceIndex = this.services.findIndex(service => service.name === 'Custom Service');
+    if (customServiceTotal > 0 && customServiceIndex !== -1) {
+      this.services[customServiceIndex].price = customServiceTotal;
+      this.services[customServiceIndex].checked = true;
+
+      this.updateTotalCost();
+    }
+  }
+
+  updateTotalCost() {
+    const selectedServices = this.services.filter(service => service.checked);
+    this.totalCost.total = selectedServices.reduce((total, service) => total + service.price, 0);
   }
 
   submitInvoice() {
     // Calculate total based on checkboxes and custom service details
     const selectedServices = this.services.filter(service => service.checked);
-    const customServiceTotal = this.customService.parts + this.customService.hours * 50;
     const selectedServicesTotal = selectedServices.reduce((total, service) => total + service.price, 0);
-    const total = selectedServicesTotal + customServiceTotal;
+    const total = selectedServicesTotal;
 
     // Prepare data for the invoice
     const invoiceData = {
       username: this.username,
       lineItems: selectedServices.map(service => ({ name: service.name, quantity: 1, price: service.price })),
-      partsAmount: this.customService.parts * 100,
-      laborAmount: this.customService.hours * 50,
+      partsAmount: this.customService.parts,
+      laborAmount: this.customService.hours,
       lineItemTotal: selectedServicesTotal,
       total: total,
       orderDate: new Date().toISOString(),
       invoiceNumber: 'INV' + Date.now(),
       amount: total,
-
     };
-    console.log(invoiceData)
+
+    if (invoiceData.username === '') {
+      alert('Please enter a username');
+      return;
+    };
+
     this.http.post('/api/invoice/createInvoice', invoiceData, { responseType: 'text' }).subscribe(
       (response: any) => {
         console.log('Response from server:', response);

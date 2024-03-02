@@ -76,7 +76,7 @@ router.post("/signin", async (req, res, next) => {
 
     // If the user is found and the password is correct, send the user object as a JSON response
     if (result && bcrypt.compareSync(user.password, result.password)) {
-      console.log('User object:', result);
+      console.log('User successfully authenticated');
       res.json(result);
 
     } else {
