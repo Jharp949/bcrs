@@ -75,13 +75,13 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     const invoiceData = {
       username: this.username,
       lineItems: selectedServices.map(service => ({ name: service.name, quantity: 1, price: service.price })),
-      partsAmount: this.customService.parts,
-      laborAmount: this.customService.hours,
-      lineItemTotal: selectedServicesTotal,
-      total: total,
+      partsAmount: Math.round(this.customService.parts * 100) /100,
+      laborAmount: Math.round(this.customService.hours * 100) /100,
+      lineItemTotal: Math.round(selectedServicesTotal * 100) /100,
+      total: Math.round(total * 100) /100,
       orderDate: new Date().toISOString(),
       invoiceNumber: 'INV' + Date.now(),
-      amount: total,
+      amount: Math.round(total * 100) /100
     };
 
     if (invoiceData.username === '') {
