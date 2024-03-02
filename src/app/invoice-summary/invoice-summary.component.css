@@ -21,3 +21,6 @@ button[color="primary"] {
   background-color: #f95f62 !important;
   color: white !important;
 }
+h1, div, input, button, label {
+  font-family: 'Quicksand', sans-serif;
+};

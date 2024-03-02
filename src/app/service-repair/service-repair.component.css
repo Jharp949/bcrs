@@ -4,6 +4,6 @@ Danielle, Laurel, James
 2/29/2024
 service repair component css
 */
-div, p, form-check-input {
+div, p, form-check-input, h1, input, button {
     font-family: 'Quicksand', sans-serif;
 }

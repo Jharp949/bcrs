@@ -3,3 +3,6 @@
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */
+h1, div, input, button, label {
+    font-family: 'Quicksand', sans-serif;
+};
