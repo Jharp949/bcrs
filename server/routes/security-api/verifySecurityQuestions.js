@@ -12,8 +12,8 @@ const { mongo } = require('../../utils/mongo');
 const express = require('express');
 const Ajv = require('ajv');
 const router = express.Router();
+
 const ajv = new Ajv();
-const bcrypt = require('bcryptjs');
 
 // Define the schema for the request body
 const schema = {
@@ -154,6 +154,7 @@ router.post("/verify/users/security-questions/:email", async (req, res, next) =>
     if (securityQuestions[0].answer !== user.selectedSecurityQuestions[0].answer ||
       securityQuestions[1].answer !== user.selectedSecurityQuestions[1].answer ||
       securityQuestions[2].answer !== user.selectedSecurityQuestions[2].answer) {
+
       const err = new Error('Unauthorized') // create a new Error object
       err.status = 401 // set the error status to 401
       err.message = 'Unauthorized: Security questions do not match' // set the error message to 'Security questions do not match'

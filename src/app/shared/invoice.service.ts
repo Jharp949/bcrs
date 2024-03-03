@@ -1,3 +1,9 @@
+/*
+* Project Name: invoice.service.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 3/3/2024
+*/
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Invoice } from '../shared/invoice.interface';

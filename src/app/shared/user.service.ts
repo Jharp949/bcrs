@@ -1,5 +1,5 @@
 /*
-* Project Name: app.module.ts
+* Project Name: user.service.ts
 * Authors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */

@@ -1,7 +1,7 @@
 /**
  * Author: Professor Krasso
  * Date: 2/21/2021
- * File Name: user.service.ts
+ * File Name: user.service.spec.ts
  * Description: This service is used to handle user registration, email verification, security question verification, and password reset.
  */
 

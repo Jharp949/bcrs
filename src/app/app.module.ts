@@ -9,8 +9,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ChartModule } from 'primeng/chart';
+
+// App components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
@@ -21,7 +24,6 @@ import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FaqComponent } from './faq/faq.component';
 import { ServiceGraphComponent } from './services/service-graph/service-graph.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { UserListComponent } from './admin/users/user-list/user-list.component';
@@ -33,7 +35,6 @@ import { VerifyEmailComponent } from './users/verify-email/verify-email.componen
 import { VerifySecurityQuestionsComponent } from './users/verify-security-questions/verify-security-questions.component';
 import { ServiceRepairComponent } from './service-repair/service-repair.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
-import { ChartModule } from 'primeng/chart';
 import { InvoiceSummaryComponent } from './invoice-summary/invoice-summary.component';
 
 //Material design

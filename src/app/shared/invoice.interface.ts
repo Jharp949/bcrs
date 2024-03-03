@@ -1,3 +1,8 @@
+/*
+* Project Name: invoice.interface.ts
+* Authors: Laurel Condon, James Harper, Danielle Taplin
+* Date: 3/3/2024
+*/
 
 import { LineItems } from './line-item.interface';
 

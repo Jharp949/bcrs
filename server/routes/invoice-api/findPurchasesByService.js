@@ -25,7 +25,6 @@ const { mongo } = require('../../utils/mongo');
  *         description: Internal Server Error
  */
 
-
 router.get('/purchases-graph', async (req, res) => {
 
   try {

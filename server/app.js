@@ -78,8 +78,6 @@ app.use('/api/users', updateUserRoute);
 app.use('/api/users', deleteUserByIdRoute);
 app.use('/api/users', findUserSecurityQuestionsRoute);
 
-
-
 // Security Related APIs
 app.use('/api/security', signinRoute);
 app.use('/api/security', registerRoute);

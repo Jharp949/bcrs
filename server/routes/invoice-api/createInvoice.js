@@ -10,7 +10,6 @@ const express = require('express');
 const router =  express.Router();
 const { mongo } = require('../../utils/mongo');
 
-
 /**
  * createInvoice
  * @swagger

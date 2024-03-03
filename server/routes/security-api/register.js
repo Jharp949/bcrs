@@ -16,14 +16,6 @@ const { mongo } = require("../../utils/mongo");
 const router = express.Router(); // Create a new router object
 
 /**
- * @description This route registers a new user
- * @body {string} email - The user's email
- * @body {string} password - The user's password
- * @returns {object} The ID of the inserted user
- * @method POST
- */
-
-/**
  * @swagger
  * /api/security/register:
  *   post:
@@ -120,7 +112,7 @@ router.post("/register", async (req, res, next) => {
 */
     // Insert the user into the users collection
     const result = await mongo(db => {
-
+      // Submits the registration form to the database as a JSON object
       const registeredUser = {
 //        empId: empId,
         email: user.email,
@@ -137,7 +129,7 @@ router.post("/register", async (req, res, next) => {
         role: "standard",
         isDisabled: false
       };
-
+      
       return db.collection("users").insertOne(registeredUser); // Insert the user into the users collection
     });
 

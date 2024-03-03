@@ -4,12 +4,6 @@
 * Contributors: Laurel Condon, James Harper, Danielle Taplin
 * Date: 2/12/2024
 */
-/*
-* Project Name: authguard.guard.ts
-* Author: Professor Krasso
-* Contributors: Laurel Condon, James Harper, Danielle Taplin
-* Date: 2/12/2024
-*/
 
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
