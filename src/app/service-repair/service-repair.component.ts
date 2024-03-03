@@ -46,12 +46,13 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     and updates the lineItem total */
   calculateCustomService() {
     // Calculate the total price for custom service
-    const partsPrice = this.customService.parts > 0 ? this.customService.parts * 100 : 0;
-   const laborPrice = this.customService.hours * 50;
+    const partsPrice = this.customService.parts > 0 ? this.customService.parts + 100 : 0;
+    const laborPrice = this.customService.hours * 50;
     const customServiceTotal = partsPrice + laborPrice;
 
     // Update the services array with the custom service details
     const customServiceIndex = this.services.findIndex(service => service.name === 'Custom Service');
+    
     if (customServiceTotal > 0 && customServiceIndex !== -1) {
       this.services[customServiceIndex].price = customServiceTotal;
       this.services[customServiceIndex].checked = true;

@@ -36,7 +36,7 @@
           <mat-list-item>
               Parts (with $100 fee):
               <div fxFlex></div>
-              {{invoice.partsAmount * 100 | currency}}
+              {{invoice.partsAmount + 100 | currency}}
           </mat-list-item>
           <mat-list-item>
               Labor:
