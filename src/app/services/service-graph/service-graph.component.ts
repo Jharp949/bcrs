@@ -28,36 +28,46 @@ export class ServiceGraphComponent implements OnInit {
       const data = lineItems.map((item: any) => item.tally);
 
       this.data = {
-      labels: labels,
-      datasets: [{
-        data: data,
-        backgroundColor: [
-        "#F2B90C",
-        "#E8EBEB",
-        "#007551",
-        "#F28907",
-        "#001120",
-        "#002A20",
-        "#6F7274",
-        "#0D0D0D"
-        ],
-        hoverBackgroundColor: [
-        "#FF6384",
-        "#36A2EB",
-        "#FFCE56"
-        ]
-      }]
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: [
+            "#F2B90C",
+            "#E8EBEB",
+            "#007551",
+            "#F28907",
+            "#001120",
+            "#002A20",
+            "#6F7274",
+            "#0D0D0D"
+          ],
+          hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ]
+        }]
       };
 
       this.options = {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 14
+              },
+                color: '#001120',
+            }
+          }
+        },
       };
 
       this.chart = new Chart('purchases', {
-      type: 'pie',
-      data: this.data,
-      options: this.options
+        type: 'pie',
+        data: this.data,
+        options: this.options
       });
     });
   }
