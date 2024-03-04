@@ -7,4 +7,9 @@
 #chart-container {
     height: 85vw;
     width: 90vw;
+    max-width: 1200px;
+    max-height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
