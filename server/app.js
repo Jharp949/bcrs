@@ -28,11 +28,9 @@ const verifyUserRoute = require('./routes/security-api/verifyUser');
 const resetPasswordRoute = require('./routes/security-api/resetPassword');
 const verifySecurityQuestionsRoute = require('./routes/security-api/verifySecurityQuestions');
 
-
 //Imports for invoice related API's
 const createInvoiceRoute = require('./routes/invoice-api/createInvoice');
 const findPurchasesByServiceRoute = require('./routes/invoice-api/findPurchasesByService')
-
 
 // Configuration object for Swagger
 const swaggerOptions = {
