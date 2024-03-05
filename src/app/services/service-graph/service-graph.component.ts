@@ -60,8 +60,8 @@ export class ServiceGraphComponent implements OnInit {
               },
                 color: '#001120',
             }
-          },
-        },
+          }
+        }
       };
 
       this.chart = new Chart('purchases', {
