@@ -46,7 +46,7 @@ constructor(private http: HttpClient, private dialog: MatDialog, private invoice
     and updates the lineItem total */
   calculateCustomService() {
     // Calculate the total price for custom service
-    const partsPrice = this.customService.parts > 0 ? this.customService.parts + 100 : 0;
+    const partsPrice = this.customService.parts;
     const laborPrice = this.customService.hours * 50;
     const customServiceTotal = partsPrice + laborPrice;
 
